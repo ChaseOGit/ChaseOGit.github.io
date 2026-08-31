@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- FIX FOR YOUTUBE ERROR 153: Explicitly send origin referrer to YouTube -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
   <title>Chase Oswalt | Systems & Software Engineer</title>
   <meta name="description" content="Portfolio of Chase Oswalt - Software Engineer, Systems Developer, and Cloud IT Specialist.">
 
@@ -122,7 +126,7 @@
           <span class="text-xs font-mono font-bold text-zinc-200">2D Physics Arena Combat • Gameplay Demo</span>
         </div>
         <div class="flex items-center gap-3">
-          <a id="external-video-link" href="https://www.youtube.com/watch?v=4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-violet-300 hover:text-white flex items-center gap-1">
+          <a id="external-video-link" href="https://youtu.be/4_mdrE4RQnl" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-violet-300 hover:text-white flex items-center gap-1">
             Open on YouTube <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
           <button onclick="closeVideoModal()" class="p-1.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-700 text-zinc-300 hover:text-white transition-colors" aria-label="Close Video Modal">
@@ -131,9 +135,18 @@
         </div>
       </div>
 
-      <!-- Responsive 16:9 Video Embed Frame -->
+      <!-- Responsive 16:9 Video Embed Frame with Error 153 Fixes -->
       <div class="relative w-full aspect-video bg-black">
-        <iframe id="video-iframe" class="absolute inset-0 w-full h-full" src="" title="Gameplay Video Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe 
+          id="video-iframe" 
+          class="absolute inset-0 w-full h-full" 
+          src="" 
+          title="Gameplay Video Demo" 
+          frameborder="0" 
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
       </div>
 
       <!-- Modal Footer -->
@@ -163,16 +176,24 @@
         <a href="#contact" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Contact</a>
       </nav>
 
-      <!-- Action & Direct Profile Links -->
+      <!-- Action & Direct Profile Links (With Bulletproof Inline SVGs) -->
       <div class="flex items-center gap-2.5">
-        <a href="Chase_Oswalt_Resume.pdf" download class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-bold rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-flame-400/60 transition-all focus-visible:outline-2 focus-visible:outline-flame-400">
+        <a href="Chase_Oswalt_Resume.pdf" download class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-flame-400/60 transition-all focus-visible:outline-2 focus-visible:outline-flame-400">
           <i data-lucide="file-code" class="w-4 h-4 text-flame-300" aria-hidden="true"></i> Resume.pdf
         </a>
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-zinc-400 text-zinc-200 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-flame-400" aria-label="Chase Oswalt GitHub Profile">
-          <i data-lucide="github" class="w-4 h-4" aria-hidden="true"></i>
+        
+        <!-- GitHub Link Button -->
+        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-obsidian-800 transition-all focus-visible:outline-2 focus-visible:outline-flame-400 flex items-center justify-center" aria-label="Chase Oswalt GitHub Profile" title="GitHub Profile">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
         </a>
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-violet-400/60 text-zinc-200 hover:text-violet-300 transition-all focus-visible:outline-2 focus-visible:outline-violet-400" aria-label="Chase Oswalt LinkedIn Profile">
-          <i data-lucide="linkedin" class="w-4 h-4" aria-hidden="true"></i>
+
+        <!-- LinkedIn Link Button -->
+        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-violet-400/60 text-zinc-300 hover:text-violet-300 hover:bg-obsidian-800 transition-all focus-visible:outline-2 focus-visible:outline-violet-400 flex items-center justify-center" aria-label="Chase Oswalt LinkedIn Profile" title="LinkedIn Profile">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
+          </svg>
         </a>
       </div>
     </div>
@@ -211,7 +232,7 @@
             </p>
           </div>
 
-          <!-- High-Contrast CTA Strip -->
+          <!-- High-Contrast CTA Strip with Icons -->
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a href="#projects" class="px-5 py-3 rounded-xl bg-gradient-to-r from-flame-400 to-amber-400 text-obsidian-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-flame-500/20 flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-white">
               Explore Projects <i data-lucide="arrow-down" class="w-4 h-4" aria-hidden="true"></i>
@@ -223,7 +244,10 @@
             </button>
             
             <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-200 hover:text-violet-300 border border-obsidian-border hover:border-violet-400/50 text-sm font-mono transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-violet-400">
-              <i data-lucide="linkedin" class="w-4 h-4 text-violet-300" aria-hidden="true"></i> LinkedIn
+              <svg class="w-4 h-4 fill-current text-violet-400" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
+              </svg>
+              <span>LinkedIn</span>
             </a>
           </div>
 
@@ -448,14 +472,14 @@
             </div>
 
             <!-- Interactive Gameplay Video Preview Card -->
-            <div onclick="openVideoModal('https://www.youtube-nocookie.com/embed/4_mdrE4RQnl?autoplay=1')" class="group/video cursor-pointer relative rounded-xl overflow-hidden border border-obsidian-border bg-obsidian-950 p-4 flex items-center justify-between hover:border-violet-400/60 transition-all">
+            <div onclick="openVideoModal('4_mdrE4RQnl')" class="group/video cursor-pointer relative rounded-xl overflow-hidden border border-obsidian-border bg-obsidian-950 p-4 flex items-center justify-between hover:border-violet-400/60 transition-all">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-violet-500/20 border border-violet-400/40 flex items-center justify-center text-violet-300 group-hover/video:bg-violet-500 group-hover/video:text-white transition-all shadow-md">
                   <i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
                 </div>
                 <div>
                   <div class="text-xs font-mono font-bold text-zinc-100 group-hover/video:text-violet-300 transition-colors">Watch Gameplay Video Demo</div>
-                  <div class="text-[11px] font-mono text-zinc-400">Click to launch interactive player modal</div>
+                  <div class="text-xs font-mono text-zinc-400">Click to launch interactive player modal</div>
                 </div>
               </div>
               <span class="text-xs font-mono text-violet-300 group-hover/video:translate-x-0.5 transition-transform flex items-center gap-1">
@@ -474,7 +498,7 @@
           <!-- Interactive Action Buttons -->
           <div class="pt-5 mt-6 border-t border-obsidian-border flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <button onclick="openVideoModal('https://www.youtube-nocookie.com/embed/4_mdrE4RQnl?autoplay=1')" class="px-3.5 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 hover:text-white border border-violet-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-violet-400">
+              <button onclick="openVideoModal('4_mdrE4RQnl')" class="px-3.5 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 hover:text-white border border-violet-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-violet-400">
                 <i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Launch Video ▶
               </button>
               <a href="https://youtu.be/4_mdrE4RQnl" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-300 hover:text-white border border-obsidian-border text-xs font-mono transition-all flex items-center gap-1.5" title="Direct YouTube Link">
@@ -688,7 +712,10 @@
             <i data-lucide="copy" class="w-4 h-4 text-flame-300" aria-hidden="true"></i> Copy Email
           </button>
           <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-violet-400/50 text-sm font-medium transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-violet-400">
-            <i data-lucide="linkedin" class="w-4 h-4 text-violet-300" aria-hidden="true"></i> LinkedIn Profile
+            <svg class="w-4 h-4 fill-current text-violet-300" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
+            </svg>
+            <span>LinkedIn Profile</span>
           </a>
         </div>
 
@@ -711,8 +738,10 @@
 
   <!-- ================= INTERACTIVE JAVASCRIPT ================= -->
   <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
+    // Initialize Lucide icons on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
 
     // 1. Live EST Clock for Terminal
     function updateClock() {
@@ -777,12 +806,13 @@
       copyToClipboard(cmd, `Copied: ${cmd}`);
     }
 
-    // 5. Interactive Video Modal Handler
-    function openVideoModal(embedUrl) {
+    // 5. Interactive Video Modal Handler with Origin Binding
+    function openVideoModal(videoId = '4_mdrE4RQnl') {
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('video-iframe');
       if (iframe && modal) {
-        iframe.src = embedUrl;
+        const originParam = (window.location.origin && window.location.origin !== 'null') ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1${originParam}`;
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
@@ -793,7 +823,7 @@
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('video-iframe');
       if (iframe && modal) {
-        iframe.src = ''; // Stop playback
+        iframe.src = ''; // Stop playback immediately
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = 'auto';
