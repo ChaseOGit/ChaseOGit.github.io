@@ -1,147 +1,192 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="tokyo">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Explicitly send origin referrer to YouTube -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
-  <title>Chase Oswalt | Systems & Software Engineer</title>
-  <meta name="description" content="Portfolio of Chase Oswalt - Software Engineer, Systems Developer, and Cloud IT Specialist.">
+  <title>chase@workstation: ~/portfolio (zsh)</title>
+  <meta name="description" content="Portfolio of Chase Oswalt - Systems & Software Engineer, Cloud Architect, UCF IT Graduate.">
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  
+  <!-- Google Fonts: Inter for readability & JetBrains Mono for authentic terminal feel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons for UI utilities -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            obsidian: {
-              950: '#090a0f',
-              900: '#11131a',
-              850: '#181b24',
-              800: '#222634',
-              700: '#32374a',
-              border: '#2a2e3d',
-            },
-            flame: {
-              300: '#ffaa80',
-              400: '#ff7043',
-              500: '#f4511e',
-              600: '#d84315',
-            },
-            amber: {
-              300: '#fcd34d',
-              400: '#fbbf24',
-              500: '#f59e0b',
-            },
-            violet: {
-              300: '#d8b4fe',
-              400: '#a78bfa',
-              500: '#8b5cf6',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    /* Subtle dot grid pattern */
-    .bg-dot-pattern {
-      background-size: 28px 28px;
-      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    }
-    
-    /* Interactive dynamic spot light */
-    .spotlight-card {
-      position: relative;
-      overflow: hidden;
-    }
-    .spotlight-card::before {
-      content: '';
-      position: absolute;
-      top: var(--mouse-y, -200px);
-      left: var(--mouse-x, -200px);
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle closest-side, rgba(255, 112, 67, 0.12), transparent);
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      transition: opacity 0.2s;
-      opacity: 0;
-    }
-    .spotlight-card:hover::before {
-      opacity: 1;
+    /* ================= ALACRITTY THEME REGISTERS ================= */
+    :root, [data-theme="tokyo"] {
+      --bg-term: #0b0d13;
+      --bg-panel: #141722;
+      --bg-header: #1a1e2e;
+      --bg-alt: #1e2335;
+      --border: #293047;
+      --border-bright: #434e73;
+      --fg-main: #f8fafc;        /* 16.5:1 AAA */
+      --fg-body: #cbd5e1;        /* 11.2:1 AAA */
+      --fg-muted: #94a3b8;       /* 6.1:1 AA */
+      --ansi-black: #0b0d13;
+      --ansi-red: #ff757f;
+      --ansi-green: #4ee297;
+      --ansi-yellow: #ffc777;
+      --ansi-blue: #7aa2f7;
+      --ansi-magenta: #c8a2ff;
+      --ansi-cyan: #70d8ff;
+      --cursor: #7aa2f7;
     }
 
-    /* Crisp accessible glass panel */
-    .glass-panel {
-      background: rgba(17, 19, 26, 0.88);
-      backdrop-filter: blur(14px);
-      border: 1px solid #2a2e3d;
+    [data-theme="dracula"] {
+      --bg-term: #12131a;
+      --bg-panel: #1b1c28;
+      --bg-header: #232536;
+      --bg-alt: #2b2e44;
+      --border: #3b3f5c;
+      --border-bright: #5a608c;
+      --fg-main: #f8fafc;
+      --fg-body: #d6d9e8;
+      --fg-muted: #a5adc6;
+      --ansi-black: #12131a;
+      --ansi-red: #ff6e6e;
+      --ansi-green: #5af78e;
+      --ansi-yellow: #f4f99d;
+      --ansi-blue: #caa9f8;
+      --ansi-magenta: #ff92d0;
+      --ansi-cyan: #9aedfe;
+      --cursor: #ff92d0;
+    }
+
+    [data-theme="gruvbox"] {
+      --bg-term: #141617;
+      --bg-panel: #1d2021;
+      --bg-header: #282828;
+      --bg-alt: #32302f;
+      --border: #494440;
+      --border-bright: #665c54;
+      --fg-main: #fbf1c7;
+      --fg-body: #ebdbb2;
+      --fg-muted: #bdae93;
+      --ansi-black: #1d2021;
+      --ansi-red: #fb4934;
+      --ansi-green: #b8bb26;
+      --ansi-yellow: #fabd2f;
+      --ansi-blue: #83a598;
+      --ansi-magenta: #d3869b;
+      --ansi-cyan: #8ec07c;
+      --cursor: #fe8019;
+    }
+
+    [data-theme="matrix"] {
+      --bg-term: #040804;
+      --bg-panel: #0a130a;
+      --bg-header: #101e10;
+      --bg-alt: #152815;
+      --border: #1c3c1c;
+      --border-bright: #2d5e2d;
+      --fg-main: #f0fff0;
+      --fg-body: #a8ffa8;
+      --fg-muted: #66cc66;
+      --ansi-black: #040804;
+      --ansi-red: #ff5555;
+      --ansi-green: #33ff33;
+      --ansi-yellow: #b8ff33;
+      --ansi-blue: #33ffbb;
+      --ansi-magenta: #77ffaa;
+      --ansi-cyan: #66ffff;
+      --cursor: #33ff33;
+    }
+
+    body {
+      background-color: var(--bg-term);
+      color: var(--fg-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Terminal Blinking Cursor */
+    .term-cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.15em;
+      vertical-align: -0.18em;
+      background-color: var(--cursor);
+      animation: alacritty-blink 1.06s steps(1) infinite;
+    }
+
+    @keyframes alacritty-blink {
+      50% { opacity: 0; }
+    }
+
+    /* Terminal Panes */
+    .term-pane {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.6);
+    }
+
+    .term-header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Focus Visible Standard */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--ansi-yellow) !important;
+      outline-offset: 2px !important;
     }
   </style>
 </head>
 
-<body class="bg-obsidian-950 text-zinc-200 font-sans antialiased selection:bg-flame-500 selection:text-obsidian-950 min-h-screen">
+<body class="selection:bg-yellow-400 selection:text-black min-h-screen flex flex-col pb-16 antialiased">
 
-  <!-- Skip to Content Link for Accessibility -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-amber-400 text-obsidian-950 font-bold rounded-md ring-2 ring-white">
-    Skip to main content
+  <!-- Accessible Skip Link -->
+  <a href="#main-console" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-yellow-400 text-black font-mono font-bold text-xs rounded-sm shadow-xl">
+    [Skip to terminal content]
   </a>
 
-  <!-- Ambient Glow Effects -->
-  <div class="fixed inset-0 bg-dot-pattern pointer-events-none z-0"></div>
-  <div class="fixed top-0 left-1/4 -translate-x-1/2 w-[600px] h-[350px] bg-flame-500/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
-  <div class="fixed top-40 right-10 w-[450px] h-[350px] bg-violet-500/10 blur-[160px] rounded-full pointer-events-none z-0"></div>
-
   <!-- Toast Notification Alert -->
-  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-obsidian-850 border border-flame-400/50 shadow-2xl text-xs sm:text-sm font-mono text-zinc-100">
-    <i data-lucide="check-circle" class="w-5 h-5 text-flame-300 shrink-0" aria-hidden="true"></i>
-    <span id="toast-msg">Copied to clipboard!</span>
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-12 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-4 py-3 rounded-md font-mono text-xs shadow-2xl border" style="background: var(--bg-alt); border-color: var(--border-bright); color: var(--fg-main);">
+    <span style="color: var(--ansi-green); font-weight: bold;">[OK]</span>
+    <span id="toast-msg">Copied command to system buffer</span>
   </div>
 
-  <!-- ================= INTERACTIVE VIDEO MODAL LIGHTBOX ================= -->
-  <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-obsidian-950/85 backdrop-blur-md p-4 sm:p-6 transition-all duration-300" role="dialog" aria-modal="true" aria-label="Gameplay Demo Video Player">
-    <div class="relative w-full max-w-4xl bg-obsidian-900 border border-obsidian-border rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+  <!-- ================= VIDEO MODAL LIGHTBOX ================= -->
+  <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Gameplay Demo Video Player">
+    <div class="relative w-full max-w-4xl term-pane rounded-lg overflow-hidden border shadow-2xl">
       
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between px-5 py-3.5 bg-obsidian-850 border-b border-obsidian-border">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-violet-400 animate-pulse"></span>
-          <span class="text-xs font-mono font-bold text-zinc-200">2D Physics Arena Combat • Gameplay Demo</span>
+      <!-- Video Window Title Bar -->
+      <div class="flex items-center justify-between px-4 py-2.5 term-header font-mono text-xs">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-red)"></span>
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-yellow)"></span>
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-green)"></span>
+          <span class="ml-2 text-slate-200 font-bold">physics_combat_demo.mp4</span>
         </div>
         <div class="flex items-center gap-3">
-          <a id="external-video-link" href="https://www.youtube.com/watch?v=4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-violet-300 hover:text-white flex items-center gap-1">
-            Open on YouTube <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <a id="external-video-link" href="https://www.youtube.com/watch?v=4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1.5 font-bold" style="color: var(--ansi-cyan)">
+            <span>Open on YouTube</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
-          <button onclick="closeVideoModal()" class="p-1.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-700 text-zinc-300 hover:text-white transition-colors" aria-label="Close Video Modal">
-            <i data-lucide="x" class="w-4 h-4"></i>
+          <button onclick="closeVideoModal()" class="px-2 py-0.5 rounded hover:text-red-400 text-slate-300 font-bold" aria-label="Close video player">
+            [ESC]
           </button>
         </div>
       </div>
 
-      <!-- Responsive 16:9 Video Embed Frame -->
+      <!-- Video Player Frame -->
       <div class="relative w-full aspect-video bg-black">
         <iframe 
           id="video-iframe" 
           class="absolute inset-0 w-full h-full" 
           src="" 
-          title="Gameplay Video Demo" 
+          title="2D Physics Combat Engine Demo" 
           frameborder="0" 
           referrerpolicy="strict-origin-when-cross-origin"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -149,49 +194,75 @@
         </iframe>
       </div>
 
-      <!-- Modal Footer -->
-      <div class="px-5 py-3 bg-obsidian-850 border-t border-obsidian-border flex items-center justify-between text-xs font-mono text-zinc-400">
-        <span>Custom GLSL Shaders + Javelin Physics Engine</span>
-        <span>Press <kbd class="px-1.5 py-0.5 rounded bg-obsidian-950 border border-obsidian-border text-zinc-200 font-bold">Esc</kbd> to exit</span>
+      <!-- Footer Bar -->
+      <div class="px-4 py-2 term-header font-mono flex items-center justify-between text-xs" style="color: var(--fg-muted);">
+        <span>GLSL Fragment Lighting • Javelin 2D Physics • Godot 4.x</span>
+        <span>Press <kbd class="px-1.5 py-0.5 rounded font-bold text-slate-200" style="background: var(--bg-alt); border: 1px solid var(--border);">ESC</kbd> to exit</span>
       </div>
     </div>
   </div>
 
-  <!-- ================= HEADER ================= -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-obsidian-950/90 border-b border-obsidian-border">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- ================= ALACRITTY WINDOW FRAME HEADER ================= -->
+  <header class="sticky top-0 z-40 term-header backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-13 py-2 flex items-center justify-between font-mono text-xs">
       
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-2 font-mono font-bold text-sm sm:text-base text-zinc-100 hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded-md">
-        <span class="w-3 h-3 rounded-sm bg-gradient-to-tr from-flame-400 to-amber-300"></span>
-        <span>chase.oswalt<span class="text-flame-300">()</span></span>
-      </a>
-      
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center gap-7 text-xs font-mono uppercase tracking-wider text-zinc-300" aria-label="Main Navigation">
-        <a href="#about" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">About</a>
-        <a href="#projects" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Projects</a>
-        <a href="#skills" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Capabilities</a>
-        <a href="#education" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Education</a>
-        <a href="#contact" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Contact</a>
+      <!-- Session Breadcrumb & Window Controls -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5" aria-hidden="true">
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-red);" title="Close"></span>
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-yellow);" title="Minimize"></span>
+          <span class="w-3 h-3 rounded-full inline-block" style="background: var(--ansi-green);" title="Maximize"></span>
+        </div>
+        
+        <span class="text-slate-600 hidden sm:inline">│</span>
+        
+        <a href="#" class="font-bold flex items-center gap-2 hover:underline text-slate-100">
+          <span style="color: var(--ansi-blue);">❯_</span>
+          <span>chase@workstation</span>
+          <span style="color: var(--fg-muted);">:</span>
+          <span style="color: var(--ansi-yellow);">~/portfolio</span>
+          <span style="color: var(--ansi-green);">(main)</span>
+        </a>
+      </div>
+
+      <!-- Section Tabs -->
+      <nav class="hidden md:flex items-center gap-1 font-mono text-xs" aria-label="Terminal Tabs">
+        <a href="#about" class="px-2.5 py-1 rounded hover:bg-white/5 text-slate-300 hover:text-white transition-colors">1:about</a>
+        <a href="#projects" class="px-2.5 py-1 rounded hover:bg-white/5 text-slate-300 hover:text-white transition-colors">2:projects/</a>
+        <a href="#skills" class="px-2.5 py-1 rounded hover:bg-white/5 text-slate-300 hover:text-white transition-colors">3:capabilities</a>
+        <a href="#education" class="px-2.5 py-1 rounded hover:bg-white/5 text-slate-300 hover:text-white transition-colors">4:education</a>
+        <a href="#contact" class="px-2.5 py-1 rounded hover:bg-white/5 text-slate-300 hover:text-white transition-colors">5:contact</a>
       </nav>
 
-      <!-- Action & Profile Links -->
-      <div class="flex items-center gap-2.5">
-        <a href="Chase_Oswalt_Resume.pdf" download class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-flame-400/60 transition-all focus-visible:outline-2 focus-visible:outline-flame-400">
-          <i data-lucide="file-code" class="w-4 h-4 text-flame-300" aria-hidden="true"></i> Resume.pdf
+      <!-- Theme Selector & Social Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Palette Switcher -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded border text-xs" style="background: var(--bg-alt); border-color: var(--border);">
+          <span style="color: var(--ansi-yellow)">🎨</span>
+          <label for="theme-selector" class="sr-only">Select Alacritty Palette</label>
+          <select id="theme-selector" onchange="setTheme(this.value)" class="bg-transparent text-xs font-mono font-medium focus:outline-none cursor-pointer" style="color: var(--fg-main)">
+            <option value="tokyo" style="background:#141722; color:#f8fafc">Tokyo Night</option>
+            <option value="dracula" style="background:#1b1c28; color:#f8fafc">Dracula</option>
+            <option value="gruvbox" style="background:#1d2021; color:#fbf1c7">Gruvbox</option>
+            <option value="matrix" style="background:#0a130a; color:#f0fff0">Matrix</option>
+          </select>
+        </div>
+
+        <!-- Resume Download -->
+        <a href="Chase_Oswalt_Resume.pdf" download class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded border text-xs font-mono font-bold hover:brightness-110 transition-all" style="background: var(--bg-alt); border-color: var(--border-bright); color: var(--ansi-cyan)">
+          <i data-lucide="file-down" class="w-3.5 h-3.5" aria-hidden="true"></i> Resume.pdf
         </a>
-        
-        <!-- GitHub Link Button -->
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-obsidian-800 transition-all focus-visible:outline-2 focus-visible:outline-flame-400 flex items-center justify-center" aria-label="Chase Oswalt GitHub Profile" title="GitHub Profile">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+
+        <!-- GitHub Profile (Inline SVG) -->
+        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded border hover:bg-white/10 transition-all text-slate-200" style="border-color: var(--border);" aria-label="Chase Oswalt GitHub Profile" title="GitHub Profile">
+          <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
         </a>
 
-        <!-- LinkedIn Link Button -->
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border hover:border-violet-400/60 text-zinc-300 hover:text-violet-300 hover:bg-obsidian-800 transition-all focus-visible:outline-2 focus-visible:outline-violet-400 flex items-center justify-center" aria-label="Chase Oswalt LinkedIn Profile" title="LinkedIn Profile">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <!-- LinkedIn Profile (Inline SVG) -->
+        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded border hover:bg-white/10 transition-all text-slate-200" style="border-color: var(--border);" aria-label="Chase Oswalt LinkedIn Profile" title="LinkedIn Profile">
+          <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
           </svg>
         </a>
@@ -199,581 +270,801 @@
     </div>
   </header>
 
-  <main id="main-content" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 py-12">
+  <!-- ================= MAIN WORKSPACE ================= -->
+  <main id="main-console" class="max-w-6xl mx-auto px-4 sm:px-6 w-full space-y-14 py-8 flex-1">
 
-    <!-- ================= HERO BENTO ================= -->
-    <section id="about" class="pt-6 sm:pt-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+    <!-- ================= HERO PROFILE ================= -->
+    <section id="about" class="term-pane rounded-lg overflow-hidden border">
+      
+      <!-- Terminal Window Bar -->
+      <div class="px-4 py-2 term-header flex items-center justify-between font-mono text-xs">
+        <div class="flex items-center gap-2">
+          <span style="color: var(--ansi-magenta);">╭─</span>
+          <span style="color: var(--ansi-blue);">chase@workstation</span>
+          <span class="text-slate-500">in</span>
+          <span style="color: var(--ansi-green);">~/portfolio</span>
+          <span class="text-slate-500">on</span>
+          <span style="color: var(--ansi-cyan);"> main</span>
+        </div>
+        <div class="flex items-center gap-2" style="color: var(--fg-muted);">
+          <span>whoami --specs</span>
+          <span class="w-2 h-2 rounded-full inline-block" style="background: var(--ansi-green)"></span>
+        </div>
+      </div>
+
+      <!-- Neofetch Split Layout -->
+      <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- Left: Hero Headline & Elevator Pitch -->
-        <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-          <div class="space-y-4">
-            
-            <!-- Status Badge -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-obsidian-850 border border-obsidian-border text-xs font-mono text-zinc-200">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-flame-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-flame-400"></span>
-              </span>
-              <span class="font-medium">Seeking Full-Time Roles • UCF Grad 2026</span>
+        <!-- Left: ASCII & Mission -->
+        <div class="lg:col-span-6 space-y-4">
+          <pre class="font-mono text-xs sm:text-sm font-bold leading-none select-none overflow-x-auto text-slate-100" style="color: var(--ansi-cyan);" aria-hidden="true">
+   ______   __  __   ______   ______   ______
+  /\  ___\ /\ \_\ \ /\  __ \ /\  ___\ /\  ___\
+  \ \ \____\ \  __ \\ \  __ \\ \___  \\ \  __\_
+   \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\\ \_____\
+    \/_____/ \/_/\/_/ \/_/\/_/ \/_____/ \/_____/
+  ──────────────────────────────────────────────</pre>
+          <div>
+            <div class="text-xs font-mono font-bold uppercase tracking-wider mb-1" style="color: var(--ansi-yellow);">
+              Systems Software & Cloud Infrastructure
             </div>
-
-            <!-- Main Title -->
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
-              Architecting <br/>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-flame-300 via-amber-300 to-violet-300">
-                Resilient Systems
-              </span>
-              <br/>& Cloud Platforms.
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              Chase Oswalt
             </h1>
-
-            <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-xl">
-              I’m <strong class="text-white font-bold">Chase Oswalt</strong>, an Information Technology graduate from the <strong class="text-white font-semibold">University of Central Florida</strong>. I engineer high-performance web architectures, automate cloud infrastructure, and develop graphics-driven systems software.
-            </p>
           </div>
 
-          <!-- High-Contrast CTA Strip with Icons -->
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#projects" class="px-5 py-3 rounded-xl bg-gradient-to-r from-flame-400 to-amber-400 text-obsidian-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-flame-500/20 flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-white">
-              Explore Projects <i data-lucide="arrow-down" class="w-4 h-4" aria-hidden="true"></i>
+          <p class="text-sm leading-relaxed" style="color: var(--fg-body);">
+            Information Technology scholar at the <strong class="text-white font-semibold">University of Central Florida</strong>. Focused on enterprise cloud architecture, systems programming, and high-performance software engineering.
+          </p>
+
+          <!-- Prompt Quick Action Strip -->
+          <div class="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
+            <a href="#projects" class="px-4 py-2 rounded font-bold flex items-center gap-2 hover:brightness-110 transition-all shadow-md" style="background: var(--ansi-yellow); color: var(--ansi-black);">
+              <i data-lucide="folder" class="w-4 h-4" aria-hidden="true"></i> View Projects
             </a>
             
-            <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied to clipboard!')" class="px-5 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 text-sm font-mono font-medium border border-obsidian-border hover:border-flame-400/50 transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-flame-400">
-              <i data-lucide="copy" class="w-4 h-4 text-flame-300" aria-hidden="true"></i>
-              <span>chase.ed.oswalt@gmail.com</span>
+            <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied to clipboard!')" class="px-4 py-2 rounded border flex items-center gap-2 hover:bg-white/5 transition-all text-slate-200" style="border-color: var(--border-bright);">
+              <i data-lucide="copy" class="w-3.5 h-3.5" style="color: var(--ansi-green)" aria-hidden="true"></i> echo $EMAIL
             </button>
-            
-            <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-200 hover:text-violet-300 border border-obsidian-border hover:border-violet-400/50 text-sm font-mono transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-violet-400">
-              <svg class="w-4 h-4 fill-current text-violet-400" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
-              </svg>
-              <span>LinkedIn</span>
-            </a>
-          </div>
-
-          <!-- Quick Metrics Bar -->
-          <div class="grid grid-cols-3 gap-3 pt-6 border-t border-obsidian-border">
-            <div>
-              <div class="text-2xl font-bold font-mono text-flame-300">3.53</div>
-              <div class="text-xs text-zinc-400 font-mono uppercase tracking-wide">Dean's List GPA</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold font-mono text-amber-300">UCF '26</div>
-              <div class="text-xs text-zinc-400 font-mono uppercase tracking-wide">B.S. Info Tech</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold font-mono text-violet-300">&gt;95%</div>
-              <div class="text-xs text-zinc-400 font-mono uppercase tracking-wide">Lighthouse Audit</div>
-            </div>
           </div>
         </div>
 
-        <!-- Right: Interactive System Diagnostics Console -->
-        <div class="lg:col-span-5 rounded-2xl glass-panel p-5 flex flex-col justify-between font-mono text-xs border border-obsidian-border shadow-2xl relative">
-          
-          <!-- Terminal Header -->
-          <div class="flex items-center justify-between border-b border-obsidian-border pb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-              <div class="w-3 h-3 rounded-full bg-amber-400"></div>
-              <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
-              <span class="ml-2 text-xs font-semibold text-zinc-300">terminal@chase-os</span>
-            </div>
-            <span class="text-xs font-mono text-zinc-400">STATUS: ACTIVE</span>
+        <!-- Right: Hardware & Academic Specs -->
+        <div class="lg:col-span-6 font-mono text-xs space-y-2 p-4 rounded border" style="background: var(--bg-alt); border-color: var(--border);">
+          <div class="pb-2 border-b flex items-center justify-between font-bold" style="border-color: var(--border);">
+            <span style="color: var(--ansi-magenta)">system.diagnostics</span>
+            <span style="color: var(--ansi-green)">READY FOR HIRE (2026)</span>
           </div>
 
-          <!-- Terminal Output Body -->
-          <div class="py-4 space-y-3 font-mono">
-            <div class="text-zinc-300">
-              <span class="text-flame-300 font-bold">&gt;</span> chase.current_status()
+          <div class="space-y-1.5 text-slate-200 pt-1">
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Degree:</span>
+              <span class="text-right">B.S. Information Technology (UCF '26)</span>
             </div>
-            <div class="p-3 rounded-lg bg-obsidian-950 border border-obsidian-border space-y-1.5 text-xs text-zinc-200">
-              <div class="flex justify-between">
-                <span class="text-zinc-400">location:</span>
-                <span class="text-zinc-100 font-medium">Orlando, Florida</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-zinc-400">local_time:</span>
-                <span id="local-time" class="text-amber-300 font-semibold">--:--:-- EST</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-zinc-400">specialization:</span>
-                <span class="text-violet-300 font-semibold">Cloud & Systems Software</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-zinc-400">availability:</span>
-                <span class="text-emerald-300 font-bold">Ready for Hire (2026)</span>
-              </div>
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">GPA:</span>
+              <span class="font-bold text-right" style="color: var(--ansi-green)">3.53 / 4.00 (Dean's Honor List)</span>
             </div>
-
-            <div class="text-zinc-300 pt-1">
-              <span class="text-flame-300 font-bold">&gt;</span> cat primary_stack.json
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Location:</span>
+              <span class="text-right">Orlando, FL [Open to Relocation]</span>
             </div>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="p-2.5 rounded bg-obsidian-900 border border-obsidian-border text-zinc-200">
-                <span class="text-flame-300 font-bold block">01. Web Platform:</span> React, Node, Express
-              </div>
-              <div class="p-2.5 rounded bg-obsidian-900 border border-obsidian-border text-zinc-200">
-                <span class="text-amber-300 font-bold block">02. Core Systems:</span> Java, C#, SQL
-              </div>
-              <div class="p-2.5 rounded bg-obsidian-900 border border-obsidian-border text-zinc-200">
-                <span class="text-violet-300 font-bold block">03. Cloud & CI:</span> AWS, DigitalOcean
-              </div>
-              <div class="p-2.5 rounded bg-obsidian-900 border border-obsidian-border text-zinc-200">
-                <span class="text-zinc-300 font-bold block">04. IT Infra:</span> Linux, Win Server, AD
-              </div>
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Core Stack:</span>
+              <span class="text-right" style="color: var(--ansi-yellow)">Java, C#, C++, Python, SQL, GLSL</span>
+            </div>
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Web & Cloud:</span>
+              <span class="text-right">React, Node/Express, Tomcat, AWS, DigitalOcean</span>
+            </div>
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Scholarships:</span>
+              <span class="text-right" style="color: var(--ansi-magenta)">Elbit America STEM Scholar • Bright Futures</span>
+            </div>
+            <div class="flex items-start justify-between">
+              <span class="font-bold" style="color: var(--ansi-blue)">Organizations:</span>
+              <span class="text-right">AI@UCF & GameDev Knights</span>
             </div>
           </div>
-
-          <!-- Terminal Prompt Footer -->
-          <div class="pt-3 border-t border-obsidian-border flex items-center justify-between text-zinc-400 text-xs">
-            <span class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> 0 errors • 0 warnings
-            </span>
-            <span class="text-zinc-400 font-mono">v2.6.4</span>
-          </div>
-
         </div>
 
       </div>
     </section>
 
-    <!-- ================= FEATURED PROJECTS WITH INTERACTIVE LINKS & DEMOS ================= -->
-    <section id="projects" class="space-y-6">
-      
-      <!-- Section Heading & Filter Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-obsidian-border pb-4">
-        <div>
-          <div class="flex items-center gap-2 text-flame-300 font-mono text-xs uppercase tracking-wider font-bold">
-            <i data-lucide="layers" class="w-4 h-4" aria-hidden="true"></i> Technical Portfolio
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">Featured Engineering Works</h2>
+    <!-- ================= INTERACTIVE CLI REPL ================= -->
+    <section class="term-pane rounded-lg overflow-hidden font-mono text-xs">
+      <div class="px-4 py-2 term-header flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span style="color: var(--ansi-green); font-weight: bold;">chase@alacritty</span>
+          <span class="text-slate-500">:</span>
+          <span style="color: var(--ansi-blue)">~/shell</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded" style="background: var(--bg-alt); color: var(--ansi-yellow);">[SESSION ACTIVE]</span>
+        </div>
+        <span class="hidden sm:inline" style="color: var(--fg-muted);">Type 'help' for available commands</span>
+      </div>
+
+      <div class="p-4 space-y-3">
+        <div id="terminal-history" class="space-y-1 max-h-32 overflow-y-auto pr-2 text-xs leading-relaxed" style="color: var(--fg-body);">
+          <div>Terminal session ready. Type <span style="color: var(--ansi-yellow); font-weight: bold;">'help'</span> for instructions.</div>
         </div>
 
-        <!-- Filter Pill Buttons -->
-        <div class="flex flex-wrap gap-1.5 p-1 rounded-xl bg-obsidian-900 border border-obsidian-border text-xs font-mono" role="tablist" aria-label="Project Categories">
-          <button onclick="filterProjects('all')" class="project-tab-btn active-tab px-3.5 py-2 rounded-lg font-bold text-obsidian-950 bg-amber-400 transition-all focus-visible:outline-2 focus-visible:outline-white" data-target="all">All</button>
-          <button onclick="filterProjects('web')" class="project-tab-btn px-3.5 py-2 rounded-lg font-medium text-zinc-300 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-amber-400" data-target="web">Cloud & Web</button>
-          <button onclick="filterProjects('systems')" class="project-tab-btn px-3.5 py-2 rounded-lg font-medium text-zinc-300 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-amber-400" data-target="systems">Systems & Game</button>
-          <button onclick="filterProjects('infra')" class="project-tab-btn px-3.5 py-2 rounded-lg font-medium text-zinc-300 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-amber-400" data-target="infra">Infra & AD</button>
+        <!-- Terminal Input Prompt -->
+        <form id="terminal-form" onsubmit="handleShellCommand(event)" class="flex items-center gap-2 pt-2 border-t" style="border-color: var(--border);">
+          <span class="font-bold select-none text-sm" style="color: var(--ansi-magenta)">╰─❯</span>
+          <label for="cli-input" class="sr-only">Interactive Terminal Prompt Input</label>
+          <input 
+            type="text" 
+            id="cli-input" 
+            autocomplete="off" 
+            spellcheck="false" 
+            placeholder="try: projects, demo, skills, theme matrix, clear" 
+            class="w-full bg-transparent text-xs font-mono focus:outline-none placeholder:text-slate-500 font-semibold"
+            style="color: var(--ansi-green);"
+          />
+          <span class="term-cursor" aria-hidden="true"></span>
+        </form>
+
+        <!-- Command Shortcut Chips -->
+        <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
+          <span class="text-slate-400 font-medium">Quick commands:</span>
+          <button onclick="runSampleCmd('projects')" class="px-2 py-0.5 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-colors" style="border-color: var(--border-bright);">projects</button>
+          <button onclick="runSampleCmd('demo')" class="px-2 py-0.5 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-colors" style="border-color: var(--border-bright);">demo</button>
+          <button onclick="runSampleCmd('skills')" class="px-2 py-0.5 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-colors" style="border-color: var(--border-bright);">skills</button>
+          <button onclick="runSampleCmd('theme tokyo')" class="px-2 py-0.5 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-colors" style="border-color: var(--border-bright);">theme tokyo</button>
+          <button onclick="runSampleCmd('clear')" class="px-2 py-0.5 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-colors" style="border-color: var(--border-bright);">clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED PROJECTS ================= -->
+    <section id="projects" class="space-y-6">
+      
+      <!-- Section Command Bar & Filtering Flags -->
+      <div class="term-pane rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono">
+        <div class="flex items-center gap-2 text-xs">
+          <span style="color: var(--ansi-magenta);">❯</span>
+          <span style="color: var(--ansi-cyan); font-weight: bold;">ls -la</span>
+          <span class="text-white font-bold">~/projects</span>
+          <span class="text-slate-500 hidden sm:inline">(4 entries)</span>
+        </div>
+
+        <!-- Filter Flags -->
+        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+          <button onclick="filterProjects('all')" class="project-tab-btn px-2.5 py-1 rounded font-bold transition-all" data-target="all" style="background: var(--ansi-yellow); color: var(--ansi-black);">
+            --all
+          </button>
+          <button onclick="filterProjects('web')" class="project-tab-btn px-2.5 py-1 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-all" data-target="web" style="border-color: var(--border-bright);">
+            --web-cloud
+          </button>
+          <button onclick="filterProjects('systems')" class="project-tab-btn px-2.5 py-1 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-all" data-target="systems" style="border-color: var(--border-bright);">
+            --systems
+          </button>
+          <button onclick="filterProjects('infra')" class="project-tab-btn px-2.5 py-1 rounded border text-slate-300 hover:text-white hover:bg-white/5 transition-all" data-target="infra" style="border-color: var(--border-bright);">
+            --infra-ad
+          </button>
         </div>
       </div>
 
       <!-- Project Cards Grid -->
       <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Project 1: UCF Tech Lending App -->
-        <div class="project-card spotlight-card rounded-2xl glass-panel p-6 flex flex-col justify-between border border-obsidian-border hover:border-flame-400 transition-all" data-category="web">
-          <div class="space-y-4">
-            
-            <div class="flex items-center justify-between">
-              <span class="px-3 py-1 text-xs font-mono font-bold rounded-md bg-flame-500/20 text-flame-300 border border-flame-400/40">
-                Flagship • Full-Stack
+        <!-- ================= PROJECT 1: UCF TECH LENDING PLATFORM ================= -->
+        <div class="project-card term-pane rounded-lg flex flex-col justify-between overflow-hidden" data-category="web">
+          <div>
+            <!-- Terminal Titlebar -->
+            <div class="px-5 py-3 term-header font-mono text-xs flex items-center justify-between">
+              <div class="flex items-center gap-2 text-slate-200">
+                <span style="color: var(--ansi-cyan)">◽</span>
+                <span class="font-bold">ucf_tech_lending.tsx</span>
+                <span class="text-slate-500">[RO]</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border" style="background: var(--bg-alt); border-color: var(--ansi-green); color: var(--ansi-green);">
+                FLAGSHIP • FULL-STACK
               </span>
-              <span class="text-xs font-mono text-zinc-400">Team Lead (4 Devs)</span>
             </div>
 
-            <div>
-              <h3 class="text-xl font-bold text-white transition-colors">
+            <!-- Natural, Uncluttered Content -->
+            <div class="p-6 sm:p-7 space-y-3.5">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span style="color: var(--ansi-yellow); font-weight: bold;">Team Lead (4 Devs)</span>
+                <span class="text-slate-400">CI/CD Automated</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-white tracking-tight">
                 UCF Technology Lending Web Platform
               </h3>
-              <p class="text-sm text-zinc-300 mt-2.5 leading-relaxed">
-                Full-stack inventory and checkout platform replacing university legacy systems. Integrated Google OAuth 2.0, ZXing webcam barcode scanner, fine-calculation microservice, and automated CI/CD pipeline.
-              </p>
-            </div>
 
-            <!-- Technical Badges -->
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">React (Vite)</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Node/Express</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">MongoDB</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">DigitalOcean</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">CI/CD Actions</span>
+              <p class="text-sm leading-relaxed" style="color: var(--fg-body);">
+                Full-stack inventory and checkout platform replacing university legacy systems. Integrated Google OAuth 2.0, ZXing webcam barcode scanner, fine-calculation microservice, and automated CI/CD pipeline on DigitalOcean.
+              </p>
+
+              <!-- Technical Tags -->
+              <div class="pt-2 flex flex-wrap gap-1.5 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">React (Vite)</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Node / Express</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">MongoDB</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">DigitalOcean</span>
+              </div>
             </div>
           </div>
 
-          <!-- Interactive Action Buttons -->
-          <div class="pt-5 mt-6 border-t border-obsidian-border flex flex-wrap items-center justify-between gap-3">
+          <!-- Clean Single Action Strip -->
+          <div class="px-6 py-3.5 term-header border-t font-mono text-xs flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <a href="https://github.com/ChaseOGit/ucf-tech-lending-platform" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-flame-500/20 hover:bg-flame-500/30 text-flame-300 hover:text-white border border-flame-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-flame-400">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> View Source ↗
+              <!-- Guaranteed Inline SVG for View Source -->
+              <a href="https://github.com/ChaseOGit/ucf-tech-lending-platform" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110 shadow" style="background: var(--ansi-blue); color: var(--ansi-black);">
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>View Source ↗</span>
               </a>
-              <button onclick="copyCloneCmd('https://github.com/ChaseOGit/ucf-tech-lending-platform')" class="px-3 py-2 rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-300 hover:text-white border border-obsidian-border text-xs font-mono transition-all flex items-center gap-1.5" title="Copy git clone command">
-                <i data-lucide="terminal" class="w-3.5 h-3.5 text-zinc-400"></i> clone
+
+              <button onclick="copyCloneCmd('https://github.com/ChaseOGit/ucf-tech-lending-platform')" class="px-3 py-1.5 rounded border hover:bg-white/5 transition-all flex items-center gap-1.5 text-slate-200" style="border-color: var(--border-bright);">
+                <span class="text-slate-400">&gt;_</span> clone
               </button>
             </div>
-            <span class="text-xs font-mono text-zinc-400">&gt;95% Lighthouse</span>
+            
+            <span class="text-[11px]" style="color: var(--ansi-green); font-weight: bold;">
+              DigitalOcean • &gt;95% Lighthouse
+            </span>
           </div>
         </div>
 
-        <!-- Project 2: Enterprise 3-Tier Web App -->
-        <div class="project-card spotlight-card rounded-2xl glass-panel p-6 flex flex-col justify-between border border-obsidian-border hover:border-amber-400 transition-all" data-category="web">
-          <div class="space-y-4">
-            
-            <div class="flex items-center justify-between">
-              <span class="px-3 py-1 text-xs font-mono font-bold rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/40">
-                Enterprise Backend
+        <!-- ================= PROJECT 2: ENTERPRISE 3-TIER WEB APP ================= -->
+        <div class="project-card term-pane rounded-lg flex flex-col justify-between overflow-hidden" data-category="web">
+          <div>
+            <div class="px-5 py-3 term-header font-mono text-xs flex items-center justify-between">
+              <div class="flex items-center gap-2 text-slate-200">
+                <span style="color: var(--ansi-yellow)">◽</span>
+                <span class="font-bold">enterprise_tier3.java</span>
+                <span class="text-slate-500">[RO]</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border" style="background: var(--bg-alt); border-color: var(--ansi-yellow); color: var(--ansi-yellow);">
+                ENTERPRISE BACKEND
               </span>
-              <span class="text-xs font-mono text-zinc-400">Apache Tomcat</span>
             </div>
 
-            <div>
-              <h3 class="text-xl font-bold text-white transition-colors">
+            <div class="p-6 sm:p-7 space-y-3.5">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span style="color: var(--ansi-yellow); font-weight: bold;">Apache Tomcat 10</span>
+                <span class="text-slate-400">4-Tier RBAC</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-white tracking-tight">
                 Enterprise Three-Tier Web Application
               </h3>
-              <p class="text-sm text-zinc-300 mt-2.5 leading-relaxed">
+
+              <p class="text-sm leading-relaxed" style="color: var(--fg-body);">
                 Distributed client-server system deployed on Apache Tomcat. Engineered 4-tier Role-Based Access Control (RBAC), parameterized dynamic query handling with JDBC, and isolated stored procedures.
               </p>
-            </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Java Servlets</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">JSP</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">MySQL</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Apache Tomcat</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">JDBC Pool</span>
+              <div class="pt-2 flex flex-wrap gap-1.5 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Java Servlets</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">JSP</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">MySQL</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Tomcat Pool</span>
+              </div>
             </div>
           </div>
 
-          <!-- Interactive Action Buttons -->
-          <div class="pt-5 mt-6 border-t border-obsidian-border flex flex-wrap items-center justify-between gap-3">
+          <div class="px-6 py-3.5 term-header border-t font-mono text-xs flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <a href="https://github.com/ChaseOGit/enterprise-three-tier-app" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 hover:text-white border border-amber-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-amber-400">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> View Source ↗
+              <a href="https://github.com/ChaseOGit/enterprise-three-tier-app" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110 shadow" style="background: var(--ansi-yellow); color: var(--ansi-black);">
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>View Source ↗</span>
               </a>
-              <button onclick="copyCloneCmd('https://github.com/ChaseOGit/enterprise-three-tier-app')" class="px-3 py-2 rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-300 hover:text-white border border-obsidian-border text-xs font-mono transition-all flex items-center gap-1.5" title="Copy git clone command">
-                <i data-lucide="terminal" class="w-3.5 h-3.5 text-zinc-400"></i> clone
+
+              <button onclick="copyCloneCmd('https://github.com/ChaseOGit/enterprise-three-tier-app')" class="px-3 py-1.5 rounded border hover:bg-white/5 transition-all flex items-center gap-1.5 text-slate-200" style="border-color: var(--border-bright);">
+                <span class="text-slate-400">&gt;_</span> clone
               </button>
             </div>
-            <span class="text-xs font-mono text-zinc-400">RBAC Security Layer</span>
+            
+            <span class="text-slate-400 text-[11px]">
+              Role-Based Access Layer
+            </span>
           </div>
         </div>
 
-        <!-- Project 3: 2D Physics Arena Combat Engine (Correct Case-Sensitive ID: 4_mdrE4RQnI) -->
-        <div class="project-card spotlight-card rounded-2xl glass-panel p-6 flex flex-col justify-between border border-obsidian-border hover:border-violet-400 transition-all" data-category="systems">
-          <div class="space-y-4">
-            
-            <div class="flex items-center justify-between">
-              <span class="px-3 py-1 text-xs font-mono font-bold rounded-md bg-violet-500/20 text-violet-300 border border-violet-400/40">
-                Graphics & Systems
-              </span>
-              <span class="text-xs font-mono text-violet-300 font-bold flex items-center gap-1">
-                <i data-lucide="video" class="w-3.5 h-3.5"></i> Video Demo Available
+        <!-- ================= PROJECT 3: 2D PHYSICS ARENA ENGINE ================= -->
+        <div class="project-card term-pane rounded-lg flex flex-col justify-between overflow-hidden" data-category="systems">
+          <div>
+            <div class="px-5 py-3 term-header font-mono text-xs flex items-center justify-between">
+              <div class="flex items-center gap-2 text-slate-200">
+                <span style="color: var(--ansi-magenta)">◽</span>
+                <span class="font-bold">arena_physics.cs</span>
+                <span class="text-slate-500">[RO]</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border" style="background: var(--bg-alt); border-color: var(--ansi-magenta); color: var(--ansi-magenta);">
+                GRAPHICS & SYSTEMS
               </span>
             </div>
 
-            <div>
-              <h3 class="text-xl font-bold text-white transition-colors">
+            <div class="p-6 sm:p-7 space-y-3.5">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="font-bold flex items-center gap-1" style="color: var(--ansi-magenta);">
+                  <i data-lucide="video" class="w-3.5 h-3.5" aria-hidden="true"></i> Video Demo Ready
+                </span>
+                <span class="text-slate-400">4-Player Combat</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-white tracking-tight">
                 2D Physics Combat Engine & Arena
               </h3>
-              <p class="text-sm text-zinc-300 mt-2.5 leading-relaxed">
+
+              <p class="text-sm leading-relaxed" style="color: var(--fg-body);">
                 Authored custom GLSL fragment shaders for dynamic multi-source illumination, integrated the Javelin 2D physics engine, and built an automated CSV data streaming parser for weapon balance.
               </p>
-            </div>
 
-            <!-- Interactive Gameplay Video Preview Card -->
-            <div onclick="openVideoModal('4_mdrE4RQnI')" class="group/video cursor-pointer relative rounded-xl overflow-hidden border border-obsidian-border bg-obsidian-950 p-4 flex items-center justify-between hover:border-violet-400/60 transition-all">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-violet-500/20 border border-violet-400/40 flex items-center justify-center text-violet-300 group-hover/video:bg-violet-500 group-hover/video:text-white transition-all shadow-md">
-                  <i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
+              <!-- Interactive Launch Banner -->
+              <div onclick="openVideoModal('4_mdrE4RQnI')" class="p-3 rounded cursor-pointer border transition-all flex items-center justify-between group hover:border-purple-400" style="background: var(--bg-alt); border-color: var(--border-bright);">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded flex items-center justify-center font-bold shadow" style="background: var(--ansi-magenta); color: var(--ansi-black);">
+                    ▶
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-xs">Launch Gameplay Demo Modal</div>
+                    <div class="text-[11px]" style="color: var(--fg-muted);">Direct3D / Vulkan engine run</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="text-xs font-mono font-bold text-zinc-100 group-hover/video:text-violet-300 transition-colors">Watch Gameplay Video Demo</div>
-                  <div class="text-xs font-mono text-zinc-400">Click to launch interactive player modal</div>
-                </div>
+                <span class="font-mono text-xs font-bold" style="color: var(--ansi-magenta);">[play] ↗</span>
               </div>
-              <span class="text-xs font-mono text-violet-300 group-hover/video:translate-x-0.5 transition-transform flex items-center gap-1">
-                Play <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </span>
-            </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Godot Engine</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">C#</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">GLSL Shaders</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Physics Simulator</span>
+              <div class="pt-1 flex flex-wrap gap-1.5 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Godot 4</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">C# (.NET)</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">GLSL Shaders</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Javelin Physics</span>
+              </div>
             </div>
           </div>
 
-          <!-- Interactive Action Buttons -->
-          <div class="pt-5 mt-6 border-t border-obsidian-border flex flex-wrap items-center justify-between gap-3">
+          <div class="px-6 py-3.5 term-header border-t font-mono text-xs flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <button onclick="openVideoModal('4_mdrE4RQnI')" class="px-3.5 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 hover:text-white border border-violet-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-violet-400">
-                <i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Launch Video ▶
+              <button onclick="openVideoModal('4_mdrE4RQnI')" class="px-3.5 py-1.5 rounded font-bold transition-all flex items-center gap-1.5 hover:brightness-110 shadow" style="background: var(--ansi-magenta); color: var(--ansi-black);">
+                <i data-lucide="play-circle" class="w-4 h-4" aria-hidden="true"></i> Launch Demo ▶
               </button>
-              <a href="https://www.youtube.com/watch?v=4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-lg bg-obsidian-850 hover:bg-obsidian-800 text-zinc-300 hover:text-white border border-obsidian-border text-xs font-mono transition-all flex items-center gap-1.5" title="Direct YouTube Link">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-zinc-400"></i> YouTube ↗
+              <a href="https://www.youtube.com/watch?v=4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded border hover:bg-white/5 transition-all flex items-center gap-1 text-slate-200" style="border-color: var(--border-bright);">
+                YouTube ↗
               </a>
             </div>
-            <span class="text-xs font-mono text-zinc-400">Local 4-Player Engine</span>
+            
+            <span class="text-slate-400 text-[11px]">
+              60 FPS Deterministic Sim
+            </span>
           </div>
         </div>
 
-        <!-- Project 4: Enterprise IT Infrastructure -->
-        <div class="project-card spotlight-card rounded-2xl glass-panel p-6 flex flex-col justify-between border border-obsidian-border hover:border-flame-400 transition-all" data-category="infra">
-          <div class="space-y-4">
-            
-            <div class="flex items-center justify-between">
-              <span class="px-3 py-1 text-xs font-mono font-bold rounded-md bg-flame-500/20 text-flame-300 border border-flame-400/40">
-                Infrastructure & DevOps
+        <!-- ================= PROJECT 4: ENTERPRISE INFRASTRUCTURE & AD ================= -->
+        <div class="project-card term-pane rounded-lg flex flex-col justify-between overflow-hidden" data-category="infra">
+          <div>
+            <div class="px-5 py-3 term-header font-mono text-xs flex items-center justify-between">
+              <div class="flex items-center gap-2 text-slate-200">
+                <span style="color: var(--ansi-green)">◽</span>
+                <span class="font-bold">deploy_ad_forest.ps1</span>
+                <span class="text-slate-500">[RO]</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold border" style="background: var(--bg-alt); border-color: var(--ansi-green); color: var(--ansi-green);">
+                SYSADMIN & DEVOPS
               </span>
-              <span class="text-xs font-mono text-zinc-400">Active Directory</span>
             </div>
 
-            <div>
-              <h3 class="text-xl font-bold text-white transition-colors">
+            <div class="p-6 sm:p-7 space-y-3.5">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span style="color: var(--ansi-green); font-weight: bold;">Windows Server 2022</span>
+                <span class="text-slate-400">Enterprise AD</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-white tracking-tight">
                 Virtual Enterprise Infrastructure & AD
               </h3>
-              <p class="text-sm text-zinc-300 mt-2.5 leading-relaxed">
+
+              <p class="text-sm leading-relaxed" style="color: var(--fg-body);">
                 Deployed and configured a dual-domain forest with Windows Server 2022. Automated user lifecycle management, backup triggers, and group policy objects (GPO) through modular PowerShell scripts.
               </p>
-            </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Active Directory DS</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">PowerShell</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">Win Server 2022</span>
-              <span class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-obsidian-850 text-zinc-100 border border-obsidian-border">GPO / DNS</span>
+              <div class="pt-2 flex flex-wrap gap-1.5 font-mono text-xs">
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Active Directory DS</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">PowerShell</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">Win Server</span>
+                <span class="px-2.5 py-1 rounded border text-slate-200" style="background: var(--bg-alt); border-color: var(--border-bright);">GPO / DNS</span>
+              </div>
             </div>
           </div>
 
-          <!-- Interactive Action Buttons -->
-          <div class="pt-5 mt-6 border-t border-obsidian-border flex flex-wrap items-center justify-between gap-3">
+          <div class="px-6 py-3.5 term-header border-t font-mono text-xs flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-flame-500/20 hover:bg-flame-500/30 text-flame-300 hover:text-white border border-flame-400/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-flame-400">
-                <i data-lucide="github" class="w-3.5 h-3.5"></i> Profile Hub ↗
+              <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110 shadow" style="background: var(--ansi-green); color: var(--ansi-black);">
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>Profile Hub ↗</span>
               </a>
             </div>
-            <span class="text-xs font-mono text-zinc-400">Enterprise Automation</span>
+            
+            <span class="text-slate-400 text-[11px]">
+              Automated PowerShell Deployment
+            </span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ================= CAPABILITIES & TECHNICAL MATRIX ================= -->
-    <section id="skills" class="space-y-6">
-      <div class="flex items-center gap-2 text-amber-300 font-mono text-xs uppercase tracking-wider font-bold">
-        <i data-lucide="cpu" class="w-4 h-4" aria-hidden="true"></i> Technical Matrix
+    <!-- ================= CAPABILITIES MATRIX ================= -->
+    <section id="skills" class="space-y-4 font-mono">
+      <div class="term-pane rounded-lg p-3.5 flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2">
+          <span style="color: var(--ansi-magenta);">❯</span>
+          <span style="color: var(--ansi-yellow); font-weight: bold;">cat</span>
+          <span class="text-white font-semibold">~/config/capabilities.matrix</span>
+        </div>
+        <span class="text-[11px]" style="color: var(--ansi-green)">4 DOMAINS LOADED</span>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Engineering Capabilities</h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
         
-        <!-- Languages -->
-        <div class="p-5 rounded-2xl glass-panel border border-obsidian-border space-y-3">
-          <div class="flex items-center gap-2 text-flame-300 font-mono text-xs font-bold uppercase">
-            <i data-lucide="code-2" class="w-4 h-4" aria-hidden="true"></i> Languages
+        <!-- Domain 1 -->
+        <div class="term-pane rounded-lg p-4 space-y-3">
+          <div class="flex items-center justify-between border-b pb-2 font-bold" style="border-color: var(--border); color: var(--ansi-red);">
+            <span>[01] CORE_LANGUAGES</span>
+            <span>8 items</span>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Java</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Python</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">JavaScript (ES6+)</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">C / C++</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">C#</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">SQL</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">PowerShell</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">GLSL</span>
-          </div>
-        </div>
-
-        <!-- Full Stack & Frameworks -->
-        <div class="p-5 rounded-2xl glass-panel border border-obsidian-border space-y-3">
-          <div class="flex items-center gap-2 text-amber-300 font-mono text-xs font-bold uppercase">
-            <i data-lucide="layout" class="w-4 h-4" aria-hidden="true"></i> Web & Frameworks
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">React.js</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Node.js</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Express.js</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Servlets & JSP</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">RESTful APIs</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Tailwind CSS</span>
+          <div class="space-y-1.5 text-slate-200">
+            <div class="flex justify-between"><span>Java (Enterprise)</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Python 3.x</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>JavaScript (ES6+)</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>C / C++</span><span style="color: var(--ansi-yellow)">[██████░░░]</span></div>
+            <div class="flex justify-between"><span>C# (.NET / Godot)</span><span style="color: var(--ansi-yellow)">[██████░░░]</span></div>
+            <div class="flex justify-between"><span>SQL (MySQL/Mongo)</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>PowerShell</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>GLSL Shaders</span><span style="color: var(--ansi-yellow)">[█████░░░░]</span></div>
           </div>
         </div>
 
-        <!-- Cloud & DevOps -->
-        <div class="p-5 rounded-2xl glass-panel border border-obsidian-border space-y-3">
-          <div class="flex items-center gap-2 text-violet-300 font-mono text-xs font-bold uppercase">
-            <i data-lucide="cloud-cog" class="w-4 h-4" aria-hidden="true"></i> Cloud & DevOps
+        <!-- Domain 2 -->
+        <div class="term-pane rounded-lg p-4 space-y-3">
+          <div class="flex items-center justify-between border-b pb-2 font-bold" style="border-color: var(--border); color: var(--ansi-yellow);">
+            <span>[02] WEB_SERVICES</span>
+            <span>6 items</span>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">AWS</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">DigitalOcean</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">GitHub Actions CI/CD</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Linux (Ubuntu/RHEL)</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Apache & Nginx</span>
+          <div class="space-y-1.5 text-slate-200">
+            <div class="flex justify-between"><span>React.js (Vite)</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Node.js / Express</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Java Servlets / JSP</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>RESTful APIs</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Tailwind CSS</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>WebSockets / ZXing</span><span style="color: var(--ansi-yellow)">[██████░░░]</span></div>
           </div>
         </div>
 
-        <!-- Infrastructure & Data -->
-        <div class="p-5 rounded-2xl glass-panel border border-obsidian-border space-y-3">
-          <div class="flex items-center gap-2 text-zinc-200 font-mono text-xs font-bold uppercase">
-            <i data-lucide="server" class="w-4 h-4" aria-hidden="true"></i> Infra & Databases
+        <!-- Domain 3 -->
+        <div class="term-pane rounded-lg p-4 space-y-3">
+          <div class="flex items-center justify-between border-b pb-2 font-bold" style="border-color: var(--border); color: var(--ansi-blue);">
+            <span>[03] CLOUD_DEVOPS</span>
+            <span>5 items</span>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">MongoDB</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">MySQL</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Active Directory</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Windows Server 2022</span>
-            <span class="px-2.5 py-1 text-xs rounded bg-obsidian-900 border border-obsidian-border text-zinc-100 font-mono font-medium">Godot 4</span>
+          <div class="space-y-1.5 text-slate-200">
+            <div class="flex justify-between"><span>AWS Cloud Track</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>DigitalOcean</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>GitHub Actions CI/CD</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Linux (Ubuntu/RHEL)</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Apache & Nginx</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+          </div>
+        </div>
+
+        <!-- Domain 4 -->
+        <div class="term-pane rounded-lg p-4 space-y-3">
+          <div class="flex items-center justify-between border-b pb-2 font-bold" style="border-color: var(--border); color: var(--ansi-green);">
+            <span>[04] SYS_INFRA</span>
+            <span>5 items</span>
+          </div>
+          <div class="space-y-1.5 text-slate-200">
+            <div class="flex justify-between"><span>Active Directory DS</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Win Server 2022</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>MongoDB NoSQL</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>MySQL RDBMS</span><span style="color: var(--ansi-green)">[████████░]</span></div>
+            <div class="flex justify-between"><span>Godot 4 Simulator</span><span style="color: var(--ansi-yellow)">[██████░░░]</span></div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ================= EDUCATION & HONORS ================= -->
-    <section id="education" class="space-y-6">
-      <div class="flex items-center gap-2 text-violet-300 font-mono text-xs uppercase tracking-wider font-bold">
-        <i data-lucide="graduation-cap" class="w-4 h-4" aria-hidden="true"></i> Credentials
+    <!-- ================= EDUCATION AUDIT ================= -->
+    <section id="education" class="term-pane rounded-lg overflow-hidden font-mono text-xs">
+      <div class="px-4 py-2.5 term-header flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span style="color: var(--ansi-magenta)">❯</span>
+          <span style="color: var(--ansi-blue); font-weight: bold;">verify_credentials</span>
+          <span class="text-white">--scope=ucf_academics</span>
+        </div>
+        <span class="font-bold text-black px-2 py-0.5 rounded text-[11px]" style="background: var(--ansi-green);">
+          DEGREE AUDIT: CONFIRMED
+        </span>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Education & Honors</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Degree Summary -->
-        <div class="md:col-span-2 p-6 rounded-2xl glass-panel border border-obsidian-border space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <h3 class="text-xl font-bold text-white">University of Central Florida</h3>
-              <p class="text-sm font-medium text-zinc-300">Bachelor of Science in Information Technology</p>
-            </div>
-            <span class="text-xs font-mono font-bold text-flame-300 bg-flame-500/20 px-3 py-1 rounded-full border border-flame-400/40 w-fit">
-              Graduate Aug 2026
-            </span>
+      <div class="p-6 space-y-4">
+        <!-- Degree header -->
+        <div class="space-y-1 pb-3 border-b" style="border-color: var(--border);">
+          <div class="text-sm font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full inline-block animate-pulse" style="background: var(--ansi-green)"></span>
+            <span>Bachelor of Science in Information Technology</span>
           </div>
-
-          <div class="flex items-center gap-3 text-xs font-mono">
-            <span class="text-amber-300 font-bold flex items-center gap-1.5">
-              <i data-lucide="award" class="w-4 h-4" aria-hidden="true"></i> GPA: 3.53 / 4.00 (Dean's List)
-            </span>
+          <div class="text-slate-400">
+            Institution: <span class="text-white font-bold">University of Central Florida</span> (Orlando, Florida)
           </div>
-
-          <div class="pt-3 border-t border-obsidian-border">
-            <div class="text-xs text-zinc-400 font-mono mb-2 uppercase font-bold tracking-wide">Focused Coursework:</div>
-            <div class="flex flex-wrap gap-1.5 text-xs text-zinc-100 font-mono">
-              <span class="px-2.5 py-1 rounded bg-obsidian-900 border border-obsidian-border font-medium">Enterprise Computing</span>
-              <span class="px-2.5 py-1 rounded bg-obsidian-900 border border-obsidian-border font-medium">Database Systems</span>
-              <span class="px-2.5 py-1 rounded bg-obsidian-900 border border-obsidian-border font-medium">Systems Software</span>
-              <span class="px-2.5 py-1 rounded bg-obsidian-900 border border-obsidian-border font-medium">Object-Oriented Programming</span>
-              <span class="px-2.5 py-1 rounded bg-obsidian-900 border border-obsidian-border font-medium">System Administration</span>
-            </div>
+          <div class="text-slate-200 font-semibold">
+            Status: <span style="color: var(--ansi-green)">Active Full-Time Student</span> • Expected Graduation: August 2026
+          </div>
+          <div class="font-bold" style="color: var(--ansi-yellow);">
+            Cumulative GPA: 3.53 / 4.00 (Dean's Honor List Recognition)
           </div>
         </div>
 
         <!-- Awards & Involvement -->
-        <div class="p-6 rounded-2xl glass-panel border border-obsidian-border flex flex-col justify-between space-y-4">
-          <h3 class="text-xs font-mono text-zinc-300 uppercase font-bold tracking-wide">Scholarships & Clubs</h3>
-          <ul class="text-xs text-zinc-200 space-y-3 font-mono">
-            <li class="flex items-start gap-2.5">
-              <i data-lucide="shield-check" class="w-4 h-4 text-flame-300 shrink-0 mt-0.5" aria-hidden="true"></i>
-              <span class="font-medium">Elbit America STEM Scholarship Recipient</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i data-lucide="shield-check" class="w-4 h-4 text-amber-300 shrink-0 mt-0.5" aria-hidden="true"></i>
-              <span class="font-medium">Bright Futures Medallion Scholar</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i data-lucide="terminal" class="w-4 h-4 text-violet-300 shrink-0 mt-0.5" aria-hidden="true"></i>
-              <span class="font-medium">Active Member: AI@UCF & GameDev Knights</span>
-            </li>
-          </ul>
-          <div class="p-2.5 rounded-lg bg-obsidian-900 border border-obsidian-border text-xs font-mono text-zinc-300 text-center font-medium">
-            AWS Cloud Architecting Certified Track
+        <div class="space-y-2 text-slate-200">
+          <div class="font-bold" style="color: var(--ansi-cyan);"># Scholarships, Honors & Student Organizations:</div>
+          <div class="pl-4 space-y-1 border-l-2" style="border-color: var(--ansi-cyan);">
+            <div><span style="color: var(--ansi-green);">[AWARD]</span> <strong>Elbit America STEM Scholarship Recipient</strong> — Merit-based award in technical systems.</div>
+            <div><span style="color: var(--ansi-green);">[AWARD]</span> <strong>Florida Bright Futures Medallion Scholar</strong> — High academic achievement recognition.</div>
+            <div><span style="color: var(--ansi-green);">[TRACK]</span> <strong>AWS Academy Cloud Architecting</strong> — Certified curriculum completion.</div>
+            <div><span style="color: var(--ansi-green);">[MEMBER]</span> <strong>Active Member</strong> — AI@UCF & GameDev Knights student organizations.</div>
           </div>
         </div>
 
+        <div class="pt-3 border-t text-[11px] text-slate-400" style="border-color: var(--border);">
+          <span style="color: var(--ansi-yellow);">Relevant Coursework:</span> Enterprise Computing, Database Management Systems, Operating Systems & Architecture, Systems Software, Object-Oriented Software Development, System Administration.
+        </div>
       </div>
     </section>
 
-    <!-- ================= CONTACT SECTION WITH DIRECT LINK HUBS ================= -->
-    <section id="contact" class="pt-4">
-      <div class="p-8 sm:p-12 rounded-3xl glass-panel border border-obsidian-border text-center space-y-6 relative overflow-hidden">
-        
-        <!-- Accent decorative gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b from-flame-500/10 via-transparent to-transparent pointer-events-none"></div>
-
-        <div class="max-w-xl mx-auto space-y-3">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-flame-500/20 border border-flame-400/40 text-flame-300 text-xs font-mono font-bold">
-            <span>Direct Channel</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let’s Build Together</h2>
-          <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
-            I’m actively interviewing for full-time software engineering and cloud infrastructure roles. Feel free to reach out directly via email, GitHub, or LinkedIn.
-          </p>
+    <!-- ================= CONNECT / CONTACT ================= -->
+    <section id="contact" class="term-pane rounded-lg p-8 text-center space-y-5 font-mono">
+      <div class="max-w-xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded text-xs font-bold border" style="background: var(--bg-alt); border-color: var(--ansi-green); color: var(--ansi-green);">
+          <span>● CONNECTION READY • SEEKING FULL-TIME 2026</span>
         </div>
 
-        <div class="flex flex-wrap justify-center items-center gap-3 pt-2">
-          <a href="mailto:chase.ed.oswalt@gmail.com" class="px-6 py-3 rounded-xl bg-gradient-to-r from-flame-400 to-amber-400 text-obsidian-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-flame-500/20 flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-white">
-            <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i> chase.ed.oswalt@gmail.com
-          </a>
-          <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied to clipboard!')" class="px-5 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-flame-400/50 text-sm font-mono font-medium transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-flame-400">
-            <i data-lucide="copy" class="w-4 h-4 text-flame-300" aria-hidden="true"></i> Copy Email
-          </button>
-          <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-zinc-100 border border-obsidian-border hover:border-violet-400/50 text-sm font-medium transition-all flex items-center gap-2 focus-visible:outline-2 focus-visible:outline-violet-400">
-            <svg class="w-4 h-4 fill-current text-violet-300" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
-            </svg>
-            <span>LinkedIn Profile</span>
-          </a>
-        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Direct Transmission Channel
+        </h2>
 
+        <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--fg-body);">
+          Actively interviewing for full-time Software Engineering, Systems Development, and Cloud Infrastructure roles. Feel free to connect via email, GitHub, or LinkedIn.
+        </p>
+      </div>
+
+      <!-- Action Buttons with Precision Inline SVGs -->
+      <div class="flex flex-wrap justify-center items-center gap-3 pt-2 text-xs">
+        <a href="mailto:chase.ed.oswalt@gmail.com" class="px-4 py-2.5 rounded font-bold transition-all flex items-center gap-2 hover:brightness-110 shadow-lg" style="background: var(--ansi-yellow); color: var(--ansi-black);">
+          <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i> chase.ed.oswalt@gmail.com
+        </a>
+
+        <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email address copied!')" class="px-4 py-2.5 rounded border hover:bg-white/5 transition-all flex items-center gap-2 text-slate-200" style="border-color: var(--border-bright);">
+          <i data-lucide="copy" class="w-4 h-4" style="color: var(--ansi-green)" aria-hidden="true"></i> Copy Address
+        </button>
+
+        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded border hover:bg-white/5 transition-all flex items-center gap-2 text-slate-200" style="border-color: var(--border-bright);">
+          <svg class="w-4 h-4 fill-current shrink-0" style="color: var(--ansi-cyan)" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
+          </svg>
+          <span>LinkedIn Connection</span>
+        </a>
       </div>
     </section>
 
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-obsidian-border py-8 text-center text-xs font-mono text-zinc-400 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 Chase Oswalt. All rights reserved.</p>
-      <div class="flex items-center gap-5 text-zinc-300 font-medium">
-        <a href="#about" class="hover:text-flame-300 transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">Top ↑</a>
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-flame-400 rounded">GitHub</a>
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="hover:text-violet-300 transition-colors focus-visible:outline-2 focus-visible:outline-violet-400 rounded">LinkedIn</a>
+  <!-- ================= STATUSBAR ================= -->
+  <footer class="fixed bottom-0 left-0 right-0 z-40 font-mono text-xs select-none" style="background: var(--bg-header); border-top: 1px solid var(--border);">
+    <div class="flex items-center justify-between overflow-x-auto text-[11px] h-7 px-3">
+      
+      <!-- Left Segment -->
+      <div class="flex items-center shrink-0">
+        <span class="px-2.5 py-0.5 font-bold text-black" style="background: var(--ansi-green);">
+          [READY]
+        </span>
+        <span class="px-3 py-0.5 text-slate-200 hidden md:inline" style="background: var(--bg-alt);">
+          session: chase-workstation
+        </span>
+        <span class="px-2 text-slate-400 hidden sm:inline">│</span>
+        <span class="text-slate-300 hidden sm:inline">
+          git:(<span style="color: var(--ansi-cyan); font-weight: bold;">main</span>)*
+        </span>
+      </div>
+
+      <!-- Center Windows -->
+      <div class="hidden md:flex items-center gap-3 text-slate-400">
+        <span>[1: about]</span>
+        <span class="font-bold text-slate-200" style="color: var(--ansi-blue)">[2: projects*]</span>
+        <span>[3: capabilities]</span>
+        <span>[4: education]</span>
+      </div>
+
+      <!-- Right Segment -->
+      <div class="flex items-center gap-3 shrink-0" style="color: var(--fg-body);">
+        <span class="hidden sm:inline">UTF-8</span>
+        <span class="font-bold">3.53 GPA</span>
+        <span id="tmux-clock" class="px-2 py-0.5 font-bold text-black" style="background: var(--ansi-yellow);">
+          --:--:-- EST
+        </span>
       </div>
     </div>
   </footer>
 
-  <!-- ================= INTERACTIVE JAVASCRIPT ================= -->
+  <!-- ================= JAVASCRIPT UTILITIES ================= -->
   <script>
-    // Initialize Lucide icons on DOM load
+    // Initialize Lucide icons on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      updateClock();
+      setInterval(updateClock, 1000);
+      printShellOutput("Terminal workspace loaded. Type 'help' to see commands.");
     });
 
-    // 1. Live EST Clock for Terminal
+    // 1. Live Clock for Status Bar
     function updateClock() {
       const now = new Date();
       const options = { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
       const timeStr = new Intl.DateTimeFormat('en-US', options).format(now);
-      const el = document.getElementById('local-time');
+      const el = document.getElementById('tmux-clock');
       if (el) el.textContent = timeStr + ' EST';
     }
-    setInterval(updateClock, 1000);
-    updateClock();
 
-    // 2. Project Filtering Engine
+    // 2. Alacritty Theme Switcher
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      const selector = document.getElementById('theme-selector');
+      if (selector) selector.value = themeName;
+      printShellOutput(`Alacritty palette shifted to: <strong style="color:var(--ansi-magenta)">${themeName}</strong>`);
+    }
+
+    // 3. Interactive Shell Dispatcher
+    const cmdHistory = [];
+    let historyIdx = -1;
+
+    function handleShellCommand(e) {
+      e.preventDefault();
+      const input = document.getElementById('cli-input');
+      const rawCmd = input.value.trim();
+      if (!rawCmd) return;
+
+      cmdHistory.push(rawCmd);
+      historyIdx = cmdHistory.length;
+      input.value = '';
+
+      processCommand(rawCmd);
+    }
+
+    function runSampleCmd(cmd) {
+      const input = document.getElementById('cli-input');
+      if (input) {
+        input.value = cmd;
+        processCommand(cmd);
+      }
+    }
+
+    function printShellOutput(htmlContent) {
+      const history = document.getElementById('terminal-history');
+      if (!history) return;
+      const row = document.createElement('div');
+      row.innerHTML = htmlContent;
+      history.appendChild(row);
+      history.scrollTop = history.scrollHeight;
+    }
+
+    function processCommand(raw) {
+      const clean = raw.toLowerCase().trim();
+      const args = clean.split(' ');
+      const base = args[0];
+
+      printShellOutput(`<span style="color:var(--ansi-magenta)">╰─❯</span> <span style="color:var(--ansi-green); font-weight: bold;">${raw}</span>`);
+
+      switch(base) {
+        case 'help':
+          printShellOutput(`
+            <div class="space-y-0.5 text-slate-200">
+              <div><strong style="color:var(--ansi-yellow)">projects</strong>     - Scroll to engineering portfolio</div>
+              <div><strong style="color:var(--ansi-yellow)">demo</strong>         - Launch 2D physics combat gameplay video</div>
+              <div><strong style="color:var(--ansi-yellow)">skills</strong>       - View capabilities matrix</div>
+              <div><strong style="color:var(--ansi-yellow)">theme [name]</strong> - Switch palette: tokyo | dracula | gruvbox | matrix</div>
+              <div><strong style="color:var(--ansi-yellow)">resume</strong>       - Download Chase Oswalt's resume PDF</div>
+              <div><strong style="color:var(--ansi-yellow)">contact</strong>      - Display direct email and LinkedIn channels</div>
+              <div><strong style="color:var(--ansi-yellow)">clear</strong>        - Flush terminal buffer</div>
+            </div>
+          `);
+          break;
+
+        case 'clear':
+          const history = document.getElementById('terminal-history');
+          if (history) history.innerHTML = '';
+          break;
+
+        case 'projects':
+        case 'ls':
+          document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+          printShellOutput("Navigated to [Projects].");
+          break;
+
+        case 'skills':
+          document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+          printShellOutput("Navigated to [Capabilities Matrix].");
+          break;
+
+        case 'demo':
+        case 'video':
+          openVideoModal('4_mdrE4RQnI');
+          printShellOutput("Launching video player for combat engine...");
+          break;
+
+        case 'resume':
+        case 'cv':
+          const link = document.createElement('a');
+          link.href = 'Chase_Oswalt_Resume.pdf';
+          link.download = 'Chase_Oswalt_Resume.pdf';
+          link.click();
+          printShellOutput("Downloading Chase_Oswalt_Resume.pdf...");
+          break;
+
+        case 'contact':
+        case 'email':
+          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+          printShellOutput("Channel: <span style='color:var(--ansi-cyan)'>chase.ed.oswalt@gmail.com</span>");
+          break;
+
+        case 'theme':
+          if (args[1] && ['tokyo', 'dracula', 'gruvbox', 'matrix'].includes(args[1])) {
+            setTheme(args[1]);
+          } else {
+            printShellOutput("Usage: theme [tokyo | dracula | gruvbox | matrix]");
+          }
+          break;
+
+        default:
+          printShellOutput(`<span style="color:var(--ansi-red)">command not found: ${base}</span>. Type <span style="color:var(--ansi-yellow)">'help'</span> for instructions.`);
+      }
+    }
+
+    // Terminal History Navigation (Up/Down arrows)
+    document.getElementById('cli-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        if (historyIdx > 0) {
+          historyIdx--;
+          e.target.value = cmdHistory[historyIdx] || '';
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIdx < cmdHistory.length - 1) {
+          historyIdx++;
+          e.target.value = cmdHistory[historyIdx] || '';
+        } else {
+          historyIdx = cmdHistory.length;
+          e.target.value = '';
+        }
+      }
+    });
+
+    // 4. Project Filtering
     function filterProjects(category) {
       const cards = document.querySelectorAll('.project-card');
       const tabs = document.querySelectorAll('.project-tab-btn');
 
-      // Update tab styles
       tabs.forEach(tab => {
         if (tab.getAttribute('data-target') === category) {
-          tab.classList.remove('text-zinc-300', 'bg-transparent', 'font-medium');
-          tab.classList.add('text-obsidian-950', 'bg-amber-400', 'font-bold');
+          tab.style.background = 'var(--ansi-yellow)';
+          tab.style.color = 'var(--ansi-black)';
+          tab.classList.add('font-bold');
         } else {
-          tab.classList.remove('text-obsidian-950', 'bg-amber-400', 'font-bold');
-          tab.classList.add('text-zinc-300', 'bg-transparent', 'font-medium');
+          tab.style.background = 'transparent';
+          tab.style.color = 'var(--fg-body)';
+          tab.classList.remove('font-bold');
         }
       });
 
-      // Show/Hide cards
       cards.forEach(card => {
-        const itemCategory = card.getAttribute('data-category');
-        if (category === 'all' || itemCategory === category) {
+        const itemCat = card.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
           card.style.display = 'flex';
           card.style.opacity = '1';
         } else {
@@ -781,14 +1072,15 @@
           card.style.opacity = '0';
         }
       });
+      printShellOutput(`Applied filter flag: <strong style="color:var(--ansi-cyan)">--${category}</strong>`);
     }
 
-    // 3. Universal Copy-to-Clipboard Function with Toast Feedback
+    // 5. Universal Copy to Clipboard
     function copyToClipboard(text, customMessage) {
       navigator.clipboard.writeText(text).then(() => {
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toast-msg');
-        if (toastMsg) toastMsg.textContent = customMessage || 'Copied to clipboard!';
+        if (toastMsg) toastMsg.textContent = customMessage || `Copied to clipboard: ${text}`;
         
         toast.classList.remove('translate-y-20', 'opacity-0');
         toast.classList.add('translate-y-0', 'opacity-100');
@@ -796,17 +1088,16 @@
         setTimeout(() => {
           toast.classList.remove('translate-y-0', 'opacity-100');
           toast.classList.add('translate-y-20', 'opacity-0');
-        }, 2800);
+        }, 2500);
       });
     }
 
-    // 4. Copy Git Clone Command
     function copyCloneCmd(repoUrl) {
       const cmd = `git clone ${repoUrl}.git`;
-      copyToClipboard(cmd, `Copied: ${cmd}`);
+      copyToClipboard(cmd, `Copied command: ${cmd}`);
     }
 
-    // 5. Interactive Video Modal Handler (With Capital I Video ID: 4_mdrE4RQnI)
+    // 6. Interactive Video Modal Lightbox Handler (YouTube ID: 4_mdrE4RQnI)
     function openVideoModal(videoId = '4_mdrE4RQnI') {
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('video-iframe');
@@ -823,36 +1114,19 @@
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('video-iframe');
       if (iframe && modal) {
-        iframe.src = ''; // Stop playback immediately
+        iframe.src = '';
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = 'auto';
       }
     }
 
-    // Close modal on Escape key press
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeVideoModal();
-      }
+      if (e.key === 'Escape') closeVideoModal();
     });
 
-    // Close modal when clicking outside video frame
     document.getElementById('video-modal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'video-modal') {
-        closeVideoModal();
-      }
-    });
-
-    // 6. Spotlight Card Mouse Effect
-    document.querySelectorAll('.spotlight-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      });
+      if (e.target.id === 'video-modal') closeVideoModal();
     });
   </script>
 </body>
