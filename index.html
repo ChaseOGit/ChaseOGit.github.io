@@ -5,872 +5,1090 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
-  <title>Chase Oswalt • Systems &amp; Software Engineer</title>
-  <meta name="description" content="Portfolio of Chase Oswalt - Systems & Software Engineer, Cloud Architect, UCF IT Graduate.">
+  <title>Chase Oswalt — Systems &amp; Software Engineer</title>
+  <meta name="description" content="Engineering portfolio and resume of Chase Oswalt — Systems & Software Engineer, Cloud Infrastructure, and Graphics Programming (B.S. IT, UCF '26).">
 
-  <!-- Tailwind CSS via CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Fonts: Plus Jakarta Sans for crystal-clear readability & Space Mono / JetBrains Mono for authentic code styling -->
+  <!-- Typography: Plus Jakarta Sans for editorial clarity & JetBrains Mono for technical specs -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ================= BESPOKE 3D CONTOUR PALETTE ================= */
+    /* ================= SWISS-TECHNICAL ARCHITECTURAL TOKENS ================= */
     :root {
-      --void-black: #030508;
-      --surface-glass: rgba(7, 13, 20, 0.84);
-      --surface-glass-hover: rgba(11, 20, 32, 0.94);
-      --border-contour: rgba(20, 231, 165, 0.16);
-      --border-bright: rgba(20, 231, 165, 0.45);
+      --bg-obsidian: #05070a;
+      --surface-slate: #090d13;
+      --surface-elevated: #0d131c;
+      --surface-interactive: #121a26;
       
-      /* Optical 3D Accents */
-      --accent-mint: #14e7a5;        /* Bioluminescent seafoam */
-      --accent-mint-glow: rgba(20, 231, 165, 0.32);
-      --accent-amber: #ffab2e;       /* Warm Topaz */
-      --accent-amber-glow: rgba(255, 171, 46, 0.28);
-      --accent-cobalt: #2b61ff;      /* Perspective line blue */
+      --border-hairline: #1e293b;
+      --border-subtle: #151e2b;
+      --border-focus: #10b981;
+      
+      /* Technical Signal Accents */
+      --signal-emerald: #10b981;
+      --signal-amber: #f59e0b;
+      --signal-cobalt: #3b82f6;
+      
+      /* Editorial Typography */
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+    }
 
-      /* Ultra-clear Typography Tokens */
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
+    * {
+      box-sizing: border-box;
     }
 
     body {
-      background-color: var(--void-black);
-      color: var(--text-white);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-obsidian);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .font-mono {
-      font-family: 'Space Mono', monospace;
-    }
-
-    .font-code {
+    .font-mono, .font-code {
       font-family: 'JetBrains Mono', monospace;
+      font-feature-settings: "liga" 0, "zero" 1;
     }
 
-    /* 3D Topographic Contour Canvas */
+    /* Subtle architectural background grid */
+    .bg-tech-grid {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(30, 41, 59, 0.18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 41, 59, 0.18) 1px, transparent 1px);
+    }
+
+    /* Fixed 3D Hardware-Accelerated Canvas (Zero Backdrop Overdraw) */
     #optical-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.95;
+      opacity: 0.92;
     }
 
-    /* Stable Solid Glass Cards */
-    .glass-panel {
-      background: var(--surface-glass);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--border-contour);
-      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    /* Matte Architectural Panels — Zero GPU backdrop-filter thrashing */
+    .tech-panel {
+      background-color: rgba(9, 13, 19, 0.94);
+      border: 1px solid var(--border-hairline);
+      border-radius: 3px;
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+      transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
       position: relative;
     }
 
-    .glass-panel:hover {
-      background: var(--surface-glass-hover);
-      border-color: var(--border-bright);
-      box-shadow: 0 20px 42px -12px rgba(0, 0, 0, 0.95), 0 0 22px -4px var(--accent-mint-glow);
+    .tech-panel-interactive:hover {
+      background-color: rgba(13, 19, 28, 0.97);
+      border-color: #334155;
     }
 
-    .glass-panel-amber:hover {
-      border-color: rgba(255, 171, 46, 0.5);
-      box-shadow: 0 20px 42px -12px rgba(0, 0, 0, 0.95), 0 0 22px -4px var(--accent-amber-glow);
+    .tech-panel-emerald:hover {
+      border-color: rgba(16, 185, 129, 0.55);
     }
 
-    /* Dedicated 3D Showcase Frame in Hero */
-    .sculpture-frame {
-      background: radial-gradient(circle at center, rgba(20, 231, 165, 0.04) 0%, rgba(4, 8, 14, 0.5) 75%);
-      border: 1px solid rgba(20, 231, 165, 0.22);
-      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.85), inset 0 0 30px rgba(20, 231, 165, 0.03);
+    .tech-panel-amber:hover {
+      border-color: rgba(245, 158, 11, 0.55);
     }
 
-    /* Tags & Badges */
-    .badge-mint {
-      background: rgba(20, 231, 165, 0.08);
-      border: 1px solid rgba(20, 231, 165, 0.26);
-      color: var(--accent-mint);
+    .tech-panel-cobalt:hover {
+      border-color: rgba(59, 130, 246, 0.55);
     }
 
-    .badge-amber {
-      background: rgba(255, 171, 46, 0.09);
-      border: 1px solid rgba(255, 171, 46, 0.3);
-      color: var(--accent-amber);
+    /* Corner registration ticks for engineering dossier feel */
+    .corner-ticks::before,
+    .corner-ticks::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      pointer-events: none;
+      border-color: var(--signal-emerald);
+      opacity: 0.55;
+    }
+    .corner-ticks::before {
+      top: -1px;
+      left: -1px;
+      border-top: 1.5px solid var(--signal-emerald);
+      border-left: 1.5px solid var(--signal-emerald);
+    }
+    .corner-ticks::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 1.5px solid var(--signal-emerald);
+      border-right: 1.5px solid var(--signal-emerald);
     }
 
-    /* ASCII Container */
-    .ascii-terminal {
-      background: rgba(5, 10, 16, 0.94);
-      border: 1px solid rgba(20, 231, 165, 0.24);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    /* Interactive 3D Viewport Frame in Hero */
+    .viewport-frame {
+      background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, rgba(5, 7, 10, 0.72) 80%);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      border-radius: 3px;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.85);
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+    .viewport-frame:active {
+      cursor: grabbing;
     }
 
-    /* Progress Indicators */
-    .meter-tube {
-      background: rgba(6, 12, 18, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
+    /* Structured Tags */
+    .tag-chip {
+      background-color: #0d141f;
+      border: 1px solid #1e293b;
+      color: #cbd5e1;
+      border-radius: 2px;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .tag-chip:hover {
+      border-color: var(--signal-emerald);
+      color: #ffffff;
     }
 
-    .meter-fill {
-      height: 100%;
-      border-radius: 9999px;
-      background: linear-gradient(90deg, #14e7a5 0%, #2b61ff 100%);
-      box-shadow: 0 0 8px rgba(20, 231, 165, 0.5);
+    .tag-amber {
+      background-color: rgba(245, 158, 11, 0.07);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      color: #fcd34d;
+      border-radius: 2px;
     }
 
-    /* Scroll HUD */
-    #scroll-hud {
-      background: rgba(7, 13, 20, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    /* Accessible focus state */
+    /* Keyboard focus accessibility */
     a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--accent-mint) !important;
-      outline-offset: 3px !important;
+      outline: 2px solid var(--signal-emerald) !important;
+      outline-offset: 2px !important;
     }
 
+    /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 7px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: var(--void-black);
+      background: var(--bg-obsidian);
     }
     ::-webkit-scrollbar-thumb {
-      background: #142332;
-      border-radius: 4px;
-      border: 1px solid rgba(20, 231, 165, 0.2);
+      background: #1e293b;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-mint);
+      background: var(--signal-emerald);
     }
   </style>
 </head>
 
-<body class="min-h-screen flex flex-col relative selection:bg-emerald-400 selection:text-black">
+<body class="min-h-screen flex flex-col relative bg-tech-grid selection:bg-emerald-500 selection:text-black">
 
-  <!-- Interactive 3D Perspective Contour Flight Canvas -->
+  <!-- Hardware-Accelerated 3D Topographic & Wireframe Canvas -->
   <canvas id="optical-canvas" aria-hidden="true"></canvas>
 
-  <!-- Accessible Skip Link -->
-  <a href="#content-start" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-emerald-400 text-black font-mono font-bold text-xs rounded shadow-2xl">
-    Skip to main content
+  <!-- Accessible Skip Navigation -->
+  <a href="#content-start" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 z-50 px-3 py-1.5 bg-emerald-500 text-black font-mono font-bold text-xs rounded-sm shadow-lg">
+    [SKIP TO CONTENT]
   </a>
 
-  <!-- ================= HEADER NAVIGATION ================= -->
-  <header class="fixed top-4 left-0 right-0 z-40 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto h-14 rounded-full px-5 flex items-center justify-between border" style="background: rgba(7, 13, 20, 0.88); backdrop-filter: blur(20px); border-color: var(--border-contour); box-shadow: 0 12px 30px rgba(0,0,0,0.65);">
+  <!-- ================= ARCHITECTURAL TOP HEADER ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 border-b border-slate-800/90 bg-[#05070a]/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto h-14 px-4 sm:px-6 flex items-center justify-between">
       
-      <!-- Logo / Name -->
-      <a href="#" class="flex items-center gap-2.5 group">
-        <span class="w-2.5 h-2.5 rounded-full" style="background: var(--accent-mint);"></span>
-        <span class="font-bold text-sm tracking-tight text-white group-hover:text-emerald-300 transition-colors">
-          Chase Oswalt
+      <!-- Identity & Status -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <span class="w-2 h-2 bg-emerald-500 inline-block"></span>
+          <span class="font-mono font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            CHASE_OSWALT
+          </span>
+        </a>
+        <span class="hidden sm:inline-block text-slate-700 font-mono text-xs">/</span>
+        <span class="hidden sm:inline-block font-mono text-[11px] text-slate-400">
+          B.S. IT @ UCF <span class="text-emerald-400">'26</span>
         </span>
-        <span class="hidden sm:inline font-mono text-[11px] px-2 py-0.5 rounded-full badge-mint ml-1">
-          UCF IT '26
-        </span>
-      </a>
+      </div>
 
-      <!-- Navigation Anchors -->
-      <nav class="hidden md:flex items-center gap-6 font-medium text-xs text-slate-300" aria-label="Main Navigation">
-        <a href="#about" class="hover:text-emerald-300 transition-colors">About</a>
-        <a href="#projects" class="hover:text-emerald-300 transition-colors">Projects</a>
-        <a href="#skills" class="hover:text-emerald-300 transition-colors">Skills</a>
-        <a href="#education" class="hover:text-emerald-300 transition-colors">Education</a>
-        <a href="#contact" class="hover:text-emerald-300 transition-colors">Contact</a>
+      <!-- Section Index Links -->
+      <nav class="hidden md:flex items-center gap-6 font-mono text-xs text-slate-400" aria-label="Primary Navigation">
+        <a href="#about" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">01.</span>Overview</a>
+        <a href="#projects" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">02.</span>Case Studies</a>
+        <a href="#skills" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">03.</span>Stack Matrix</a>
+        <a href="#education" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">04.</span>Education</a>
+        <a href="#contact" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">05.</span>Contact</a>
       </nav>
 
-      <!-- Action Cluster -->
-      <div class="flex items-center gap-2.5">
-        <!-- 3D Contour Simulation Toggle -->
-        <button id="sim-toggle-btn" onclick="toggleCanvasSim()" class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border transition-all text-slate-300 hover:text-white" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);" title="Toggle 3D Animation">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-          <span id="sim-toggle-label">3D Engine: RUN</span>
+      <!-- Controls & Direct Links -->
+      <div class="flex items-center gap-2">
+        <!-- 3D Render Loop Toggle -->
+        <button id="sim-toggle-btn" type="button" onclick="toggleCanvasSim()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-mono border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-600 hover:text-white transition-colors" title="Pause or resume 3D wireframe renderer">
+          <span id="sim-status-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span id="sim-toggle-label">RENDER: ON</span>
         </button>
 
-        <!-- Resume Download -->
-        <a href="Chase_Oswalt_Resume.pdf" download class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-black transition-all hover:scale-105 shadow" style="background: var(--accent-mint);">
-          <i data-lucide="arrow-down-to-line" class="w-3.5 h-3.5" aria-hidden="true"></i>
-          <span>Resume</span>
+        <!-- Resume PDF -->
+        <a href="Chase_Oswalt_Resume.pdf" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-mono font-semibold text-black bg-emerald-500 hover:bg-emerald-400 transition-colors">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+            <path d="M12 3v13M7 11l5 5 5-5M4 20h16"/>
+          </svg>
+          <span>Resume.pdf</span>
         </a>
 
-        <!-- Social Connections -->
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="GitHub Profile">
-          <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+        <!-- GitHub -->
+        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors" aria-label="GitHub Profile">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
         </a>
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="LinkedIn Profile">
-          <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors" aria-label="LinkedIn Profile">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
           </svg>
         </a>
       </div>
+
     </div>
   </header>
 
-  <!-- ================= FLOATING SCROLL DEPTH INDICATOR ================= -->
-  <div id="scroll-hud" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 px-3.5 py-1.5 rounded-full font-mono text-[11px] text-slate-300 shadow-xl backdrop-blur-md">
-    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-    <span id="scroll-depth-label">Z-Depth: 0000m</span>
-    <span class="text-slate-500">|</span>
-    <span id="scroll-morph-label" class="text-emerald-300 font-bold">Wireframe: Sphere (Hero)</span>
+  <!-- ================= COMPACT TELEMETRY READOUT (BOTTOM LEFT) ================= -->
+  <div id="scroll-hud" class="fixed bottom-4 left-4 z-30 hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-sm font-mono text-[11px] text-slate-400 border border-slate-800 bg-[#05070a]/95 shadow-lg">
+    <span class="w-1.5 h-1.5 bg-emerald-400"></span>
+    <span id="scroll-depth-label">Z: 0000m</span>
+    <span class="text-slate-700">|</span>
+    <span id="scroll-morph-label" class="text-emerald-400">MESH: SPHERE</span>
   </div>
 
-  <!-- ================= MAIN CONTENT ================= -->
-  <main id="content-start" class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-20 space-y-20 relative z-10 flex-1">
+  <!-- ================= MAIN ENGINEERING DOSSIER ================= -->
+  <main id="content-start" class="max-w-6xl mx-auto w-full px-4 sm:px-6 pt-20 pb-24 space-y-20 relative z-10 flex-1">
 
-    <!-- ================= HERO SECTION WITH ASCII ART ================= -->
-    <section id="about" class="pt-6 sm:pt-8 space-y-8">
+    <!-- ================= 01 // OVERVIEW & HERO ================= -->
+    <section id="about" class="pt-2 space-y-6">
       
-      <!-- ASCII Name Container -->
-      <div class="ascii-terminal rounded-2xl p-5 sm:p-6 border overflow-hidden relative">
-        <div class="flex items-center justify-between border-b pb-3 mb-4 font-mono text-xs text-slate-400" style="border-color: rgba(255, 255, 255, 0.08);">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
-            <span class="text-slate-200 font-bold">chase_oswalt.profile</span>
-          </div>
-          <div class="hidden sm:flex items-center gap-3 text-slate-400 font-code text-[11px]">
-            <span>University of Central Florida</span>
-            <span>•</span>
-            <span class="text-emerald-400 font-medium">B.S. Information Technology ('26)</span>
-          </div>
-        </div>
-
-        <!-- Preserved User ASCII Art -->
-        <div class="flex items-center justify-center py-2 overflow-x-auto">
-          <pre class="font-mono text-emerald-400 font-bold select-none leading-none tracking-tight text-[9px] sm:text-xs md:text-sm lg:text-base text-center" aria-label="ASCII Art Name: CHASE">
+      <!-- Integrated Terminal Identity Bar with Preserved ASCII Banner -->
+      <div class="tech-panel corner-ticks p-4 sm:px-6 sm:py-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          
+          <!-- Left: Terminal Header + Preserved ASCII Art -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+              <span class="text-emerald-400 font-bold">SYS // 01</span>
+              <span>•</span>
+              <span class="text-slate-200 font-semibold">chase_oswalt // systems &amp; software</span>
+            </div>
+            <div class="overflow-x-auto py-0.5">
+              <pre class="font-mono text-emerald-400 font-bold select-none leading-none tracking-tight text-[8px] sm:text-[10px] md:text-xs" aria-label="ASCII Art Name: CHASE">
    ______   __  __   ______   ______   ______    
   /\  ___\ /\ \_\ \ /\  __ \ /\  ___\ /\  ___\   
   \ \ \____\ \  __ \\ \  __ \\ \___  \\ \  __\_  
    \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\\ \_____\ 
     \/_____/ \/_/\/_/ \/_/\/_/ \/_____/ \/_____/ </pre>
+            </div>
+          </div>
+
+          <!-- Right: Live Status & Degree Readout -->
+          <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 md:text-right font-mono text-xs border-t md:border-t-0 pt-3 md:pt-0 border-slate-800/80">
+            <div class="px-3 py-2 bg-[#06090e] border border-slate-800 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Current Status</div>
+              <div class="text-emerald-400 font-semibold flex items-center gap-1.5 mt-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Open to Full-Time Roles (2026)</span>
+              </div>
+            </div>
+            <div class="px-3 py-2 bg-[#06090e] border border-slate-800 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Primary Focus</div>
+              <div class="text-slate-200 font-medium mt-0.5">Backend • Cloud Infra • C# / GLSL</div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Hero Grid: Left Column Text & Metrics | Right Column Hero Showcase Frame -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <!-- Main Hero Grid: Left Editorial Bio & Specs | Right Interactive 3D Viewport -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        <!-- Left: Text, Actions & Structured Metric Strip -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-mint font-mono text-xs font-semibold">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>SYSTEMS SOFTWARE • CLOUD ARCHITECTURE • GRAPHICS</span>
+        <!-- Left Column: Direct Engineer-to-Engineer Copy & Spec Strip -->
+        <div class="lg:col-span-7 tech-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-5">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-sm font-mono text-[11px] text-emerald-300 font-medium">
+              <span>SYSTEMS SOFTWARE</span>
+              <span class="text-emerald-500/50">/</span>
+              <span>BACKEND ARCHITECTURE</span>
+              <span class="text-emerald-500/50">/</span>
+              <span>GRAPHICS</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-[1.15]">
+              Building backend services, automated infrastructure, and <span class="text-emerald-400">real-time graphics.</span>
+            </h1>
+
+            <p class="text-base sm:text-[17px] leading-relaxed text-slate-300 font-normal">
+              I'm a Systems &amp; Software Engineer finishing my B.S. in Information Technology at <strong class="text-white font-semibold">UCF</strong> (August 2026). My work spans full-stack web platforms and transactional Java/SQL backends to Windows/Linux server automation and custom C#/GLSL game systems.
+            </p>
+
+            <!-- Direct Action Bar -->
+            <div class="pt-2 flex flex-wrap items-center gap-3">
+              <a href="#projects" class="px-5 py-2.5 rounded-sm font-mono font-bold text-xs text-black bg-emerald-500 hover:bg-emerald-400 flex items-center gap-2 transition-colors">
+                <span>VIEW CASE STUDIES [04]</span>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                </svg>
+              </a>
+
+              <button type="button" onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied: chase.ed.oswalt@gmail.com')" class="px-4 py-2.5 rounded-sm font-mono text-xs font-medium text-slate-200 bg-[#0d141f] border border-slate-700 hover:border-emerald-500/60 hover:text-white flex items-center gap-2 transition-colors">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                <span>chase.ed.oswalt@gmail.com</span>
+              </button>
+            </div>
           </div>
 
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.14]">
-            Engineering resilient cloud systems &amp; <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(135deg, #14e7a5 20%, #ffab2e 90%);">computational graphics.</span>
-          </h1>
-
-          <p class="text-base sm:text-lg leading-relaxed max-w-2xl font-normal" style="color: var(--text-muted);">
-            Information Technology scholar at the <strong class="text-white font-semibold">University of Central Florida</strong>. Specialized in high-throughput enterprise backends, custom GLSL graphics pipelines, and robust automated infrastructure.
-          </p>
-
-          <div class="pt-1 flex flex-wrap items-center gap-4">
-            <a href="#projects" class="px-6 py-3 rounded-full font-bold text-sm text-black flex items-center gap-2 hover:scale-105 shadow-xl transition-all" style="background: var(--accent-mint);">
-              <i data-lucide="folder-git-2" class="w-4 h-4"></i> View Featured Projects
-            </a>
-            
-            <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied to clipboard!')" class="px-5 py-3 rounded-full font-mono text-xs font-semibold text-slate-200 glass-panel hover:text-white flex items-center gap-2 transition-all">
-              <i data-lucide="copy" class="w-3.5 h-3.5" style="color: var(--accent-mint)"></i>
-              <span>chase.ed.oswalt@gmail.com</span>
-            </button>
-          </div>
-
-          <!-- Structured Credentials Metric Strip -->
-          <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-            <div class="p-3 rounded-xl border bg-slate-900/40" style="border-color: rgba(255,255,255,0.07);">
-              <div class="text-slate-400 text-[10px] uppercase">Education</div>
-              <div class="font-bold text-white mt-0.5">UCF '26</div>
-              <div class="text-[10px] text-emerald-400">B.S. Info Tech</div>
+          <!-- 4-Column Specification Strip -->
+          <div class="pt-6 border-t border-slate-800/90 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
+            <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Degree</div>
+              <div class="text-xs font-bold text-white mt-0.5">B.S. IT @ UCF</div>
+              <div class="text-[11px] text-emerald-400">Aug 2026</div>
             </div>
-            <div class="p-3 rounded-xl border bg-slate-900/40" style="border-color: rgba(255,255,255,0.07);">
-              <div class="text-slate-400 text-[10px] uppercase">Academic</div>
-              <div class="font-bold text-emerald-400 mt-0.5">3.53 GPA</div>
-              <div class="text-[10px] text-slate-300">Dean's List</div>
+            <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Standing</div>
+              <div class="text-xs font-bold text-emerald-400 mt-0.5">3.53 / 4.0 GPA</div>
+              <div class="text-[11px] text-slate-400">Dean's List</div>
             </div>
-            <div class="p-3 rounded-xl border bg-slate-900/40" style="border-color: rgba(255,255,255,0.07);">
-              <div class="text-slate-400 text-[10px] uppercase">Scholarship</div>
-              <div class="font-bold text-amber-300 mt-0.5 truncate">Elbit America</div>
-              <div class="text-[10px] text-slate-300">STEM Scholar</div>
+            <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Recognition</div>
+              <div class="text-xs font-bold text-amber-400 mt-0.5 truncate">Elbit America</div>
+              <div class="text-[11px] text-slate-400">STEM Scholar</div>
             </div>
-            <div class="p-3 rounded-xl border bg-slate-900/40" style="border-color: rgba(255,255,255,0.07);">
-              <div class="text-slate-400 text-[10px] uppercase">Location</div>
-              <div class="font-bold text-white mt-0.5 truncate">Satellite Beach</div>
-              <div class="text-[10px] text-slate-300">FL (Open to Relocate)</div>
+            <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
+              <div class="text-[10px] text-slate-500 uppercase">Base</div>
+              <div class="text-xs font-bold text-white mt-0.5 truncate">Satellite Beach</div>
+              <div class="text-[11px] text-slate-400">Orlando / Relocate</div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Dedicated Hero Showcase Frame -->
-        <div class="lg:col-span-5">
-          <div id="sculpture-anchor" class="sculpture-frame rounded-3xl relative h-[420px] p-6 flex flex-col justify-between overflow-hidden">
+        <!-- Right Column: Interactive 3D Viewport Frame -->
+        <div class="lg:col-span-5 flex flex-col">
+          <div id="sculpture-anchor" class="viewport-frame flex-1 min-h-[380px] sm:min-h-[420px] p-5 flex flex-col justify-between relative overflow-hidden" title="Drag to rotate 3D wireframe">
             
-            <!-- Top HUD Bar -->
-            <div class="flex items-center justify-between font-mono text-[11px] relative z-10">
+            <!-- Viewport Header & Mode Selector -->
+            <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] relative z-10">
               <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-slate-200 font-bold">3D WIREFRAME CORE</span>
+                <span class="w-2 h-2 bg-emerald-400 inline-block"></span>
+                <span class="text-slate-200 font-bold tracking-wider">VIEWPORT // 3D MESH</span>
               </div>
-              <span class="px-2 py-0.5 rounded badge-mint text-[10px]">AUTONOMOUS ORBIT</span>
-            </div>
-
-            <!-- Transparent Center for Canvas Sphere -->
-            <div class="flex-1 flex items-center justify-center pointer-events-none" aria-hidden="true">
-              <div class="w-full flex justify-between px-2 text-[10px] font-mono text-emerald-500/30">
-                <span>+</span>
-                <span>+</span>
+              <!-- Interactive Geometry Override Controls -->
+              <div class="flex items-center gap-1 bg-[#05070a]/90 p-0.5 border border-slate-800 rounded-sm" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()">
+                <button type="button" onclick="setShapeMode('auto')" data-shape-btn="auto" class="shape-mode-btn px-2 py-0.5 text-[10px] font-bold bg-emerald-500 text-black rounded-sm transition-colors">AUTO</button>
+                <button type="button" onclick="setShapeMode('sphere')" data-shape-btn="sphere" class="shape-mode-btn px-2 py-0.5 text-[10px] text-slate-400 hover:text-white rounded-sm transition-colors">SPHERE</button>
+                <button type="button" onclick="setShapeMode('torus')" data-shape-btn="torus" class="shape-mode-btn px-2 py-0.5 text-[10px] text-slate-400 hover:text-white rounded-sm transition-colors">TORUS</button>
+                <button type="button" onclick="setShapeMode('ribbon')" data-shape-btn="ribbon" class="shape-mode-btn px-2 py-0.5 text-[10px] text-slate-400 hover:text-white rounded-sm transition-colors">MÖBIUS</button>
               </div>
             </div>
 
-            <!-- Bottom Controls & Morph Indicator -->
-            <div class="space-y-2 relative z-10 border-t pt-3" style="border-color: rgba(20, 231, 165, 0.15);">
-              <div class="flex items-center justify-between font-mono text-xs">
-                <span class="text-slate-400">GEOMETRY:</span>
+            <!-- Reticle Crosshairs for 3D Canvas Target -->
+            <div class="flex-1 flex items-center justify-between px-2 pointer-events-none font-mono text-xs text-emerald-500/30" aria-hidden="true">
+              <span>+</span>
+              <span>+</span>
+            </div>
+
+            <!-- Viewport Telemetry Footer -->
+            <div class="space-y-1.5 relative z-10 border-t border-slate-800/80 pt-3 font-mono text-[11px]">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-400">ACTIVE TOPOLOGY:</span>
                 <span id="hero-geometry-name" class="font-bold text-emerald-400">SPHERE (0%)</span>
               </div>
-              <div class="flex items-center justify-between font-mono text-[11px] text-slate-400">
-                <span>Core: Java • Python • C# • GLSL</span>
-                <span class="text-amber-300">SCROLL TO MORPH ▾</span>
+              <div class="flex items-center justify-between text-[10px] text-slate-500">
+                <span>DRAG TO ROTATE • SCROLL TO MORPH</span>
+                <span class="text-amber-400/90">60 FPS LUT BATCHED</span>
               </div>
             </div>
+
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ================= FEATURED PROJECTS ================= -->
-    <section id="projects" class="space-y-8">
+    <!-- ================= 02 // ENGINEERING CASE STUDIES (PROJECTS) ================= -->
+    <section id="projects" class="space-y-6">
       
-      <!-- Section Header & Filter Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b" style="border-color: rgba(255, 255, 255, 0.08);">
+      <!-- Section Header & Segmented Filter Control -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
-          <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">Portfolio</div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Technical Projects</h2>
+          <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">SYS // 02 — SELECTED WORK</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Engineering Case Studies</h2>
         </div>
 
-        <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs p-1 rounded-full glass-panel">
-          <button onclick="filterProjects('all')" class="project-filter-btn px-4 py-1.5 rounded-full font-bold transition-all text-black" data-filter="all" style="background: var(--accent-mint);">
-            All
+        <!-- Crisp Segmented Filter -->
+        <div class="inline-flex flex-wrap items-center gap-1 p-1 bg-[#090d13] border border-slate-800 rounded-sm font-mono text-xs" role="tablist" aria-label="Filter projects by domain">
+          <button type="button" onclick="filterProjects('all')" class="project-filter-btn px-3 py-1.5 rounded-sm font-bold text-black bg-emerald-500 transition-colors" data-filter="all">
+            All [04]
           </button>
-          <button onclick="filterProjects('web')" class="project-filter-btn px-4 py-1.5 rounded-full transition-all text-slate-300 hover:text-white" data-filter="web">
-            Full-Stack &amp; Cloud
+          <button type="button" onclick="filterProjects('web')" class="project-filter-btn px-3 py-1.5 rounded-sm text-slate-400 hover:text-white transition-colors" data-filter="web">
+            Full-Stack &amp; Cloud [02]
           </button>
-          <button onclick="filterProjects('systems')" class="project-filter-btn px-4 py-1.5 rounded-full transition-all text-slate-300 hover:text-white" data-filter="systems">
-            Systems &amp; Graphics
+          <button type="button" onclick="filterProjects('systems')" class="project-filter-btn px-3 py-1.5 rounded-sm text-slate-400 hover:text-white transition-colors" data-filter="systems">
+            Systems &amp; Graphics [01]
           </button>
-          <button onclick="filterProjects('infra')" class="project-filter-btn px-4 py-1.5 rounded-full transition-all text-slate-300 hover:text-white" data-filter="infra">
-            Infrastructure &amp; AD
+          <button type="button" onclick="filterProjects('infra')" class="project-filter-btn px-3 py-1.5 rounded-sm text-slate-400 hover:text-white transition-colors" data-filter="infra">
+            Infrastructure &amp; AD [01]
           </button>
         </div>
       </div>
 
-      <!-- Projects Grid -->
-      <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 gap-7">
+      <!-- Case Studies Grid -->
+      <div id="project-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        <!-- ================= PROJECT 1: UCF TECH LENDING ================= -->
-        <article class="glass-panel rounded-2xl flex flex-col justify-between overflow-hidden project-entry group" data-category="web">
-          <div class="p-7 space-y-4">
+        <!-- ================= CASE STUDY 01: UCF TECH LENDING ================= -->
+        <article class="tech-panel tech-panel-interactive tech-panel-emerald flex flex-col justify-between project-entry" data-category="web">
+          <div class="p-6 sm:p-7 space-y-5">
             
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                Lead Developer (4-Person Agile Team)
-              </span>
-              <span class="font-mono text-[11px] px-2 py-0.5 rounded-full badge-mint">MERN Web App</span>
+            <!-- Dossier Meta Header -->
+            <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold rounded-sm">01</span>
+                <span class="text-emerald-400 font-semibold">Lead Developer (4-Person Agile Team)</span>
+              </div>
+              <span class="text-slate-400 text-[11px]">MERN • DigitalOcean</span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-              UCF Technology Lending Web Platform
-            </h3>
+            <!-- Title & Direct Summary -->
+            <div class="space-y-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                UCF Technology Lending Web Platform
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Led a 4-person agile team to replace a legacy university equipment checkout system with a role-aware (Student, Faculty, Admin) full-stack web application built for fast barcode checkouts and automated inventory tracking.
+              </p>
+            </div>
 
-            <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
-              Led a 4-person agile team engineering a responsive MERN application replacing a legacy university lending system with a role-aware (Student/Faculty/Admin) interface. Architected authentication with Google OAuth 2.0, JWT middleware, bcrypt, and the Resend HTTP API for verification emails. Integrated ZXing barcode scanning, external data APIs (DummyJSON, Wikipedia OpenSearch), MongoDB RBAC schema, automated late-fine calculation algorithms, and a GitHub Actions CI/CD pipeline deploying to a DigitalOcean Droplet with Nginx (Gzip, HTTP/2) and Jest unit tests (>95% Lighthouse).
-            </p>
+            <!-- Structured 3-Point Architecture Breakdown -->
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+              <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
+              <ul class="space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Auth &amp; RBAC Security:</strong> Implemented Google OAuth 2.0, stateless JWT middleware, bcrypt password hashing, MongoDB role schemas, and transactional verification emails via the Resend HTTP API.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Hardware &amp; Data Workflows:</strong> Integrated ZXing optical barcode scanning, automated late-fine calculation algorithms, and external catalog enrichment (DummyJSON, Wikipedia OpenSearch).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">CI/CD &amp; Production Delivery:</strong> Automated Jest unit test suites via GitHub Actions deploying to a Linux DigitalOcean Droplet behind an Nginx reverse proxy (Gzip, HTTP/2, &gt;95% Lighthouse score).</span>
+                </li>
+              </ul>
+            </div>
 
-            <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
-              <span class="px-2.5 py-1 rounded-md badge-mint">React (Vite)</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">Node / Express</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">MongoDB / Mongoose</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">DigitalOcean / Nginx</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">Jest / GitHub Actions</span>
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2.5 py-1 tag-chip">React (Vite)</span>
+              <span class="px-2.5 py-1 tag-chip">Node.js / Express</span>
+              <span class="px-2.5 py-1 tag-chip">MongoDB / Mongoose</span>
+              <span class="px-2.5 py-1 tag-chip">DigitalOcean / Nginx</span>
+              <span class="px-2.5 py-1 tag-chip">Jest / GitHub Actions</span>
             </div>
           </div>
 
-          <div class="px-7 py-4 border-t flex items-center justify-between font-mono text-xs" style="border-color: rgba(255, 255, 255, 0.06); background: rgba(3, 6, 10, 0.5);">
-            <div class="flex items-center gap-3">
-              <a href="https://github.com/ChaseOGit/ucf-tech-lending-platform" target="_blank" rel="noopener noreferrer" class="font-bold flex items-center gap-1.5 text-white hover:text-emerald-300 transition-colors">
+          <!-- Action Footer -->
+          <div class="px-6 py-3.5 border-t border-slate-800/90 bg-[#06090e]/90 flex items-center justify-between font-mono text-xs">
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/ChaseOGit/ucf-tech-lending-platform" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
                 <span>View Source</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
               </a>
-              <button onclick="copyToClipboard('git clone https://github.com/ChaseOGit/ucf-tech-lending-platform.git', 'Clone command copied!')" class="text-slate-400 hover:text-slate-200 transition-colors">
-                [clone]
+              <button type="button" onclick="copyToClipboard('git clone https://github.com/ChaseOGit/ucf-tech-lending-platform.git', 'Copied git clone command')" class="text-slate-400 hover:text-emerald-300 transition-colors">
+                [git clone]
               </button>
             </div>
-            <span class="text-emerald-400 font-bold">&gt;95% Lighthouse Score</span>
+            <span class="text-emerald-400 font-semibold">&gt;95% Lighthouse</span>
           </div>
         </article>
 
-        <!-- ================= PROJECT 2: 2D PHYSICS ARENA COMBAT GAME ================= -->
-        <article class="glass-panel glass-panel-amber rounded-2xl flex flex-col justify-between overflow-hidden project-entry group" data-category="systems">
-          <div class="p-7 space-y-4">
+        <!-- ================= CASE STUDY 02: 2D PHYSICS ARENA COMBAT GAME ================= -->
+        <article class="tech-panel tech-panel-interactive tech-panel-amber flex flex-col justify-between project-entry" data-category="systems">
+          <div class="p-6 sm:p-7 space-y-5">
             
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                Graphics &amp; Game Simulation
-              </span>
-              <span class="font-mono text-[11px] px-2 py-0.5 rounded-full badge-amber">Godot Engine • C#</span>
+            <!-- Dossier Meta Header -->
+            <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-amber-500/15 border border-amber-500/40 text-amber-300 font-bold rounded-sm">02</span>
+                <span class="text-amber-400 font-semibold">Systems &amp; Graphics Programming</span>
+              </div>
+              <span class="text-slate-400 text-[11px]">Godot • C# • GLSL</span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">
-              2D Physics Arena Combat Game
-            </h3>
+            <!-- Title & Direct Summary -->
+            <div class="space-y-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                2D Physics Arena Combat Game
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Designed and programmed a modular local-multiplayer arena combat engine in Godot using C# and custom GLSL shaders, built around deterministic state machines, physics-driven projectile combat, and runtime data pipelines.
+              </p>
+            </div>
 
-            <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
-              Engineered an extensible modular game architecture in Godot utilizing C# for core state-machine logic, collision responses, and local multi-gamepad input handling. Programmed custom GLSL shaders to render real-time post-processing visual effects and dynamic lighting passes. Built an internal CSV-driven data pipeline to dynamically load and balance character statistics, item attributes, and asset configurations at runtime.
-            </p>
+            <!-- Structured 3-Point Architecture Breakdown -->
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+              <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
+              <ul class="space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Core C# Simulation Loop:</strong> Architected modular entity state machines, custom javelin/collision physics responses, and low-latency local multi-gamepad input routing.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Custom GLSL Shader Pipeline:</strong> Wrote real-time fragment and canvas shaders for dynamic multi-source 2D lighting passes and combat post-processing effects.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Data-Driven Runtime Balancing:</strong> Built an external CSV ingestion parser that dynamically loads character stats, weapon attributes, and asset configs without recompiling.</span>
+                </li>
+              </ul>
+            </div>
 
-            <!-- Video Player Interactive Banner -->
-            <div onclick="openVideoModal('4_mdrE4RQnI')" class="p-3.5 rounded-xl border cursor-pointer transition-all flex items-center justify-between group/banner" style="background: rgba(255, 171, 46, 0.05); border-color: rgba(255, 171, 46, 0.25);">
+            <!-- Interactive Gameplay Video Trigger Banner -->
+            <button type="button" onclick="openVideoModal('4_mdrE4RQnI')" class="w-full text-left p-3 rounded-sm border border-amber-500/35 bg-amber-500/5 hover:bg-amber-500/10 transition-colors flex items-center justify-between group/vid">
               <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-black shadow transition-transform group-hover/banner:scale-110" style="background: var(--accent-amber);">
+                <div class="w-8 h-8 rounded-sm bg-amber-500 text-black flex items-center justify-center font-bold text-xs shrink-0 group-hover/vid:scale-105 transition-transform">
                   ▶
                 </div>
                 <div>
-                  <div class="font-bold text-white text-xs">Watch Gameplay Demo Video</div>
-                  <div class="text-[11px] text-amber-200/70">60 FPS Direct3D / Vulkan Engine Capture</div>
+                  <div class="font-mono font-bold text-white text-xs">Launch 60 FPS Engine Gameplay Capture</div>
+                  <div class="font-mono text-[11px] text-amber-200/75">Demonstrates GLSL shaders, javelin physics &amp; multi-controller combat</div>
                 </div>
               </div>
-              <span class="font-mono text-xs font-bold text-amber-400 group-hover/banner:translate-x-1 transition-transform">PLAY ↗</span>
-            </div>
+              <span class="font-mono text-xs font-bold text-amber-400 shrink-0 ml-2">WATCH ↗</span>
+            </button>
 
-            <div class="pt-1 flex flex-wrap gap-2 font-mono text-xs">
-              <span class="px-2.5 py-1 rounded-md badge-amber">Godot Engine</span>
-              <span class="px-2.5 py-1 rounded-md badge-amber">C# (.NET)</span>
-              <span class="px-2.5 py-1 rounded-md badge-amber">GLSL Shaders</span>
-              <span class="px-2.5 py-1 rounded-md badge-amber">Javelin Physics</span>
-              <span class="px-2.5 py-1 rounded-md badge-amber">CSV Data Pipeline</span>
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2.5 py-1 tag-amber">Godot Engine</span>
+              <span class="px-2.5 py-1 tag-amber">C# (.NET)</span>
+              <span class="px-2.5 py-1 tag-amber">GLSL Shaders</span>
+              <span class="px-2.5 py-1 tag-amber">2D Physics &amp; State Machines</span>
+              <span class="px-2.5 py-1 tag-amber">CSV Data Pipeline</span>
             </div>
           </div>
 
-          <div class="px-7 py-4 border-t flex items-center justify-between font-mono text-xs" style="border-color: rgba(255, 255, 255, 0.06); background: rgba(3, 6, 10, 0.5);">
-            <div class="flex items-center gap-3">
-              <button onclick="openVideoModal('4_mdrE4RQnI')" class="font-bold flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors">
-                <i data-lucide="play" class="w-3.5 h-3.5"></i>
+          <!-- Action Footer -->
+          <div class="px-6 py-3.5 border-t border-slate-800/90 bg-[#06090e]/90 flex items-center justify-between font-mono text-xs">
+            <div class="flex items-center gap-4">
+              <button type="button" onclick="openVideoModal('4_mdrE4RQnI')" class="font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1.5 transition-colors">
                 <span>Open Video Lightbox</span>
               </button>
-              <a href="https://youtu.be/4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200 transition-colors">
-                [YouTube]
+              <a href="https://youtu.be/4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors">
+                [YouTube Direct ↗]
               </a>
             </div>
-            <span class="text-slate-400">Local Multi-Gamepad Input</span>
+            <span class="text-slate-400">Multi-Gamepad Engine</span>
           </div>
         </article>
 
-        <!-- ================= PROJECT 3: THREE-TIER ENTERPRISE ================= -->
-        <article class="glass-panel rounded-2xl flex flex-col justify-between overflow-hidden project-entry group" data-category="web">
-          <div class="p-7 space-y-4">
+        <!-- ================= CASE STUDY 03: THREE-TIER ENTERPRISE WEB APP ================= -->
+        <article class="tech-panel tech-panel-interactive tech-panel-cobalt flex flex-col justify-between project-entry" data-category="web">
+          <div class="p-6 sm:p-7 space-y-5">
             
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-                Backend Systems
-              </span>
-              <span class="font-mono text-[11px] px-2 py-0.5 rounded-full badge-mint">Tomcat Container • Java</span>
+            <!-- Dossier Meta Header -->
+            <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-blue-500/15 border border-blue-500/40 text-blue-300 font-bold rounded-sm">03</span>
+                <span class="text-blue-400 font-semibold">Distributed Backend Systems</span>
+              </div>
+              <span class="text-slate-400 text-[11px]">Java • Tomcat • MySQL</span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white group-hover:text-sky-300 transition-colors">
-              Enterprise Distributed Three-Tier Web Application
-            </h3>
+            <!-- Title & Direct Summary -->
+            <div class="space-y-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                Enterprise Distributed Three-Tier Web Application
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Engineered a multi-user transactional client-server application deployed on Apache Tomcat backed by a relational MySQL database, isolating presentation, business logic, and data access across four permission tiers.
+              </p>
+            </div>
 
-            <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
-              Developed a scalable three-tier client-server web application deployed on an Apache Tomcat container interacting with a backend MySQL relational database. Implemented strict Role-Based Access Control (RBAC) to enforce granular read/write/audit permissions across four distinct user tiers (Root, Client, Data Entry, Accountant). Engineered server-side business logic using JDBC PreparedStatement and CallableStatement to trigger remote stored procedures, ensuring data integrity and preventing SQL injection vulnerabilities. Designed dynamic JSP frontends interfacing with transactional database operations enforcing foreign key referential integrity.
-            </p>
+            <!-- Structured 3-Point Architecture Breakdown -->
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+              <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
+              <ul class="space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-blue-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">4-Tier Role-Based Access Control:</strong> Enforced strict read, write, and audit boundaries across Root, Client, Data Entry, and Accountant user sessions at both the Servlet and DB connection levels.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-blue-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Hardened JDBC Data Layer:</strong> Utilized parameterized <code class="text-blue-300">PreparedStatement</code> and <code class="text-blue-300">CallableStatement</code> pipelines to execute remote stored procedures and prevent SQL injection.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-blue-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Referential Integrity &amp; JSP Views:</strong> Built dynamic JSP interfaces wired to ACID-compliant relational transactions enforcing foreign-key constraints and cascading business rules.</span>
+                </li>
+              </ul>
+            </div>
 
-            <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
-              <span class="px-2.5 py-1 rounded-md badge-mint">Java Servlets</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">JSP</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">MySQL / JDBC</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">Apache Tomcat</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">4-Tier RBAC</span>
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2.5 py-1 tag-chip">Java Servlets</span>
+              <span class="px-2.5 py-1 tag-chip">JSP</span>
+              <span class="px-2.5 py-1 tag-chip">MySQL / Stored Procedures</span>
+              <span class="px-2.5 py-1 tag-chip">JDBC</span>
+              <span class="px-2.5 py-1 tag-chip">Apache Tomcat</span>
             </div>
           </div>
 
-          <div class="px-7 py-4 border-t flex items-center justify-between font-mono text-xs" style="border-color: rgba(255, 255, 255, 0.06); background: rgba(3, 6, 10, 0.5);">
-            <div class="flex items-center gap-3">
-              <a href="https://github.com/ChaseOGit/enterprise-three-tier-app" target="_blank" rel="noopener noreferrer" class="font-bold flex items-center gap-1.5 text-white hover:text-sky-300 transition-colors">
+          <!-- Action Footer -->
+          <div class="px-6 py-3.5 border-t border-slate-800/90 bg-[#06090e]/90 flex items-center justify-between font-mono text-xs">
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/ChaseOGit/enterprise-three-tier-app" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-blue-400 flex items-center gap-1.5 transition-colors">
                 <span>View Source</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
               </a>
-              <button onclick="copyToClipboard('git clone https://github.com/ChaseOGit/enterprise-three-tier-app.git', 'Clone command copied!')" class="text-slate-400 hover:text-slate-200 transition-colors">
-                [clone]
+              <button type="button" onclick="copyToClipboard('git clone https://github.com/ChaseOGit/enterprise-three-tier-app.git', 'Copied git clone command')" class="text-slate-400 hover:text-blue-300 transition-colors">
+                [git clone]
               </button>
             </div>
-            <span class="text-slate-400">Stored Procedures &amp; RBAC</span>
+            <span class="text-blue-400 font-semibold">4-Tier RBAC &amp; JDBC</span>
           </div>
         </article>
 
-        <!-- ================= PROJECT 4: ENTERPRISE INFRASTRUCTURE ================= -->
-        <article class="glass-panel rounded-2xl flex flex-col justify-between overflow-hidden project-entry group" data-category="infra">
-          <div class="p-7 space-y-4">
+        <!-- ================= CASE STUDY 04: ENTERPRISE INFRASTRUCTURE ================= -->
+        <article class="tech-panel tech-panel-interactive tech-panel-emerald flex flex-col justify-between project-entry" data-category="infra">
+          <div class="p-6 sm:p-7 space-y-5">
             
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                Automation &amp; SysAdmin
-              </span>
-              <span class="font-mono text-[11px] px-2 py-0.5 rounded-full badge-mint">Windows Server 2022</span>
+            <!-- Dossier Meta Header -->
+            <div class="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-3 font-mono text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold rounded-sm">04</span>
+                <span class="text-emerald-400 font-semibold">Systems Administration &amp; Automation</span>
+              </div>
+              <span class="text-slate-400 text-[11px]">Windows Server 2022 • AD DS</span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-              Enterprise Virtual Infrastructure &amp; Automation Pipeline
-            </h3>
+            <!-- Title & Direct Summary -->
+            <div class="space-y-2">
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                Enterprise Virtual Infrastructure &amp; Automation Pipeline
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Designed and provisioned an isolated multi-node enterprise network topology running Windows Server 2022 domain controllers and client workstations, paired with PowerShell and Python administration scripts.
+              </p>
+            </div>
 
-            <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
-              Architected an isolated enterprise virtual network supporting Windows Server 2022 domain controllers and multi-version Windows clients via Oracle VirtualBox. Configured Active Directory Domain Services (AD DS), implementing Group Policy Objects (GPOs), Organizational Units (OUs), DNS/DHCP server roles, and RBAC user provisioning. Authored automation scripts in PowerShell and Python to streamline routine server maintenance, health monitoring, and bulk user onboarding operations.
-            </p>
+            <!-- Structured 3-Point Architecture Breakdown -->
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+              <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
+              <ul class="space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Active Directory Architecture:</strong> Configured AD DS domain forests, hierarchical Organizational Units (OUs), Group Policy Objects (GPOs), and least-privilege access controls.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">Core Network Services:</strong> Provisioned internal DNS zones, DHCP address scopes, and isolated virtual subnet routing across multi-version Windows hosts in Oracle VirtualBox.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-400 font-mono font-bold">›</span>
+                  <span><strong class="text-white">PowerShell &amp; Python Tooling:</strong> Wrote unmanned automation scripts for bulk user onboarding, scheduled health telemetry, and routine server maintenance.</span>
+                </li>
+              </ul>
+            </div>
 
-            <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
-              <span class="px-2.5 py-1 rounded-md badge-mint">Windows Server 2022</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">Active Directory (AD DS)</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">PowerShell &amp; Python</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">Oracle VirtualBox</span>
-              <span class="px-2.5 py-1 rounded-md badge-mint">GPOs / OUs / DNS / DHCP</span>
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span class="px-2.5 py-1 tag-chip">Windows Server 2022</span>
+              <span class="px-2.5 py-1 tag-chip">Active Directory (AD DS)</span>
+              <span class="px-2.5 py-1 tag-chip">PowerShell</span>
+              <span class="px-2.5 py-1 tag-chip">Python Automation</span>
+              <span class="px-2.5 py-1 tag-chip">DNS / DHCP / GPOs</span>
             </div>
           </div>
 
-          <div class="px-7 py-4 border-t flex items-center justify-between font-mono text-xs" style="border-color: rgba(255, 255, 255, 0.06); background: rgba(3, 6, 10, 0.5);">
-            <div class="flex items-center gap-3">
-              <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="font-bold flex items-center gap-1.5 text-white hover:text-emerald-300 transition-colors">
-                <span>GitHub Archive</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <!-- Action Footer -->
+          <div class="px-6 py-3.5 border-t border-slate-800/90 bg-[#06090e]/90 flex items-center justify-between font-mono text-xs">
+            <div class="flex items-center gap-4">
+              <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
+                <span>GitHub Profile &amp; Scripts</span>
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
               </a>
             </div>
-            <span class="text-slate-400">PowerShell &amp; Python Automation</span>
+            <span class="text-slate-400">AD DS • PowerShell • Python</span>
           </div>
         </article>
 
       </div>
     </section>
 
-    <!-- ================= TECHNICAL SKILLS ================= -->
-    <section id="skills" class="space-y-8">
-      <div>
-        <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">Capabilities</div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Technical Skills</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Domain 1: Languages -->
-        <div class="glass-panel rounded-2xl p-6 space-y-4">
-          <div class="flex items-center gap-2 font-mono text-xs font-bold text-emerald-400 border-b pb-3" style="border-color: rgba(255,255,255,0.08);">
-            <span>[01]</span>
-            <span>LANGUAGES</span>
-          </div>
-          <div class="space-y-3 font-mono text-xs">
-            <div>
-              <div class="flex justify-between mb-1"><span>Java (Enterprise)</span><span class="text-emerald-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 90%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Python</span><span class="text-emerald-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 88%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>JavaScript (ES6+)</span><span class="text-emerald-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 88%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>C / C++</span><span class="text-emerald-400">Solid</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 78%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>C# (.NET)</span><span class="text-emerald-400">Proficient</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 82%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>SQL &amp; PowerShell</span><span class="text-emerald-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 86%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>GLSL / HTML5 / CSS3</span><span class="text-emerald-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 75%;"></div></div>
-            </div>
-          </div>
+    <!-- ================= 03 // TECHNICAL STACK & CONTEXT MATRIX ================= -->
+    <section id="skills" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-slate-800">
+        <div>
+          <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">SYS // 03 — TECHNICAL CAPABILITIES</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Stack &amp; Implementation Matrix</h2>
         </div>
-
-        <!-- Domain 2: Frameworks & Web -->
-        <div class="glass-panel rounded-2xl p-6 space-y-4">
-          <div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 border-b pb-3" style="border-color: rgba(255,255,255,0.08);">
-            <span>[02]</span>
-            <span>FRAMEWORKS &amp; WEB</span>
-          </div>
-          <div class="space-y-3 font-mono text-xs">
-            <div>
-              <div class="flex justify-between mb-1"><span>React.js &amp; Vite</span><span class="text-amber-400">Fluent</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 88%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Node.js / Express.js</span><span class="text-amber-400">Fluent</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 85%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Java Servlets / JSP</span><span class="text-amber-400">Fluent</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 84%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>JDBC &amp; Stored Procs</span><span class="text-amber-400">Fluent</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 86%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>RESTful APIs</span><span class="text-amber-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 90%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Nginx (Gzip/HTTP2)</span><span class="text-amber-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #ffab2e, #ff5757); width: 80%;"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Domain 3: Cloud & Systems -->
-        <div class="glass-panel rounded-2xl p-6 space-y-4">
-          <div class="flex items-center gap-2 font-mono text-xs font-bold text-sky-400 border-b pb-3" style="border-color: rgba(255,255,255,0.08);">
-            <span>[03]</span>
-            <span>CLOUD &amp; SYSTEMS</span>
-          </div>
-          <div class="space-y-3 font-mono text-xs">
-            <div>
-              <div class="flex justify-between mb-1"><span>AWS Cloud Architecture</span><span class="text-sky-400">Certified</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 88%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>DigitalOcean Droplets</span><span class="text-sky-400">Experienced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 85%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Linux (RHEL / Ubuntu)</span><span class="text-sky-400">Solid</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 84%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Windows Server 2022</span><span class="text-sky-400">Administered</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 85%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Active Directory (AD DS)</span><span class="text-sky-400">Configured</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 86%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>GitHub Actions CI/CD</span><span class="text-sky-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 82%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Docker (Basics) &amp; VBox</span><span class="text-sky-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="background: linear-gradient(90deg, #2b61ff, #14e7a5); width: 75%;"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Domain 4: Databases & Tools -->
-        <div class="glass-panel rounded-2xl p-6 space-y-4">
-          <div class="flex items-center gap-2 font-mono text-xs font-bold text-emerald-400 border-b pb-3" style="border-color: rgba(255,255,255,0.08);">
-            <span>[04]</span>
-            <span>DATABASES &amp; TOOLS</span>
-          </div>
-          <div class="space-y-3 font-mono text-xs">
-            <div>
-              <div class="flex justify-between mb-1"><span>MongoDB &amp; Mongoose</span><span class="text-emerald-400">Proficient</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 86%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>MySQL Relational DB</span><span class="text-emerald-400">Proficient</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 85%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Jest &amp; Supertest</span><span class="text-emerald-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 80%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Postman API Testing</span><span class="text-emerald-400">Proficient</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 84%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Godot Engine</span><span class="text-emerald-400">Applied</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 82%;"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Git / GitHub</span><span class="text-emerald-400">Advanced</span></div>
-              <div class="meter-tube h-1.5 rounded-full"><div class="meter-fill" style="width: 90%;"></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================= EDUCATION & HONORS ================= -->
-    <section id="education" class="space-y-6">
-      <div class="glass-panel rounded-2xl p-8 space-y-6">
-        
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b" style="border-color: rgba(255,255,255,0.08);">
-          <div>
-            <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">Education</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">University of Central Florida</h2>
-            <p class="text-sm text-slate-400 mt-1">Bachelor of Science in Information Technology • Orlando, FL | 2022–2026</p>
-          </div>
-          <div class="flex flex-col sm:items-end">
-            <span class="font-mono text-xl font-extrabold text-emerald-400">3.53 / 4.00 GPA</span>
-            <span class="font-mono text-xs text-amber-300">Honors: Dean's List</span>
-            <span class="font-mono text-[11px] text-slate-400 mt-0.5">Conferred: August 2026</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          
-          <div class="space-y-3">
-            <div class="font-mono text-xs font-bold text-amber-400 uppercase tracking-wider">
-              Awards &amp; Scholarships
-            </div>
-            <ul class="space-y-2 text-sm text-slate-200">
-              <li class="flex items-start gap-2.5">
-                <span class="text-amber-400 font-bold">•</span>
-                <span><strong>Elbit America STEM Scholarship</strong> — Merit-based award recognized for academic excellence in computing and technology.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-amber-400 font-bold">•</span>
-                <span><strong>Florida Bright Futures Medallion Scholarship</strong> — State academic merit scholarship covering undergraduate tuition.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-amber-400 font-bold">•</span>
-                <span><strong>AWS Academy Graduate - AWS Academy Cloud Architecting</strong> — Certified academic curriculum completion in enterprise cloud architecture.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="space-y-3">
-            <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">
-              Extracurricular &amp; Leadership
-            </div>
-            <ul class="space-y-2 text-sm text-slate-200">
-              <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold">•</span>
-                <span><strong>AI@UCF (Artificial Intelligence Club) | Active Member:</strong> Analyzed deep learning architectures, transformer models, and neural network fine-tuning methodologies for LLMs.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold">•</span>
-                <span><strong>GameDev Knights | Active Member:</strong> Collaborated in game jams and attended workshops focused on game design patterns, memory optimization, and physics engines.</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Exact Resume Relevant Coursework -->
-        <div class="pt-4 border-t text-xs text-slate-300" style="border-color: rgba(255,255,255,0.08);">
-          <strong class="text-white font-mono">Relevant Coursework:</strong> Enterprise Computing, Database Systems, Object-Oriented Programming, Systems Software, System Administration &amp; Maintenance, Human-Computer Interaction (HCI).
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section id="contact" class="glass-panel rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
-      
-      <div class="max-w-xl mx-auto space-y-3 relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-mint font-mono text-xs font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>AVAILABLE FOR FULL-TIME OPPORTUNITIES (2026)</span>
-        </div>
-
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Get In Touch
-        </h2>
-
-        <p class="text-sm sm:text-base leading-relaxed" style="color: var(--text-muted);">
-          Actively interviewing for full-time Software Engineering, Systems Development, and Enterprise Cloud Infrastructure roles. Feel free to connect directly.
+        <p class="font-mono text-xs text-slate-400">
+          Concrete production &amp; academic usage across languages, backend systems, and infrastructure.
         </p>
       </div>
 
-      <div class="flex flex-wrap justify-center items-center gap-4 pt-3 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <a href="mailto:chase.ed.oswalt@gmail.com" class="px-6 py-3.5 rounded-full font-bold text-sm text-black flex items-center gap-2 hover:scale-105 transition-all shadow-xl" style="background: var(--accent-mint);">
-          <i data-lucide="mail" class="w-4 h-4"></i>
-          <span>chase.ed.oswalt@gmail.com</span>
-        </a>
+        <!-- Domain 01: Languages & Low-Level -->
+        <div class="tech-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 font-mono text-xs">
+            <span class="font-bold text-emerald-400">01 / LANGUAGES &amp; CORE</span>
+            <span class="text-slate-500">APPLICATION CONTEXT</span>
+          </div>
+          <div class="divide-y divide-slate-800/70 font-mono text-xs">
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Java</span>
+              <span class="text-slate-400 text-right">Servlets, JSP, JDBC, Stored Procs, OOP</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Python</span>
+              <span class="text-slate-400 text-right">SysAdmin Automation, Scripting, AI/ML Tooling</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">C# (.NET)</span>
+              <span class="text-slate-400 text-right">Godot 4 Architecture, State Machines, Physics</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">JavaScript (ES6+)</span>
+              <span class="text-slate-400 text-right">React Frontend, Node/Express REST APIs</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">C / C++</span>
+              <span class="text-slate-400 text-right">Systems Software, Memory Management, Pointers</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">SQL &amp; PowerShell</span>
+              <span class="text-slate-400 text-right">Relational Schemas, AD DS Bulk Provisioning</span>
+            </div>
+            <div class="pt-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">GLSL / HTML5 / CSS3</span>
+              <span class="text-slate-400 text-right">2D Fragment Shaders, Semantic Web UI</span>
+            </div>
+          </div>
+        </div>
 
-        <button onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email address copied to buffer!')" class="px-5 py-3.5 rounded-full font-mono text-xs font-semibold text-slate-200 glass-panel hover:text-white flex items-center gap-2 transition-all">
-          <i data-lucide="copy" class="w-4 h-4" style="color: var(--accent-mint)"></i>
-          <span>Copy Address</span>
-        </button>
+        <!-- Domain 02: Backend & Web Architecture -->
+        <div class="tech-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 font-mono text-xs">
+            <span class="font-bold text-amber-400">02 / BACKEND &amp; WEB ARCHITECTURE</span>
+            <span class="text-slate-500">APPLICATION CONTEXT</span>
+          </div>
+          <div class="divide-y divide-slate-800/70 font-mono text-xs">
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Node.js &amp; Express</span>
+              <span class="text-slate-400 text-right">REST Controllers, JWT Auth, RBAC Middleware</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">React.js (Vite)</span>
+              <span class="text-slate-400 text-right">Role-Aware SPAs, ZXing Barcode Integration</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Apache Tomcat &amp; JSP</span>
+              <span class="text-slate-400 text-right">3-Tier Enterprise Containers, Session Security</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">JDBC Data Access</span>
+              <span class="text-slate-400 text-right">PreparedStatements, CallableStatements, ACID</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Authentication &amp; APIs</span>
+              <span class="text-slate-400 text-right">Google OAuth 2.0, bcrypt, Resend HTTP API</span>
+            </div>
+            <div class="pt-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Nginx Reverse Proxy</span>
+              <span class="text-slate-400 text-right">Gzip Compression, HTTP/2, SSL Termination</span>
+            </div>
+          </div>
+        </div>
 
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-full font-mono text-xs font-semibold text-slate-200 glass-panel hover:text-white flex items-center gap-2 transition-all">
-          <svg class="w-4 h-4 fill-current text-sky-400 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
-          </svg>
-          <span>LinkedIn</span>
-        </a>
+        <!-- Domain 03: Cloud, Linux & Systems Administration -->
+        <div class="tech-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 font-mono text-xs">
+            <span class="font-bold text-blue-400">03 / CLOUD, LINUX &amp; SYSADMIN</span>
+            <span class="text-slate-500">APPLICATION CONTEXT</span>
+          </div>
+          <div class="divide-y divide-slate-800/70 font-mono text-xs">
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">AWS Cloud Architecture</span>
+              <span class="text-slate-400 text-right">AWS Academy Certified, VPC, EC2, IAM, S3</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">DigitalOcean Droplets</span>
+              <span class="text-slate-400 text-right">Production Linux VPS Hosting &amp; Hardening</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Windows Server 2022</span>
+              <span class="text-slate-400 text-right">Domain Controllers, Active Directory (AD DS)</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Network &amp; Policy Admin</span>
+              <span class="text-slate-400 text-right">GPOs, OUs, DNS Zones, DHCP Scopes, RBAC</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Linux (Ubuntu / RHEL)</span>
+              <span class="text-slate-400 text-right">Systemd Services, SSH, Package &amp; User Admin</span>
+            </div>
+            <div class="pt-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">CI/CD &amp; Virtualization</span>
+              <span class="text-slate-400 text-right">GitHub Actions Pipelines, Oracle VirtualBox, Docker</span>
+            </div>
+          </div>
+        </div>
 
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-full font-mono text-xs font-semibold text-slate-200 glass-panel hover:text-white flex items-center gap-2 transition-all">
-          <svg class="w-4 h-4 fill-current text-emerald-400 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          <span>GitHub</span>
-        </a>
+        <!-- Domain 04: Databases, Testing & Engine Tooling -->
+        <div class="tech-panel p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 font-mono text-xs">
+            <span class="font-bold text-emerald-400">04 / DATA, TESTING &amp; TOOLING</span>
+            <span class="text-slate-500">APPLICATION CONTEXT</span>
+          </div>
+          <div class="divide-y divide-slate-800/70 font-mono text-xs">
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">MySQL Relational DB</span>
+              <span class="text-slate-400 text-right">Normalized Schemas, Foreign Keys, Stored Procs</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">MongoDB &amp; Mongoose</span>
+              <span class="text-slate-400 text-right">Document Modeling, Indexing, Aggregation</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Jest &amp; Supertest</span>
+              <span class="text-slate-400 text-right">Automated Unit &amp; API Integration Testing</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Postman</span>
+              <span class="text-slate-400 text-right">Endpoint Contract Validation &amp; Auth Debugging</span>
+            </div>
+            <div class="py-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Godot Engine 4</span>
+              <span class="text-slate-400 text-right">Scene Trees, 2D Physics, Shader Graphs</span>
+            </div>
+            <div class="pt-2.5 flex items-baseline justify-between gap-4">
+              <span class="font-bold text-white shrink-0">Git &amp; Agile Workflows</span>
+              <span class="text-slate-400 text-right">Branch Protection, PR Reviews, Sprint Planning</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 04 // EDUCATION, SCHOLARSHIPS & INVOLVEMENT ================= -->
+    <section id="education" class="space-y-6">
+      <div class="pb-4 border-b border-slate-800">
+        <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">SYS // 04 — ACADEMIC CREDENTIALS</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Education &amp; Honors</h2>
+      </div>
+
+      <div class="tech-panel corner-ticks p-6 sm:p-8 space-y-8">
+        
+        <!-- Primary University Banner -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-2 font-mono text-xs text-amber-400 font-semibold">
+              <span>ORLANDO, FLORIDA</span>
+              <span>•</span>
+              <span>2022 – AUGUST 2026</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+              University of Central Florida (UCF)
+            </h3>
+            <p class="text-base text-slate-300 font-medium">
+              Bachelor of Science in Information Technology
+            </p>
+          </div>
+
+          <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 font-mono">
+            <div class="px-4 py-2.5 bg-[#06090e] border border-emerald-500/40 rounded-sm">
+              <div class="text-[10px] text-slate-400 uppercase">Cumulative GPA</div>
+              <div class="text-lg font-extrabold text-emerald-400">3.53 / 4.00</div>
+            </div>
+            <div class="px-4 py-2.5 bg-[#06090e] border border-amber-500/40 rounded-sm">
+              <div class="text-[10px] text-slate-400 uppercase">Academic Standing</div>
+              <div class="text-lg font-extrabold text-amber-300">Dean's List</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two-Column Details: Scholarships/Certifications & Technical Organizations -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Left: Scholarships & Certifications -->
+          <div class="space-y-4">
+            <div class="font-mono text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-1.5 h-1.5 bg-amber-400"></span>
+              <span>Scholarships &amp; Certifications</span>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
+                <div class="font-bold text-white text-sm">Elbit America STEM Scholarship</div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Competitive merit-based scholarship awarded for academic performance in computing and engineering disciplines.
+                </p>
+              </div>
+
+              <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
+                <div class="font-bold text-white text-sm">Florida Bright Futures Medallion Scholarship</div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  State-sponsored academic merit award covering undergraduate coursework at UCF.
+                </p>
+              </div>
+
+              <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
+                <div class="font-bold text-emerald-400 text-sm">AWS Academy Graduate — Cloud Architecting</div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  Certified technical curriculum covering VPC networking, IAM security boundaries, high-availability compute, and distributed storage on AWS.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Technical Societies & Coursework -->
+          <div class="space-y-6">
+            <div class="space-y-4">
+              <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-emerald-400"></span>
+                <span>Technical Organizations</span>
+              </div>
+
+              <div class="space-y-3">
+                <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-sm">AI@UCF (Artificial Intelligence Club)</span>
+                    <span class="font-mono text-[11px] text-emerald-400">Active Member</span>
+                  </div>
+                  <p class="text-xs text-slate-400 leading-relaxed">
+                    Studied deep learning architectures, transformer attention mechanisms, and practical fine-tuning workflows for large language models.
+                  </p>
+                </div>
+
+                <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-sm">GameDev Knights</span>
+                    <span class="font-mono text-[11px] text-emerald-400">Active Member</span>
+                  </div>
+                  <p class="text-xs text-slate-400 leading-relaxed">
+                    Collaborated in campus game jams and technical workshops focused on entity-component design patterns, memory layout optimization, and 2D/3D physics engines.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Core Coursework -->
+            <div class="space-y-2.5">
+              <div class="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider">
+                Core Engineering Coursework
+              </div>
+              <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                <span class="px-2.5 py-1 tag-chip">Enterprise Computing</span>
+                <span class="px-2.5 py-1 tag-chip">Database Systems</span>
+                <span class="px-2.5 py-1 tag-chip">Systems Software</span>
+                <span class="px-2.5 py-1 tag-chip">Object-Oriented Programming</span>
+                <span class="px-2.5 py-1 tag-chip">System Administration &amp; Maintenance</span>
+                <span class="px-2.5 py-1 tag-chip">Human-Computer Interaction (HCI)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 05 // DIRECT CONTACT ================= -->
+    <section id="contact" class="tech-panel corner-ticks p-8 sm:p-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-7 space-y-3">
+          <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">
+            SYS // 05 — DISPATCH &amp; CONTACT
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+            Available for Software, Systems &amp; Cloud Engineering Roles.
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+            Graduating August 2026 from UCF and based in Satellite Beach / Orlando, FL (open to relocation). Reach out directly via email or connect on GitHub and LinkedIn.
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 font-mono text-xs">
+          
+          <div class="flex items-center gap-2">
+            <a href="mailto:chase.ed.oswalt@gmail.com" class="flex-1 px-4 py-3 rounded-sm font-bold text-black bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center gap-2 transition-colors">
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>
+              </svg>
+              <span>chase.ed.oswalt@gmail.com</span>
+            </a>
+            <button type="button" onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied to clipboard')" class="px-3.5 py-3 rounded-sm bg-[#06090e] border border-slate-700 hover:border-emerald-400 text-slate-200 hover:text-white transition-colors" title="Copy email address">
+              [COPY]
+            </button>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <a href="Chase_Oswalt_Resume.pdf" download class="px-3 py-2.5 rounded-sm bg-[#06090e] border border-slate-800 hover:border-slate-600 text-slate-200 hover:text-white flex items-center justify-center gap-1.5 transition-colors">
+              <span>Resume PDF</span>
+            </a>
+            <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-sm bg-[#06090e] border border-slate-800 hover:border-slate-600 text-slate-200 hover:text-white flex items-center justify-center gap-1.5 transition-colors">
+              <span>GitHub ↗</span>
+            </a>
+            <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-sm bg-[#06090e] border border-slate-800 hover:border-slate-600 text-slate-200 hover:text-white flex items-center justify-center gap-1.5 transition-colors">
+              <span>LinkedIn ↗</span>
+            </a>
+          </div>
+
+        </div>
 
       </div>
     </section>
 
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t py-8 text-center font-mono text-xs relative z-10" style="border-color: rgba(255, 255, 255, 0.06); background: rgba(3, 6, 10, 0.95);">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400">
+  <!-- ================= ARCHITECTURAL FOOTER ================= -->
+  <footer class="border-t border-slate-800/90 bg-[#05070a] py-6 font-mono text-xs text-slate-400 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        Chase Oswalt • University of Central Florida '26
+        CHASE OSWALT — B.S. INFORMATION TECHNOLOGY, UCF ('26)
       </div>
-      <div class="flex items-center gap-4 text-slate-400">
-        <span>Satellite Beach / Orlando, FL</span>
-        <span>•</span>
-        <a href="#about" class="text-emerald-400 hover:underline">Back to top ↑</a>
+      <div class="flex items-center gap-4">
+        <span>SATELLITE BEACH / ORLANDO, FL</span>
+        <span class="text-slate-700">|</span>
+        <a href="#about" class="text-emerald-400 hover:underline">TOP ↑</a>
       </div>
     </div>
   </footer>
 
   <!-- ================= VIDEO MODAL LIGHTBOX ================= -->
-  <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-xl p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Combat Engine Gameplay Demo">
-    <div class="relative w-full max-w-4xl glass-panel rounded-2xl overflow-hidden border shadow-2xl">
+  <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="2D Physics Arena Combat Game Demo">
+    <div class="relative w-full max-w-4xl tech-panel overflow-hidden shadow-2xl border-slate-700">
       
-      <div class="flex items-center justify-between px-5 py-3 border-b font-mono text-xs" style="border-color: rgba(255, 255, 255, 0.08); background: rgba(7, 13, 20, 0.95);">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-[#05070a] font-mono text-xs">
         <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-          <span class="ml-2 text-slate-200 font-bold">2D_Physics_Arena_Combat_Game_Demo.mp4</span>
+          <span class="w-2 h-2 bg-amber-400"></span>
+          <span class="text-slate-200 font-bold">2D_Physics_Arena_Combat_Game_Demo.mp4</span>
         </div>
         <div class="flex items-center gap-4">
-          <a id="external-video-link" href="https://youtu.be/4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1.5 font-bold text-amber-300">
-            <span>YouTube</span> <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <a id="external-video-link" href="https://youtu.be/4_mdrE4RQnI" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-bold">
+            Open on YouTube ↗
           </a>
-          <button onclick="closeVideoModal()" class="px-2 py-0.5 rounded hover:text-red-400 text-slate-300 font-bold">
-            [ESC]
+          <button type="button" onclick="closeVideoModal()" class="px-2 py-0.5 bg-slate-800 hover:bg-red-500/20 hover:text-red-300 text-slate-200 rounded-sm font-bold transition-colors">
+            [ESC / CLOSE]
           </button>
         </div>
       </div>
@@ -888,379 +1106,585 @@
         </iframe>
       </div>
 
-      <div class="px-5 py-2.5 font-mono flex items-center justify-between text-xs text-slate-400" style="background: rgba(7, 13, 20, 0.95);">
-        <span>GLSL Shaders • Multi-Source Lighting • Javelin 2D Physics</span>
-        <span>Press <kbd class="px-1.5 py-0.5 rounded text-white bg-slate-800 border border-slate-700 font-bold">ESC</kbd> to exit</span>
+      <div class="px-4 py-2.5 bg-[#05070a] border-t border-slate-800 font-mono flex items-center justify-between text-[11px] text-slate-400">
+        <span>Godot Engine • C# State Machines • Custom GLSL Shaders</span>
+        <span>Press <kbd class="px-1.5 py-0.5 bg-slate-900 border border-slate-700 text-slate-200">ESC</kbd> to close</span>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" role="status" aria-live="polite" class="fixed bottom-8 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2.5 px-4 py-3 rounded-full font-mono text-xs shadow-2xl border" style="background: #09131d; border-color: var(--accent-mint); color: #fff;">
-    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-    <span id="toast-msg">Copied to buffer</span>
+  <!-- ================= TOAST NOTIFICATION ================= -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none flex items-center gap-2.5 px-4 py-2.5 rounded-sm font-mono text-xs shadow-2xl border border-emerald-500 bg-[#060a0f] text-white">
+    <span class="w-2 h-2 bg-emerald-400"></span>
+    <span id="toast-msg">Copied to clipboard</span>
   </div>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- ================= HIGH-PERFORMANCE 3D WIREFRAME & UI ENGINE ================= -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      initOpticalEngine();
-    });
-
-    // ================= 3D OPTICAL CONTOUR FLIGHT & SCROLL MORPH ENGINE =================
-    let canvas, ctx, width, height;
-    let animFrameId;
+    // ================= 1. CACHED DOM REFERENCES & GEOMETRY LUTs =================
+    let canvas, ctx;
+    let width = 0, height = 0, dpr = 1;
+    let animFrameId = null;
     let isSimRunning = true;
+    let isPageVisible = true;
     let time = 0;
 
-    // Smoothed scroll tracker (Linear Interpolation)
+    // Scroll state (Zero layout thrashing in rAF)
     let rawScrollY = 0;
     let smoothScrollY = 0;
     let maxScroll = 1;
 
+    // Cached layout metrics updated ONLY on init & debounced resize
+    let cachedLayout = {
+      heroCenterX: 0,
+      heroDocCenterY: 0,
+      heroRadius: 135,
+      persistentX: 0,
+      persistentY: 0,
+      persistentRadius: 110
+    };
+
+    // Cached HUD DOM nodes + dirty-check strings
+    let domHudDepth = null;
+    let domHudMorph = null;
+    let domHeroGeoName = null;
+    let domAnchor = null;
+    let domContentStart = null;
+    let lastDepthStr = '';
+    let lastMorphStr = '';
+    let lastHeroGeoStr = '';
+
+    // Interactive 3D Viewport state (Shape override + Drag rotation)
+    let shapeMode = 'auto'; // 'auto' | 'sphere' | 'torus' | 'ribbon'
+    let isDraggingMesh = false;
+    let dragStartX = 0, dragStartY = 0;
+    let userRotX = 0, userRotY = 0;
+    let velRotX = 0, velRotY = 0;
+
+    // Precomputed Trigonometric Lookup Tables (Float32Array)
+    const SLICE_SEGMENTS = 44;
+    const MERIDIAN_STEPS = 36;
+    const NUM_MERIDIANS = 10;
+
+    const sliceCos = new Float32Array(SLICE_SEGMENTS + 1);
+    const sliceSin = new Float32Array(SLICE_SEGMENTS + 1);
+    const sliceCos2 = new Float32Array(SLICE_SEGMENTS + 1);
+    const sliceThetas = new Float32Array(SLICE_SEGMENTS + 1);
+
+    const merCosTheta = new Float32Array(MERIDIAN_STEPS + 1);
+    const merSinTheta = new Float32Array(MERIDIAN_STEPS + 1);
+    const merCosPhi = new Float32Array(NUM_MERIDIANS);
+    const merSinPhi = new Float32Array(NUM_MERIDIANS);
+
+    function initTrigTables() {
+      for (let j = 0; j <= SLICE_SEGMENTS; j++) {
+        const theta = (j / SLICE_SEGMENTS) * Math.PI * 2;
+        sliceThetas[j] = theta;
+        sliceCos[j] = Math.cos(theta);
+        sliceSin[j] = Math.sin(theta);
+        sliceCos2[j] = Math.cos(theta * 2);
+      }
+      for (let j = 0; j <= MERIDIAN_STEPS; j++) {
+        const theta = (j / MERIDIAN_STEPS) * Math.PI * 2;
+        merCosTheta[j] = Math.cos(theta);
+        merSinTheta[j] = Math.sin(theta);
+      }
+      for (let m = 0; m < NUM_MERIDIANS; m++) {
+        const phi = (m / NUM_MERIDIANS) * Math.PI;
+        merCosPhi[m] = Math.cos(phi);
+        merSinPhi[m] = Math.sin(phi);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initTrigTables();
+      initOpticalEngine();
+      initViewportDrag();
+    });
+
     function initOpticalEngine() {
       canvas = document.getElementById('optical-canvas');
       if (!canvas) return;
-      ctx = canvas.getContext('2d');
+      ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
 
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
+      domHudDepth = document.getElementById('scroll-depth-label');
+      domHudMorph = document.getElementById('scroll-morph-label');
+      domHeroGeoName = document.getElementById('hero-geometry-name');
+      domAnchor = document.getElementById('sculpture-anchor');
+      domContentStart = document.getElementById('content-start');
 
-      window.addEventListener('scroll', () => {
-        rawScrollY = window.scrollY;
-        maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      rawScrollY = window.scrollY || 0;
+      smoothScrollY = rawScrollY;
+
+      updateCanvasAndLayoutMetrics();
+
+      // Debounced resize listener to prevent layout thrashing
+      let resizeTimer = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateCanvasAndLayoutMetrics, 80);
       }, { passive: true });
 
-      renderLoop();
+      // Passive scroll listener only stores scrollY number
+      window.addEventListener('scroll', () => {
+        rawScrollY = window.scrollY;
+      }, { passive: true });
+
+      // Pause loop automatically when background tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        isPageVisible = !document.hidden;
+        if (isPageVisible && isSimRunning && !animFrameId) {
+          animFrameId = requestAnimationFrame(renderLoop);
+        } else if (!isPageVisible && animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+      });
+
+      // Respect OS Reduced Motion preference on initial load
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        renderSingleFrame();
+        isSimRunning = false;
+        updateSimButtonUI();
+      } else {
+        animFrameId = requestAnimationFrame(renderLoop);
+      }
     }
 
-    function resizeCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    // Measure DOM positions ONLY on init, resize, or filter change
+    function updateCanvasAndLayoutMetrics() {
+      if (!canvas) return;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      maxScroll = Math.max(1, document.documentElement.scrollHeight - height);
+
+      // Cache hero viewport frame document coordinates
+      if (domAnchor) {
+        const rect = domAnchor.getBoundingClientRect();
+        cachedLayout.heroCenterX = rect.left + rect.width * 0.5;
+        cachedLayout.heroDocCenterY = rect.top + window.scrollY + rect.height * 0.5;
+        cachedLayout.heroRadius = Math.min(rect.width, rect.height) * 0.37;
+      } else {
+        cachedLayout.heroCenterX = width * 0.72;
+        cachedLayout.heroDocCenterY = height * 0.44;
+        cachedLayout.heroRadius = 140;
+      }
+
+      // Cache widescreen right-gutter coordinates
+      let mainRight = width;
+      if (domContentStart) {
+        const cRect = domContentStart.getBoundingClientRect();
+        mainRight = cRect.right;
+      }
+      const rightMarginWidth = width - mainRight;
+      const hasWidescreenMargin = width >= 1280 && rightMarginWidth >= 160;
+
+      if (hasWidescreenMargin) {
+        const r = Math.min(155, Math.max(100, rightMarginWidth * 0.38));
+        cachedLayout.persistentRadius = r;
+        cachedLayout.persistentX = Math.min(width - r - 20, mainRight + rightMarginWidth * 0.5);
+      } else if (width > 768) {
+        cachedLayout.persistentX = width * 0.78;
+        cachedLayout.persistentRadius = 110;
+      } else {
+        cachedLayout.persistentX = width * 0.5;
+        cachedLayout.persistentRadius = 88;
+      }
+      cachedLayout.persistentY = height * 0.48;
+
+      if (!isSimRunning) {
+        renderSingleFrame();
+      }
+    }
+
+    // Interactive drag-to-rotate on the 3D Viewport Frame
+    function initViewportDrag() {
+      const anchor = document.getElementById('sculpture-anchor');
+      if (!anchor) return;
+
+      const onPointerDown = (clientX, clientY) => {
+        isDraggingMesh = true;
+        dragStartX = clientX;
+        dragStartY = clientY;
+      };
+
+      const onPointerMove = (clientX, clientY) => {
+        if (!isDraggingMesh) return;
+        const dx = clientX - dragStartX;
+        const dy = clientY - dragStartY;
+        dragStartX = clientX;
+        dragStartY = clientY;
+        velRotY = dx * 0.012;
+        velRotX = dy * 0.012;
+        userRotY += velRotY;
+        userRotX += velRotX;
+        if (!isSimRunning) renderSingleFrame();
+      };
+
+      const onPointerUp = () => {
+        isDraggingMesh = false;
+      };
+
+      anchor.addEventListener('mousedown', (e) => onPointerDown(e.clientX, e.clientY));
+      window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY), { passive: true });
+      window.addEventListener('mouseup', onPointerUp);
+
+      anchor.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          onPointerDown(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (isDraggingMesh && e.touches.length === 1) {
+          onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', onPointerUp);
+    }
+
+    function setShapeMode(mode) {
+      shapeMode = mode;
+      const buttons = document.querySelectorAll('.shape-mode-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-shape-btn') === mode) {
+          btn.className = 'shape-mode-btn px-2 py-0.5 text-[10px] font-bold bg-emerald-500 text-black rounded-sm transition-colors';
+        } else {
+          btn.className = 'shape-mode-btn px-2 py-0.5 text-[10px] text-slate-400 hover:text-white rounded-sm transition-colors';
+        }
+      });
+      if (!isSimRunning) renderSingleFrame();
+    }
+
+    function renderSingleFrame() {
+      drawScene(0);
     }
 
     function renderLoop() {
-      if (!isSimRunning) return;
+      if (!isSimRunning || !isPageVisible) {
+        animFrameId = null;
+        return;
+      }
+      drawScene(0.014);
+      animFrameId = requestAnimationFrame(renderLoop);
+    }
 
-      time += 0.014;
+    function drawScene(dt) {
+      time += dt;
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth scroll interpolation
-      smoothScrollY += (rawScrollY - smoothScrollY) * 0.06;
-      const scrollRatio = Math.min(Math.max(smoothScrollY / maxScroll, 0), 1);
-
-      // Update Floating HUD telemetry & Hero Display
-      const depthMeters = Math.floor(smoothScrollY * 1.8);
-      const hudDepth = document.getElementById('scroll-depth-label');
-      const hudMorph = document.getElementById('scroll-morph-label');
-      const heroGeoName = document.getElementById('hero-geometry-name');
-
-      let currentShapeName = 'SPHERE';
-      let morphPercentage = Math.round(scrollRatio * 100);
-
-      if (scrollRatio < 0.35) {
-        currentShapeName = `SPHERE (${morphPercentage}%)`;
-        if (hudMorph) hudMorph.textContent = 'Wireframe: Sphere (Hero)';
-      } else if (scrollRatio < 0.70) {
-        currentShapeName = `TORUS (${morphPercentage}%)`;
-        if (hudMorph) hudMorph.textContent = 'Wireframe: Torus (Projects)';
-      } else {
-        currentShapeName = `MÖBIUS LOOP (${morphPercentage}%)`;
-        if (hudMorph) hudMorph.textContent = 'Wireframe: Ribbon Loop (Core)';
+      // Smooth momentum decay for user drag rotation
+      if (!isDraggingMesh) {
+        userRotX += velRotX;
+        userRotY += velRotY;
+        velRotX *= 0.92;
+        velRotY *= 0.92;
       }
 
-      if (hudDepth) hudDepth.textContent = `Z-Depth: ${depthMeters.toString().padStart(4, '0')}m`;
-      if (heroGeoName) heroGeoName.textContent = currentShapeName;
+      // Smooth scroll interpolation
+      smoothScrollY += (rawScrollY - smoothScrollY) * 0.08;
+      const scrollRatio = Math.min(Math.max(smoothScrollY / maxScroll, 0), 1);
 
-      // ================= LAYER 1: MATHEMATICALLY CONTINUOUS CANYON TERRAIN =================
+      // Dirty-checked HUD telemetry updates (Zero unnecessary DOM mutations)
+      const depthMeters = Math.floor(smoothScrollY * 1.8);
+      const depthStr = `Z: ${depthMeters.toString().padStart(4, '0')}m`;
+      if (depthStr !== lastDepthStr) {
+        lastDepthStr = depthStr;
+        if (domHudDepth) domHudDepth.textContent = depthStr;
+      }
+
+      const morphPct = Math.round(scrollRatio * 100);
+      let heroGeoStr = '';
+      let morphStr = '';
+
+      if (shapeMode !== 'auto') {
+        const label = shapeMode === 'ribbon' ? 'MÖBIUS LOOP' : shapeMode.toUpperCase();
+        heroGeoStr = `${label} (LOCKED)`;
+        morphStr = `MESH: ${label}`;
+      } else if (scrollRatio < 0.35) {
+        heroGeoStr = `SPHERE (${morphPct}%)`;
+        morphStr = 'MESH: SPHERE';
+      } else if (scrollRatio < 0.70) {
+        heroGeoStr = `TORUS (${morphPct}%)`;
+        morphStr = 'MESH: TORUS';
+      } else {
+        heroGeoStr = `MÖBIUS (${morphPct}%)`;
+        morphStr = 'MESH: MÖBIUS';
+      }
+
+      if (heroGeoStr !== lastHeroGeoStr) {
+        lastHeroGeoStr = heroGeoStr;
+        if (domHeroGeoName) domHeroGeoName.textContent = heroGeoStr;
+      }
+      if (morphStr !== lastMorphStr) {
+        lastMorphStr = morphStr;
+        if (domHudMorph) domHudMorph.textContent = morphStr;
+      }
+
+      // ================= LAYER 1: BATCHED TOPOGRAPHIC CANYON CONTOURS =================
+      renderBatchedTerrain();
+
+      // ================= LAYER 2: BATCHED 3D WIREFRAME SCULPTURE =================
+      renderBatchedSculpture(scrollRatio);
+    }
+
+    function renderBatchedTerrain() {
       const fov = 380;
       const cx = width * 0.5;
       const cy = height * 0.46;
 
-      const numContours = 36;
-      const zStep = 32;
+      const numContours = 32;
+      const zStep = 34;
       const maxZ = numContours * zStep;
 
-      // Continuous camera displacement in world coordinates
-      const cameraZ = smoothScrollY * 1.1 + time * 42;
+      const cameraZ = smoothScrollY * 1.1 + time * 40;
       const baseWorldIndex = Math.floor(cameraZ / zStep);
       const zFrac = cameraZ - baseWorldIndex * zStep;
 
+      const stepX = 34;
+      const spanX = width * 1.3;
+      const halfSpanX = spanX * 0.5;
+      const valleyNorm = 1 / (spanX * 0.36);
+
+      // Batch all 32 contour lines into 3 color paths (3 draw calls total instead of 32)
+      const pathAmber = new Path2D();
+      const pathCobalt = new Path2D();
+      const pathEmerald = new Path2D();
+
       for (let i = numContours; i >= 1; i--) {
         const z = i * zStep - zFrac;
-        if (z < 25) continue;
+        if (z < 30 || z > maxZ) continue;
 
         const worldZ = (baseWorldIndex + i) * zStep;
         const scale = fov / (fov + z);
-        const yBase3D = 310;
-
-        const nearFade = Math.max(0, Math.min(1, (z - 25) / 60));
-        const farFade = Math.max(0, Math.min(1, (maxZ - z) / (2 * zStep)));
-        const depthAlpha = nearFade * farFade;
-
-        if (depthAlpha <= 0.001) continue;
-
         const lineIdx = baseWorldIndex + i;
-        if (lineIdx % 6 === 0) {
-          ctx.strokeStyle = `rgba(255, 171, 46, ${depthAlpha * 0.42})`;
-          ctx.lineWidth = 1.4 * scale;
-        } else if (lineIdx % 3 === 0) {
-          ctx.strokeStyle = `rgba(43, 97, 255, ${depthAlpha * 0.32})`;
-          ctx.lineWidth = 1.2 * scale;
-        } else {
-          ctx.strokeStyle = `rgba(20, 231, 165, ${depthAlpha * 0.22})`;
-          ctx.lineWidth = 1.0 * scale;
-        }
 
-        ctx.beginPath();
-        const stepX = 28;
-        const spanX = width * 1.35;
+        const targetPath = (lineIdx % 6 === 0) ? pathAmber : ((lineIdx % 3 === 0) ? pathCobalt : pathEmerald);
 
-        for (let x = -spanX * 0.5; x <= spanX * 0.5 + stepX; x += stepX) {
-          const distFromCenter = Math.abs(x);
-          const valleyWeight = Math.min(1, Math.pow(distFromCenter / (spanX * 0.36), 2.2));
+        let first = true;
+        const wz1 = worldZ * 0.0055;
+        const wz2 = worldZ * 0.0028;
 
-          const wave = Math.sin(x * 0.0032 + worldZ * 0.0055) * 58 
-                     + Math.cos(x * 0.0065 - worldZ * 0.0028) * 30;
+        for (let x = -halfSpanX; x <= halfSpanX + stepX; x += stepX) {
+          const distRatio = Math.abs(x) * valleyNorm;
+          const valleyWeight = Math.min(1, distRatio * distRatio);
 
-          const y3D = yBase3D - (wave * valleyWeight + valleyWeight * 160);
+          const wave = Math.sin(x * 0.0032 + wz1) * 56 + Math.cos(x * 0.0065 - wz2) * 28;
+          const y3D = 310 - (wave * valleyWeight + valleyWeight * 155);
 
           const projX = cx + x * scale;
           const projY = cy + y3D * scale;
 
-          if (x === -spanX * 0.5) ctx.moveTo(projX, projY);
-          else ctx.lineTo(projX, projY);
+          if (first) {
+            targetPath.moveTo(projX, projY);
+            first = false;
+          } else {
+            targetPath.lineTo(projX, projY);
+          }
         }
-
-        ctx.stroke();
       }
 
-      // ================= LAYER 2: 16:9 WIDESCREEN GUTTER SCULPTURE =================
-      renderWidescreenSculpture(scrollRatio);
+      ctx.lineWidth = 1.0;
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.14)';
+      ctx.stroke(pathEmerald);
 
-      animFrameId = requestAnimationFrame(renderLoop);
+      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.20)';
+      ctx.stroke(pathCobalt);
+
+      ctx.lineWidth = 1.25;
+      ctx.strokeStyle = 'rgba(245, 158, 11, 0.26)';
+      ctx.stroke(pathAmber);
     }
 
-    function renderWidescreenSculpture(scrollRatio) {
-      // 1. In Hero: Track position of the hero frame
-      let heroCenterX = width * 0.72;
-      let heroCenterY = height * 0.44;
-      let heroRadius = 145;
+    function renderBatchedSculpture(scrollRatio) {
+      // Compute viewport Y of the hero anchor purely from cached document offset
+      const heroViewportY = cachedLayout.heroDocCenterY - smoothScrollY;
 
-      const anchor = document.getElementById('sculpture-anchor');
-      if (anchor) {
-        const rect = anchor.getBoundingClientRect();
-        heroCenterX = rect.left + rect.width * 0.5;
-        heroCenterY = rect.top + rect.height * 0.5;
-        heroRadius = Math.min(rect.width, rect.height) * 0.38;
-      }
-
-      // 2. On Widescreen 16:9 displays: Detect the open whitespace to the right of content
-      const contentEl = document.getElementById('content-start');
-      let mainRight = width;
-      if (contentEl) {
-        const rect = contentEl.getBoundingClientRect();
-        mainRight = rect.right;
-      }
-
-      const rightMarginWidth = width - mainRight;
-      const hasWidescreenMargin = width >= 1280 && rightMarginWidth >= 160;
-
-      let persistentX;
-      let persistentRadius;
-
-      if (hasWidescreenMargin) {
-        persistentX = mainRight + (rightMarginWidth * 0.5);
-        persistentRadius = Math.min(160, Math.max(105, rightMarginWidth * 0.38));
-        persistentX = Math.min(width - persistentRadius - 20, persistentX);
-      } else if (width > 768) {
-        persistentX = width * 0.78;
-        persistentRadius = 110;
-      } else {
-        persistentX = width * 0.5;
-        persistentRadius = 90;
-      }
-
-      const persistentY = height * 0.48;
-
-      // 3. Smooth transition: As user scrolls past 320px, smoothly undock from hero box
-      // and glide into the open right margin whitespace!
       const scrollTransition = Math.min(1, Math.max(0, smoothScrollY / 320));
       const easeT = scrollTransition * scrollTransition * (3 - 2 * scrollTransition);
 
-      const shapeCenterX = heroCenterX * (1 - easeT) + persistentX * easeT;
-      const shapeCenterY = heroCenterY * (1 - easeT) + persistentY * easeT;
-      const baseRadius = heroRadius * (1 - easeT) + persistentRadius * easeT;
+      const shapeCenterX = cachedLayout.heroCenterX * (1 - easeT) + cachedLayout.persistentX * easeT;
+      const shapeCenterY = heroViewportY * (1 - easeT) + cachedLayout.persistentY * easeT;
+      const baseRadius = cachedLayout.heroRadius * (1 - easeT) + cachedLayout.persistentRadius * easeT;
 
-      // Autonomous 3D Tumble (Constant smooth rotation)
-      const rotY = time * 0.5 + scrollRatio * Math.PI * 3.5;
-      const rotX = 0.3 + Math.sin(time * 0.35) * 0.25 + scrollRatio * Math.PI * 1.5;
-      const rotZ = time * 0.22 + scrollRatio * Math.PI * 1.8;
+      // 3D Rotation angles (Autonomous orbit + scroll + user drag)
+      const rotY = time * 0.48 + scrollRatio * Math.PI * 3.2 + userRotY;
+      const rotX = 0.3 + Math.sin(time * 0.35) * 0.22 + scrollRatio * Math.PI * 1.4 + userRotX;
+      const rotZ = time * 0.20 + scrollRatio * Math.PI * 1.6;
 
       const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
       const cosZ = Math.cos(rotZ), sinZ = Math.sin(rotZ);
 
-      // Morph weights: Sphere -> Torus -> Twisted Ribbon
+      // Determine Morph Weights
       let wSphere = 0, wTorus = 0, wRibbon = 0;
-      if (scrollRatio < 0.45) {
-        const t = scrollRatio / 0.45;
-        wSphere = 1 - t;
-        wTorus = t;
+      if (shapeMode === 'sphere') {
+        wSphere = 1;
+      } else if (shapeMode === 'torus') {
+        wTorus = 1;
+      } else if (shapeMode === 'ribbon') {
+        wRibbon = 1;
       } else {
-        const t = (scrollRatio - 0.45) / 0.55;
-        wTorus = 1 - t;
-        wRibbon = t;
+        if (scrollRatio < 0.45) {
+          const t = scrollRatio / 0.45;
+          wSphere = 1 - t;
+          wTorus = t;
+        } else {
+          const t = (scrollRatio - 0.45) / 0.55;
+          wTorus = 1 - t;
+          wRibbon = t;
+        }
       }
 
-      // 1. LATITUDINAL SLICES
-      const numSlices = 24;
-      for (let s = -numSlices / 2; s <= numSlices / 2; s++) {
-        const u = s / (numSlices / 2);
+      const pathAmber = new Path2D();
+      const pathCobalt = new Path2D();
+      const pathEmerald = new Path2D();
+      const pathMeridian = new Path2D();
+
+      const numSlices = 22;
+      const halfSlices = numSlices / 2;
+      const ringR = baseRadius * 0.72;
+      const tubeR = baseRadius * 0.38;
+      const fovShape = 460;
+
+      // 1. Batched Latitudinal Slices using Precomputed Trig Tables
+      for (let s = -halfSlices; s <= halfSlices; s++) {
+        const u = s / halfSlices;
         if (Math.abs(u) > 0.96) continue;
 
-        ctx.beginPath();
+        const absS = Math.abs(s);
+        const targetPath = (absS % 4 === 0) ? pathAmber : ((absS % 2 === 0) ? pathCobalt : pathEmerald);
 
-        if (Math.abs(s) % 4 === 0) {
-          ctx.strokeStyle = 'rgba(255, 171, 46, 0.85)';
-          ctx.lineWidth = 1.8;
-        } else if (Math.abs(s) % 2 === 0) {
-          ctx.strokeStyle = 'rgba(43, 97, 255, 0.72)';
-          ctx.lineWidth = 1.4;
-        } else {
-          ctx.strokeStyle = 'rgba(20, 231, 165, 0.7)';
-          ctx.lineWidth = 1.2;
-        }
+        const rSphere = Math.sqrt(Math.max(0, 1 - u * u)) * baseRadius;
+        const yS = u * baseRadius;
 
-        const segments = 44;
-        let started = false;
+        const phiT = u * Math.PI;
+        const rTorus = ringR + Math.cos(phiT) * tubeR;
+        const yT = Math.sin(phiT) * tubeR;
 
-        for (let j = 0; j <= segments; j++) {
-          const theta = (j / segments) * Math.PI * 2;
+        const uPi = u * Math.PI;
+        const yRBase = u * baseRadius * 0.9;
 
-          // Sphere
-          const rSphere = Math.sqrt(Math.max(0, 1 - u * u)) * baseRadius;
-          const xS = Math.cos(theta) * rSphere;
-          const yS = u * baseRadius;
-          const zS = Math.sin(theta) * rSphere;
+        for (let j = 0; j <= SLICE_SEGMENTS; j++) {
+          const cTheta = sliceCos[j];
+          const sTheta = sliceSin[j];
 
-          // Torus
-          const ringR = baseRadius * 0.72;
-          const tubeR = baseRadius * 0.38;
-          const phiT = u * Math.PI;
-          const rTorus = ringR + Math.cos(phiT) * tubeR;
-          const xT = Math.cos(theta) * rTorus;
-          const yT = Math.sin(phiT) * tubeR;
-          const zT = Math.sin(theta) * rTorus;
+          const xS = cTheta * rSphere;
+          const zS = sTheta * rSphere;
 
-          // Twisted Ribbon
-          const twist = theta * 1.5 + u * Math.PI;
+          const xT = cTheta * rTorus;
+          const zT = sTheta * rTorus;
+
+          const twist = sliceThetas[j] * 1.5 + uPi;
           const rRibbon = (baseRadius * 0.8) + Math.sin(twist) * (baseRadius * 0.35);
-          const xR = Math.cos(theta) * rRibbon;
-          const yR = u * baseRadius * 0.9 + Math.cos(theta * 2) * (baseRadius * 0.25);
-          const zR = Math.sin(theta) * rRibbon;
+          const xR = cTheta * rRibbon;
+          const yR = yRBase + sliceCos2[j] * (baseRadius * 0.25);
+          const zR = sTheta * rRibbon;
 
-          let px = xS * wSphere + xT * wTorus + xR * wRibbon;
-          let py = yS * wSphere + yT * wTorus + yR * wRibbon;
-          let pz = zS * wSphere + zT * wTorus + zR * wRibbon;
+          const px = xS * wSphere + xT * wTorus + xR * wRibbon;
+          const py = yS * wSphere + yT * wTorus + yR * wRibbon;
+          const pz = zS * wSphere + zT * wTorus + zR * wRibbon;
 
-          // 3D Matrix Rotation (Z * Y * X)
-          let x1 = px * cosZ - py * sinZ;
-          let y1 = px * sinZ + py * cosZ;
-          let z1 = pz;
+          // 3D Matrix Transform
+          const x1 = px * cosZ - py * sinZ;
+          const y1 = px * sinZ + py * cosZ;
 
-          let x2 = x1 * cosY + z1 * sinY;
-          let y2 = y1;
-          let z2 = -x1 * sinY + z1 * cosY;
+          const x2 = x1 * cosY + pz * sinY;
+          const z2 = -x1 * sinY + pz * cosY;
 
-          let x3 = x2;
-          let y3 = y2 * cosX - z2 * sinX;
-          let z3 = y2 * sinX + z2 * cosX;
+          const y3 = y1 * cosX - z2 * sinX;
+          const z3 = y1 * sinX + z2 * cosX;
 
-          const fovShape = 460;
           const scaleShape = fovShape / (fovShape + z3 + 80);
-
-          const screenX = shapeCenterX + x3 * scaleShape;
+          const screenX = shapeCenterX + x2 * scaleShape;
           const screenY = shapeCenterY + y3 * scaleShape;
 
-          if (!started) {
-            ctx.moveTo(screenX, screenY);
-            started = true;
-          } else {
-            ctx.lineTo(screenX, screenY);
-          }
+          if (j === 0) targetPath.moveTo(screenX, screenY);
+          else targetPath.lineTo(screenX, screenY);
         }
-
-        ctx.stroke();
       }
 
-      // 2. LONGITUDINAL MERIDIAN RINGS
-      const numMeridians = 10;
-      for (let m = 0; m < numMeridians; m++) {
-        const phi = (m / numMeridians) * Math.PI;
+      // 2. Batched Longitudinal Meridian Rings
+      for (let m = 0; m < NUM_MERIDIANS; m++) {
+        const cPhi = merCosPhi[m];
+        const sPhi = merSinPhi[m];
 
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(20, 231, 165, 0.32)';
-        ctx.lineWidth = 1.0;
+        for (let j = 0; j <= MERIDIAN_STEPS; j++) {
+          const rSphere = merCosTheta[j] * baseRadius;
+          const xS = cPhi * rSphere;
+          const yS = merSinTheta[j] * baseRadius;
+          const zS = sPhi * rSphere;
 
-        const steps = 36;
-        let started = false;
+          const x1 = xS * cosZ - yS * sinZ;
+          const y1 = xS * sinZ + yS * cosZ;
 
-        for (let j = 0; j <= steps; j++) {
-          const theta = (j / steps) * Math.PI * 2;
-          const u = Math.sin(theta);
+          const x2 = x1 * cosY + zS * sinY;
+          const z2 = -x1 * sinY + zS * cosY;
 
-          const rSphere = Math.cos(theta) * baseRadius;
-          const xS = Math.cos(phi) * rSphere;
-          const yS = u * baseRadius;
-          const zS = Math.sin(phi) * rSphere;
+          const y3 = y1 * cosX - z2 * sinX;
+          const z3 = y1 * sinX + z2 * cosX;
 
-          let x1 = xS * cosZ - yS * sinZ;
-          let y1 = xS * sinZ + yS * cosZ;
-          let z1 = zS;
-
-          let x2 = x1 * cosY + z1 * sinY;
-          let y2 = y1;
-          let z2 = -x1 * sinY + z1 * cosY;
-
-          let x3 = x2;
-          let y3 = y2 * cosX - z2 * sinX;
-          let z3 = y2 * sinX + z2 * cosX;
-
-          const fovShape = 460;
           const scaleShape = fovShape / (fovShape + z3 + 80);
-
-          const screenX = shapeCenterX + x3 * scaleShape;
+          const screenX = shapeCenterX + x2 * scaleShape;
           const screenY = shapeCenterY + y3 * scaleShape;
 
-          if (!started) {
-            ctx.moveTo(screenX, screenY);
-            started = true;
-          } else {
-            ctx.lineTo(screenX, screenY);
-          }
+          if (j === 0) pathMeridian.moveTo(screenX, screenY);
+          else pathMeridian.lineTo(screenX, screenY);
         }
+      }
 
-        ctx.stroke();
+      // Execute 4 batched strokes total for the entire 3D sculpture
+      ctx.lineWidth = 0.9;
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
+      ctx.stroke(pathMeridian);
+
+      ctx.lineWidth = 1.15;
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.68)';
+      ctx.stroke(pathEmerald);
+
+      ctx.lineWidth = 1.3;
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.72)';
+      ctx.stroke(pathCobalt);
+
+      ctx.lineWidth = 1.65;
+      ctx.strokeStyle = 'rgba(245, 158, 11, 0.85)';
+      ctx.stroke(pathAmber);
+    }
+
+    function updateSimButtonUI() {
+      const label = document.getElementById('sim-toggle-label');
+      const dot = document.getElementById('sim-status-dot');
+      if (isSimRunning) {
+        if (label) label.textContent = 'RENDER: ON';
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400';
+      } else {
+        if (label) label.textContent = 'RENDER: STATIC';
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-amber-400';
       }
     }
 
     function toggleCanvasSim() {
       isSimRunning = !isSimRunning;
-      const label = document.getElementById('sim-toggle-label');
+      updateSimButtonUI();
       if (isSimRunning) {
-        if (label) label.textContent = '3D Engine: RUN';
-        renderLoop();
+        if (!animFrameId) animFrameId = requestAnimationFrame(renderLoop);
       } else {
-        if (label) label.textContent = '3D Engine: PAUSED';
-        cancelAnimationFrame(animFrameId);
-        ctx.clearRect(0, 0, width, height);
+        if (animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+        renderSingleFrame();
       }
     }
 
-    // ================= PROJECT FILTERING =================
+    // ================= 2. PROJECT FILTERING =================
     function filterProjects(category) {
       const cards = document.querySelectorAll('.project-entry');
       const buttons = document.querySelectorAll('.project-filter-btn');
@@ -1268,13 +1692,9 @@
       buttons.forEach(btn => {
         const target = btn.getAttribute('data-filter');
         if (target === category) {
-          btn.style.background = 'var(--accent-mint)';
-          btn.style.color = '#000';
-          btn.classList.add('font-bold');
+          btn.className = 'project-filter-btn px-3 py-1.5 rounded-sm font-bold text-black bg-emerald-500 transition-colors';
         } else {
-          btn.style.background = 'transparent';
-          btn.style.color = '#94a3b8';
-          btn.classList.remove('font-bold');
+          btn.className = 'project-filter-btn px-3 py-1.5 rounded-sm text-slate-400 hover:text-white transition-colors';
         }
       });
 
@@ -1286,31 +1706,66 @@
           card.style.display = 'none';
         }
       });
+
+      // Recalculate document scroll height after filtering
+      updateCanvasAndLayoutMetrics();
     }
 
-    // ================= CLIPBOARD COPY =================
+    // ================= 3. RELIABLE CLIPBOARD WITH IFRAME FALLBACK =================
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2400);
+    }
+
     function copyToClipboard(text, customMessage) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toast-msg');
-        if (toastMsg) toastMsg.textContent = customMessage || `Copied: ${text}`;
-        
-        toast.classList.remove('translate-y-20', 'opacity-0');
-        toast.classList.add('translate-y-0', 'opacity-100');
-
-        setTimeout(() => {
-          toast.classList.remove('translate-y-0', 'opacity-100');
-          toast.classList.add('translate-y-20', 'opacity-0');
-        }, 2200);
-      });
+      const msg = customMessage || `Copied: ${text}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(msg);
+        }).catch(() => {
+          fallbackCopy(text, msg);
+        });
+      } else {
+        fallbackCopy(text, msg);
+      }
     }
 
-    // ================= VIDEO MODAL LIGHTBOX =================
+    function fallbackCopy(text, msg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(msg);
+      } catch (err) {
+        showToast('Copy failed — please copy manually');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // ================= 4. VIDEO MODAL LIGHTBOX =================
     function openVideoModal(videoId = '4_mdrE4RQnI') {
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('video-iframe');
       if (iframe && modal) {
-        const originParam = (window.location.origin && window.location.origin !== 'null') ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
+        const originParam = (window.location.origin && window.location.origin !== 'null')
+          ? `&origin=${encodeURIComponent(window.location.origin)}`
+          : '';
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1${originParam}`;
         modal.classList.remove('hidden');
         modal.classList.add('flex');
