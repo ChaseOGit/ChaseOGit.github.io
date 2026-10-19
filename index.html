@@ -10,15 +10,31 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['var(--font-primary)', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
   
-  <!-- Typography: Plus Jakarta Sans for editorial clarity & JetBrains Mono for technical specs -->
+  <!-- Typography: High-Distance-Legibility Technical Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ================= SWISS-TECHNICAL ARCHITECTURAL TOKENS ================= */
+    /* ================= TECHNICAL ARCHITECTURAL DESIGN TOKENS ================= */
     :root {
+      /* Active font variable — dynamically switchable via HUD selector */
+      --font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
       --bg-obsidian: #05070a;
       --surface-slate: #090d13;
       --surface-elevated: #0d131c;
@@ -46,13 +62,14 @@
     body {
       background-color: var(--bg-obsidian);
       color: var(--text-primary);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-primary);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em;
     }
 
     .font-mono, .font-code {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-feature-settings: "liga" 0, "zero" 1;
     }
 
@@ -64,7 +81,7 @@
         linear-gradient(to bottom, rgba(30, 41, 59, 0.18) 1px, transparent 1px);
     }
 
-    /* Fixed 3D Hardware-Accelerated Canvas (Zero Backdrop Overdraw) */
+    /* Fixed 3D Hardware-Accelerated Canvas */
     #optical-canvas {
       position: fixed;
       inset: 0;
@@ -75,7 +92,7 @@
       opacity: 0.92;
     }
 
-    /* Matte Architectural Panels — Zero GPU backdrop-filter thrashing */
+    /* Matte Architectural Panels */
     .tech-panel {
       background-color: rgba(9, 13, 19, 0.94);
       border: 1px solid var(--border-hairline);
@@ -102,7 +119,7 @@
       border-color: rgba(59, 130, 246, 0.55);
     }
 
-    /* Corner registration ticks for engineering dossier feel */
+    /* Corner registration ticks */
     .corner-ticks::before,
     .corner-ticks::after {
       content: "";
@@ -161,7 +178,7 @@
     }
 
     /* Keyboard focus accessibility */
-    a:focus-visible, button:focus-visible {
+    a:focus-visible, button:focus-visible, select:focus-visible {
       outline: 2px solid var(--signal-emerald) !important;
       outline-offset: 2px !important;
     }
@@ -194,42 +211,42 @@
   </a>
 
   <!-- ================= ARCHITECTURAL TOP HEADER ================= -->
-  <header class="fixed top-0 left-0 right-0 z-40 border-b border-slate-800/90 bg-[#05070a]/90 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto h-14 px-4 sm:px-6 flex items-center justify-between">
+  <header class="fixed top-0 left-0 right-0 z-40 border-b border-slate-800/90 bg-[#05070a]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto h-14 px-4 sm:px-6 flex items-center justify-between gap-4">
       
-      <!-- Identity & Status -->
-      <div class="flex items-center gap-3">
+      <!-- Identity & Status Readout -->
+      <div class="flex items-center gap-2.5 shrink-0 whitespace-nowrap">
         <a href="#" class="flex items-center gap-2.5 group">
           <span class="w-2 h-2 bg-emerald-500 inline-block"></span>
-          <span class="font-mono font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+          <span class="font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition-colors uppercase">
             CHASE_OSWALT
           </span>
         </a>
         <span class="hidden sm:inline-block text-slate-700 font-mono text-xs">/</span>
-        <span class="hidden sm:inline-block font-mono text-[11px] text-slate-400">
-          B.S. IT @ UCF <span class="text-emerald-400">'26</span>
+        <span class="hidden sm:inline-block font-mono text-xs text-slate-400">
+          B.S. IT @ UCF <span class="text-emerald-400 font-semibold">'26</span>
         </span>
       </div>
 
       <!-- Section Index Links -->
-      <nav class="hidden md:flex items-center gap-6 font-mono text-xs text-slate-400" aria-label="Primary Navigation">
-        <a href="#about" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">01.</span>Overview</a>
-        <a href="#projects" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">02.</span>Case Studies</a>
-        <a href="#skills" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">03.</span>Stack Matrix</a>
-        <a href="#education" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">04.</span>Education</a>
-        <a href="#contact" class="hover:text-white transition-colors"><span class="text-emerald-500/70 mr-1">05.</span>Contact</a>
+      <nav class="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-6 text-xs lg:text-sm text-slate-400 shrink-0 whitespace-nowrap font-medium" aria-label="Primary Navigation">
+        <a href="#about" class="hover:text-white transition-colors whitespace-nowrap flex items-center"><span class="text-emerald-500/80 mr-1 font-mono font-semibold">01.</span>Overview</a>
+        <a href="#projects" class="hover:text-white transition-colors whitespace-nowrap flex items-center"><span class="text-emerald-500/80 mr-1 font-mono font-semibold">02.</span>Case Studies</a>
+        <a href="#skills" class="hover:text-white transition-colors whitespace-nowrap flex items-center"><span class="text-emerald-500/80 mr-1 font-mono font-semibold">03.</span>Stack Matrix</a>
+        <a href="#education" class="hover:text-white transition-colors whitespace-nowrap flex items-center"><span class="text-emerald-500/80 mr-1 font-mono font-semibold">04.</span>Education</a>
+        <a href="#contact" class="hover:text-white transition-colors whitespace-nowrap flex items-center"><span class="text-emerald-500/80 mr-1 font-mono font-semibold">05.</span>Contact</a>
       </nav>
 
       <!-- Controls & Direct Links -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 shrink-0 whitespace-nowrap">
         <!-- 3D Render Loop Toggle -->
-        <button id="sim-toggle-btn" type="button" onclick="toggleCanvasSim()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[11px] font-mono border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-600 hover:text-white transition-colors" title="Pause or resume 3D wireframe renderer">
+        <button id="sim-toggle-btn" type="button" onclick="toggleCanvasSim()" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-mono border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-600 hover:text-white transition-colors shrink-0 whitespace-nowrap" title="Pause or resume 3D wireframe renderer">
           <span id="sim-status-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           <span id="sim-toggle-label">RENDER: ON</span>
         </button>
 
         <!-- Resume PDF -->
-        <a href="Chase_Oswalt_Resume.pdf" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-mono font-semibold text-black bg-emerald-500 hover:bg-emerald-400 transition-colors">
+        <a href="Chase_Oswalt_Resume.pdf" download class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-mono font-semibold text-black bg-emerald-500 hover:bg-emerald-400 transition-colors shrink-0 whitespace-nowrap">
           <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
             <path d="M12 3v13M7 11l5 5 5-5M4 20h16"/>
           </svg>
@@ -237,14 +254,14 @@
         </a>
 
         <!-- GitHub -->
-        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors" aria-label="GitHub Profile">
+        <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors shrink-0" aria-label="GitHub Profile">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
         </a>
 
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors" aria-label="LinkedIn Profile">
+        <a href="https://www.linkedin.com/in/chase-o-33a124418/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-sm border border-slate-800 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 transition-colors shrink-0" aria-label="LinkedIn Profile">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.32a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/>
           </svg>
@@ -254,12 +271,24 @@
     </div>
   </header>
 
-  <!-- ================= COMPACT TELEMETRY READOUT (BOTTOM LEFT) ================= -->
-  <div id="scroll-hud" class="fixed bottom-4 left-4 z-30 hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-sm font-mono text-[11px] text-slate-400 border border-slate-800 bg-[#05070a]/95 shadow-lg">
-    <span class="w-1.5 h-1.5 bg-emerald-400"></span>
-    <span id="scroll-depth-label">Z: 0000m</span>
+  <!-- ================= COMPACT TELEMETRY READOUT + FONT SWITCHER (BOTTOM LEFT) ================= -->
+  <div id="scroll-hud" class="fixed bottom-4 left-4 z-30 hidden lg:flex items-center gap-3 px-3 py-1.5 rounded-sm font-mono text-[11px] text-slate-400 border border-slate-800 bg-[#05070a]/95 shadow-lg">
+    <div class="flex items-center gap-2">
+      <span class="w-1.5 h-1.5 bg-emerald-400"></span>
+      <span id="scroll-depth-label">Z: 0000m</span>
+      <span class="text-slate-700">|</span>
+      <span id="scroll-morph-label" class="text-emerald-400">MESH: SPHERE</span>
+    </div>
     <span class="text-slate-700">|</span>
-    <span id="scroll-morph-label" class="text-emerald-400">MESH: SPHERE</span>
+    <!-- Live Font Selector to preview distance legibility -->
+    <div class="flex items-center gap-1.5 text-slate-300">
+      <span class="text-slate-500">FONT:</span>
+      <select id="font-family-select" onchange="switchThemeFont(this.value)" class="bg-[#090d13] border border-slate-700 text-emerald-400 text-[11px] rounded px-1.5 py-0.5 focus:border-emerald-500 cursor-pointer">
+        <option value="space" selected>Space Grotesk (Neo-Tech)</option>
+        <option value="oxanium">Oxanium (Aerospace HUD)</option>
+        <option value="rajdhani">Rajdhani (Industrial Sans)</option>
+      </select>
+    </div>
   </div>
 
   <!-- ================= MAIN ENGINEERING DOSSIER ================= -->
@@ -274,7 +303,7 @@
           
           <!-- Left: Terminal Header + Preserved ASCII Art -->
           <div class="space-y-2">
-            <div class="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+            <div class="flex items-center gap-2 font-mono text-xs text-slate-400">
               <span class="text-emerald-400 font-bold">SYS // 01</span>
               <span>•</span>
               <span class="text-slate-200 font-semibold">chase_oswalt // systems &amp; software</span>
@@ -285,21 +314,21 @@
   /\  ___\ /\ \_\ \ /\  __ \ /\  ___\ /\  ___\   
   \ \ \____\ \  __ \\ \  __ \\ \___  \\ \  __\_  
    \ \_____\\ \_\ \_\\ \_\ \_\\/\_____\\ \_____\ 
-    \/_____/ \/_/\/_/ \/_/\/_/ \/_____/ \/_____/ </pre>
+    \/_____/ \/_/\/_/ \/_____/ \/_____/ \/_____/ </pre>
             </div>
           </div>
 
           <!-- Right: Live Status & Degree Readout -->
           <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 md:text-right font-mono text-xs border-t md:border-t-0 pt-3 md:pt-0 border-slate-800/80">
             <div class="px-3 py-2 bg-[#06090e] border border-slate-800 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Current Status</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Current Status</div>
               <div class="text-emerald-400 font-semibold flex items-center gap-1.5 mt-0.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>Open to Full-Time Roles (2026)</span>
               </div>
             </div>
             <div class="px-3 py-2 bg-[#06090e] border border-slate-800 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Primary Focus</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Primary Focus</div>
               <div class="text-slate-200 font-medium mt-0.5">Backend • Cloud Infra • C# / GLSL</div>
             </div>
           </div>
@@ -313,7 +342,7 @@
         <!-- Left Column: Direct Engineer-to-Engineer Copy & Spec Strip -->
         <div class="lg:col-span-7 tech-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
           <div class="space-y-5">
-            <div class="inline-flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-sm font-mono text-[11px] text-emerald-300 font-medium">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-sm font-mono text-xs text-emerald-300 font-medium tracking-wide">
               <span>SYSTEMS SOFTWARE</span>
               <span class="text-emerald-500/50">/</span>
               <span>BACKEND ARCHITECTURE</span>
@@ -321,7 +350,7 @@
               <span>GRAPHICS</span>
             </div>
 
-            <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-[1.15]">
+            <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight text-white leading-[1.12]">
               Building backend services, automated infrastructure, and <span class="text-emerald-400">real-time graphics.</span>
             </h1>
 
@@ -330,15 +359,15 @@
             </p>
 
             <!-- Direct Action Bar -->
-            <div class="pt-2 flex flex-wrap items-center gap-3">
-              <a href="#projects" class="px-5 py-2.5 rounded-sm font-mono font-bold text-xs text-black bg-emerald-500 hover:bg-emerald-400 flex items-center gap-2 transition-colors">
+            <div class="pt-2 flex flex-wrap items-center gap-3 font-mono">
+              <a href="#projects" class="px-5 py-2.5 rounded-sm font-bold text-xs text-black bg-emerald-500 hover:bg-emerald-400 flex items-center gap-2 transition-colors">
                 <span>VIEW CASE STUDIES [04]</span>
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                   <path d="M5 12h14M13 5l7 7-7 7"/>
                 </svg>
               </a>
 
-              <button type="button" onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied: chase.ed.oswalt@gmail.com')" class="px-4 py-2.5 rounded-sm font-mono text-xs font-medium text-slate-200 bg-[#0d141f] border border-slate-700 hover:border-emerald-500/60 hover:text-white flex items-center gap-2 transition-colors">
+              <button type="button" onclick="copyToClipboard('chase.ed.oswalt@gmail.com', 'Email copied: chase.ed.oswalt@gmail.com')" class="px-4 py-2.5 rounded-sm text-xs font-medium text-slate-200 bg-[#0d141f] border border-slate-700 hover:border-emerald-500/60 hover:text-white flex items-center gap-2 transition-colors">
                 <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
                 </svg>
@@ -350,22 +379,22 @@
           <!-- 4-Column Specification Strip -->
           <div class="pt-6 border-t border-slate-800/90 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
             <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Degree</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Degree</div>
               <div class="text-xs font-bold text-white mt-0.5">B.S. IT @ UCF</div>
               <div class="text-[11px] text-emerald-400">Aug 2026</div>
             </div>
             <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Standing</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Standing</div>
               <div class="text-xs font-bold text-emerald-400 mt-0.5">3.53 / 4.0 GPA</div>
               <div class="text-[11px] text-slate-400">Dean's List</div>
             </div>
             <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Recognition</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Recognition</div>
               <div class="text-xs font-bold text-amber-400 mt-0.5 truncate">Elbit America</div>
               <div class="text-[11px] text-slate-400">STEM Scholar</div>
             </div>
             <div class="p-3 bg-[#06090e] border border-slate-800/90 rounded-sm">
-              <div class="text-[10px] text-slate-500 uppercase">Base</div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wider">Base</div>
               <div class="text-xs font-bold text-white mt-0.5 truncate">Satellite Beach</div>
               <div class="text-[11px] text-slate-400">Orlando / Relocate</div>
             </div>
@@ -377,7 +406,7 @@
           <div id="sculpture-anchor" class="viewport-frame flex-1 min-h-[380px] sm:min-h-[420px] p-5 flex flex-col justify-between relative overflow-hidden" title="Drag to rotate 3D wireframe">
             
             <!-- Viewport Header & Mode Selector -->
-            <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] relative z-10">
+            <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs relative z-10">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 bg-emerald-400 inline-block"></span>
                 <span class="text-slate-200 font-bold tracking-wider">VIEWPORT // 3D MESH</span>
@@ -398,14 +427,14 @@
             </div>
 
             <!-- Viewport Telemetry Footer -->
-            <div class="space-y-1.5 relative z-10 border-t border-slate-800/80 pt-3 font-mono text-[11px]">
+            <div class="space-y-1.5 relative z-10 border-t border-slate-800/80 pt-3 font-mono text-xs">
               <div class="flex items-center justify-between">
                 <span class="text-slate-400">ACTIVE TOPOLOGY:</span>
                 <span id="hero-geometry-name" class="font-bold text-emerald-400">SPHERE (0%)</span>
               </div>
-              <div class="flex items-center justify-between text-[10px] text-slate-500">
+              <div class="flex items-center justify-between text-[11px] text-slate-500">
                 <span>DRAG TO ROTATE • SCROLL TO MORPH</span>
-                <span class="text-amber-400/90">60 FPS LUT BATCHED</span>
+                <span class="text-amber-400/90 font-semibold">60 FPS LUT BATCHED</span>
               </div>
             </div>
 
@@ -455,21 +484,21 @@
                 <span class="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold rounded-sm">01</span>
                 <span class="text-emerald-400 font-semibold">Lead Developer (4-Person Agile Team)</span>
               </div>
-              <span class="text-slate-400 text-[11px]">MERN • DigitalOcean</span>
+              <span class="text-slate-400 text-xs">MERN • DigitalOcean</span>
             </div>
 
             <!-- Title & Direct Summary -->
             <div class="space-y-2">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 UCF Technology Lending Web Platform
               </h3>
-              <p class="text-sm text-slate-300 leading-relaxed">
+              <p class="text-sm text-slate-300 leading-relaxed font-normal">
                 Led a 4-person agile team to replace a legacy university equipment checkout system with a role-aware (Student, Faculty, Admin) full-stack web application built for fast barcode checkouts and automated inventory tracking.
               </p>
             </div>
 
             <!-- Structured 3-Point Architecture Breakdown -->
-            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300 font-normal">
               <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
               <ul class="space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
@@ -488,7 +517,7 @@
             </div>
 
             <!-- Tech Stack Tags -->
-            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
               <span class="px-2.5 py-1 tag-chip">React (Vite)</span>
               <span class="px-2.5 py-1 tag-chip">Node.js / Express</span>
               <span class="px-2.5 py-1 tag-chip">MongoDB / Mongoose</span>
@@ -524,21 +553,21 @@
                 <span class="px-2 py-0.5 bg-amber-500/15 border border-amber-500/40 text-amber-300 font-bold rounded-sm">02</span>
                 <span class="text-amber-400 font-semibold">Systems &amp; Graphics Programming</span>
               </div>
-              <span class="text-slate-400 text-[11px]">Godot • C# • GLSL</span>
+              <span class="text-slate-400 text-xs">Godot • C# • GLSL</span>
             </div>
 
             <!-- Title & Direct Summary -->
             <div class="space-y-2">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 2D Physics Arena Combat Game
               </h3>
-              <p class="text-sm text-slate-300 leading-relaxed">
+              <p class="text-sm text-slate-300 leading-relaxed font-normal">
                 Designed and programmed a modular local-multiplayer arena combat engine in Godot using C# and custom GLSL shaders, built around deterministic state machines, physics-driven projectile combat, and runtime data pipelines.
               </p>
             </div>
 
             <!-- Structured 3-Point Architecture Breakdown -->
-            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300 font-normal">
               <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
               <ul class="space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
@@ -563,15 +592,15 @@
                   ▶
                 </div>
                 <div>
-                  <div class="font-mono font-bold text-white text-xs">Launch 60 FPS Engine Gameplay Capture</div>
-                  <div class="font-mono text-[11px] text-amber-200/75">Demonstrates GLSL shaders, javelin physics &amp; multi-controller combat</div>
+                  <div class="font-bold text-white text-xs">Launch 60 FPS Engine Gameplay Capture</div>
+                  <div class="font-mono text-xs text-amber-200/75">Demonstrates GLSL shaders, javelin physics &amp; multi-controller combat</div>
                 </div>
               </div>
               <span class="font-mono text-xs font-bold text-amber-400 shrink-0 ml-2">WATCH ↗</span>
             </button>
 
             <!-- Tech Stack Tags -->
-            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
               <span class="px-2.5 py-1 tag-amber">Godot Engine</span>
               <span class="px-2.5 py-1 tag-amber">C# (.NET)</span>
               <span class="px-2.5 py-1 tag-amber">GLSL Shaders</span>
@@ -604,21 +633,21 @@
                 <span class="px-2 py-0.5 bg-blue-500/15 border border-blue-500/40 text-blue-300 font-bold rounded-sm">03</span>
                 <span class="text-blue-400 font-semibold">Distributed Backend Systems</span>
               </div>
-              <span class="text-slate-400 text-[11px]">Java • Tomcat • MySQL</span>
+              <span class="text-slate-400 text-xs">Java • Tomcat • MySQL</span>
             </div>
 
             <!-- Title & Direct Summary -->
             <div class="space-y-2">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Enterprise Distributed Three-Tier Web Application
               </h3>
-              <p class="text-sm text-slate-300 leading-relaxed">
+              <p class="text-sm text-slate-300 leading-relaxed font-normal">
                 Engineered a multi-user transactional client-server application deployed on Apache Tomcat backed by a relational MySQL database, isolating presentation, business logic, and data access across four permission tiers.
               </p>
             </div>
 
             <!-- Structured 3-Point Architecture Breakdown -->
-            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300 font-normal">
               <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
               <ul class="space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
@@ -627,7 +656,7 @@
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-blue-400 font-mono font-bold">›</span>
-                  <span><strong class="text-white">Hardened JDBC Data Layer:</strong> Utilized parameterized <code class="text-blue-300">PreparedStatement</code> and <code class="text-blue-300">CallableStatement</code> pipelines to execute remote stored procedures and prevent SQL injection.</span>
+                  <span><strong class="text-white">Hardened JDBC Data Layer:</strong> Utilized parameterized <code class="text-blue-300 font-mono">PreparedStatement</code> and <code class="text-blue-300 font-mono">CallableStatement</code> pipelines to execute remote stored procedures and prevent SQL injection.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-blue-400 font-mono font-bold">›</span>
@@ -637,7 +666,7 @@
             </div>
 
             <!-- Tech Stack Tags -->
-            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
               <span class="px-2.5 py-1 tag-chip">Java Servlets</span>
               <span class="px-2.5 py-1 tag-chip">JSP</span>
               <span class="px-2.5 py-1 tag-chip">MySQL / Stored Procedures</span>
@@ -673,21 +702,21 @@
                 <span class="px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold rounded-sm">04</span>
                 <span class="text-emerald-400 font-semibold">Systems Administration &amp; Automation</span>
               </div>
-              <span class="text-slate-400 text-[11px]">Windows Server 2022 • AD DS</span>
+              <span class="text-slate-400 text-xs">Windows Server 2022 • AD DS</span>
             </div>
 
             <!-- Title & Direct Summary -->
             <div class="space-y-2">
-              <h3 class="text-xl sm:text-2xl font-bold text-white">
+              <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Enterprise Virtual Infrastructure &amp; Automation Pipeline
               </h3>
-              <p class="text-sm text-slate-300 leading-relaxed">
+              <p class="text-sm text-slate-300 leading-relaxed font-normal">
                 Designed and provisioned an isolated multi-node enterprise network topology running Windows Server 2022 domain controllers and client workstations, paired with PowerShell and Python administration scripts.
               </p>
             </div>
 
             <!-- Structured 3-Point Architecture Breakdown -->
-            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300">
+            <div class="bg-[#06090e] border border-slate-800/90 p-4 rounded-sm space-y-2.5 text-xs text-slate-300 font-normal">
               <div class="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-wider">Architecture &amp; Implementation</div>
               <ul class="space-y-2 leading-relaxed">
                 <li class="flex items-start gap-2">
@@ -706,7 +735,7 @@
             </div>
 
             <!-- Tech Stack Tags -->
-            <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
               <span class="px-2.5 py-1 tag-chip">Windows Server 2022</span>
               <span class="px-2.5 py-1 tag-chip">Active Directory (AD DS)</span>
               <span class="px-2.5 py-1 tag-chip">PowerShell</span>
@@ -916,11 +945,11 @@
 
           <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 font-mono">
             <div class="px-4 py-2.5 bg-[#06090e] border border-emerald-500/40 rounded-sm">
-              <div class="text-[10px] text-slate-400 uppercase">Cumulative GPA</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Cumulative GPA</div>
               <div class="text-lg font-extrabold text-emerald-400">3.53 / 4.00</div>
             </div>
             <div class="px-4 py-2.5 bg-[#06090e] border border-amber-500/40 rounded-sm">
-              <div class="text-[10px] text-slate-400 uppercase">Academic Standing</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Academic Standing</div>
               <div class="text-lg font-extrabold text-amber-300">Dean's List</div>
             </div>
           </div>
@@ -939,21 +968,21 @@
             <div class="space-y-3">
               <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
                 <div class="font-bold text-white text-sm">Elbit America STEM Scholarship</div>
-                <p class="text-xs text-slate-400 leading-relaxed">
+                <p class="text-xs text-slate-400 leading-relaxed font-normal">
                   Competitive merit-based scholarship awarded for academic performance in computing and engineering disciplines.
                 </p>
               </div>
 
               <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
                 <div class="font-bold text-white text-sm">Florida Bright Futures Medallion Scholarship</div>
-                <p class="text-xs text-slate-400 leading-relaxed">
+                <p class="text-xs text-slate-400 leading-relaxed font-normal">
                   State-sponsored academic merit award covering undergraduate coursework at UCF.
                 </p>
               </div>
 
               <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
                 <div class="font-bold text-emerald-400 text-sm">AWS Academy Graduate — Cloud Architecting</div>
-                <p class="text-xs text-slate-400 leading-relaxed">
+                <p class="text-xs text-slate-400 leading-relaxed font-normal">
                   Certified technical curriculum covering VPC networking, IAM security boundaries, high-availability compute, and distributed storage on AWS.
                 </p>
               </div>
@@ -972,9 +1001,9 @@
                 <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
                   <div class="flex items-center justify-between">
                     <span class="font-bold text-white text-sm">AI@UCF (Artificial Intelligence Club)</span>
-                    <span class="font-mono text-[11px] text-emerald-400">Active Member</span>
+                    <span class="font-mono text-xs text-emerald-400">Active Member</span>
                   </div>
-                  <p class="text-xs text-slate-400 leading-relaxed">
+                  <p class="text-xs text-slate-400 leading-relaxed font-normal">
                     Studied deep learning architectures, transformer attention mechanisms, and practical fine-tuning workflows for large language models.
                   </p>
                 </div>
@@ -982,9 +1011,9 @@
                 <div class="p-4 bg-[#06090e] border border-slate-800/90 rounded-sm space-y-1">
                   <div class="flex items-center justify-between">
                     <span class="font-bold text-white text-sm">GameDev Knights</span>
-                    <span class="font-mono text-[11px] text-emerald-400">Active Member</span>
+                    <span class="font-mono text-xs text-emerald-400">Active Member</span>
                   </div>
-                  <p class="text-xs text-slate-400 leading-relaxed">
+                  <p class="text-xs text-slate-400 leading-relaxed font-normal">
                     Collaborated in campus game jams and technical workshops focused on entity-component design patterns, memory layout optimization, and 2D/3D physics engines.
                   </p>
                 </div>
@@ -996,7 +1025,7 @@
               <div class="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider">
                 Core Engineering Coursework
               </div>
-              <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <div class="flex flex-wrap gap-1.5 font-mono text-xs">
                 <span class="px-2.5 py-1 tag-chip">Enterprise Computing</span>
                 <span class="px-2.5 py-1 tag-chip">Database Systems</span>
                 <span class="px-2.5 py-1 tag-chip">Systems Software</span>
@@ -1022,7 +1051,7 @@
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
             Available for Software, Systems &amp; Cloud Engineering Roles.
           </h2>
-          <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl font-normal">
             Graduating August 2026 from UCF and based in Satellite Beach / Orlando, FL (open to relocation). Reach out directly via email or connect on GitHub and LinkedIn.
           </p>
         </div>
@@ -1121,6 +1150,19 @@
 
   <!-- ================= HIGH-PERFORMANCE 3D WIREFRAME & UI ENGINE ================= -->
   <script>
+    // ================= DYNAMIC FONT SWITCHER HELPER =================
+    function switchThemeFont(fontKey) {
+      const root = document.documentElement;
+      if (fontKey === 'oxanium') {
+        root.style.setProperty('--font-primary', "'Oxanium', sans-serif");
+      } else if (fontKey === 'rajdhani') {
+        root.style.setProperty('--font-primary', "'Rajdhani', sans-serif");
+      } else {
+        root.style.setProperty('--font-primary', "'Space Grotesk', sans-serif");
+      }
+      showToast(`Font switched to ${fontKey.toUpperCase()}`);
+    }
+
     // ================= 1. CACHED DOM REFERENCES & GEOMETRY LUTs =================
     let canvas, ctx;
     let width = 0, height = 0, dpr = 1;
@@ -1129,12 +1171,12 @@
     let isPageVisible = true;
     let time = 0;
 
-    // Scroll state (Zero layout thrashing in rAF)
+    // Scroll state
     let rawScrollY = 0;
     let smoothScrollY = 0;
     let maxScroll = 1;
 
-    // Cached layout metrics updated ONLY on init & debounced resize
+    // Cached layout metrics
     let cachedLayout = {
       heroCenterX: 0,
       heroDocCenterY: 0,
@@ -1144,7 +1186,7 @@
       persistentRadius: 110
     };
 
-    // Cached HUD DOM nodes + dirty-check strings
+    // Cached HUD DOM nodes
     let domHudDepth = null;
     let domHudMorph = null;
     let domHeroGeoName = null;
@@ -1154,7 +1196,7 @@
     let lastMorphStr = '';
     let lastHeroGeoStr = '';
 
-    // Interactive 3D Viewport state (Shape override + Drag rotation)
+    // Interactive 3D Viewport state
     let shapeMode = 'auto'; // 'auto' | 'sphere' | 'torus' | 'ribbon'
     let isDraggingMesh = false;
     let dragStartX = 0, dragStartY = 0;
@@ -1218,19 +1260,16 @@
 
       updateCanvasAndLayoutMetrics();
 
-      // Debounced resize listener to prevent layout thrashing
       let resizeTimer = null;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(updateCanvasAndLayoutMetrics, 80);
       }, { passive: true });
 
-      // Passive scroll listener only stores scrollY number
       window.addEventListener('scroll', () => {
         rawScrollY = window.scrollY;
       }, { passive: true });
 
-      // Pause loop automatically when background tab is hidden
       document.addEventListener('visibilitychange', () => {
         isPageVisible = !document.hidden;
         if (isPageVisible && isSimRunning && !animFrameId) {
@@ -1241,7 +1280,6 @@
         }
       });
 
-      // Respect OS Reduced Motion preference on initial load
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         renderSingleFrame();
@@ -1252,7 +1290,6 @@
       }
     }
 
-    // Measure DOM positions ONLY on init, resize, or filter change
     function updateCanvasAndLayoutMetrics() {
       if (!canvas) return;
       width = window.innerWidth;
@@ -1265,7 +1302,6 @@
 
       maxScroll = Math.max(1, document.documentElement.scrollHeight - height);
 
-      // Cache hero viewport frame document coordinates
       if (domAnchor) {
         const rect = domAnchor.getBoundingClientRect();
         cachedLayout.heroCenterX = rect.left + rect.width * 0.5;
@@ -1277,7 +1313,6 @@
         cachedLayout.heroRadius = 140;
       }
 
-      // Cache widescreen right-gutter coordinates
       let mainRight = width;
       if (domContentStart) {
         const cRect = domContentStart.getBoundingClientRect();
@@ -1304,7 +1339,6 @@
       }
     }
 
-    // Interactive drag-to-rotate on the 3D Viewport Frame
     function initViewportDrag() {
       const anchor = document.getElementById('sculpture-anchor');
       if (!anchor) return;
@@ -1379,7 +1413,6 @@
       time += dt;
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth momentum decay for user drag rotation
       if (!isDraggingMesh) {
         userRotX += velRotX;
         userRotY += velRotY;
@@ -1387,11 +1420,9 @@
         velRotY *= 0.92;
       }
 
-      // Smooth scroll interpolation
       smoothScrollY += (rawScrollY - smoothScrollY) * 0.08;
       const scrollRatio = Math.min(Math.max(smoothScrollY / maxScroll, 0), 1);
 
-      // Dirty-checked HUD telemetry updates (Zero unnecessary DOM mutations)
       const depthMeters = Math.floor(smoothScrollY * 1.8);
       const depthStr = `Z: ${depthMeters.toString().padStart(4, '0')}m`;
       if (depthStr !== lastDepthStr) {
@@ -1427,10 +1458,7 @@
         if (domHudMorph) domHudMorph.textContent = morphStr;
       }
 
-      // ================= LAYER 1: BATCHED TOPOGRAPHIC CANYON CONTOURS =================
       renderBatchedTerrain();
-
-      // ================= LAYER 2: BATCHED 3D WIREFRAME SCULPTURE =================
       renderBatchedSculpture(scrollRatio);
     }
 
@@ -1452,7 +1480,6 @@
       const halfSpanX = spanX * 0.5;
       const valleyNorm = 1 / (spanX * 0.36);
 
-      // Batch all 32 contour lines into 3 color paths (3 draw calls total instead of 32)
       const pathAmber = new Path2D();
       const pathCobalt = new Path2D();
       const pathEmerald = new Path2D();
@@ -1504,7 +1531,6 @@
     }
 
     function renderBatchedSculpture(scrollRatio) {
-      // Compute viewport Y of the hero anchor purely from cached document offset
       const heroViewportY = cachedLayout.heroDocCenterY - smoothScrollY;
 
       const scrollTransition = Math.min(1, Math.max(0, smoothScrollY / 320));
@@ -1514,7 +1540,6 @@
       const shapeCenterY = heroViewportY * (1 - easeT) + cachedLayout.persistentY * easeT;
       const baseRadius = cachedLayout.heroRadius * (1 - easeT) + cachedLayout.persistentRadius * easeT;
 
-      // 3D Rotation angles (Autonomous orbit + scroll + user drag)
       const rotY = time * 0.48 + scrollRatio * Math.PI * 3.2 + userRotY;
       const rotX = 0.3 + Math.sin(time * 0.35) * 0.22 + scrollRatio * Math.PI * 1.4 + userRotX;
       const rotZ = time * 0.20 + scrollRatio * Math.PI * 1.6;
@@ -1523,7 +1548,6 @@
       const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
       const cosZ = Math.cos(rotZ), sinZ = Math.sin(rotZ);
 
-      // Determine Morph Weights
       let wSphere = 0, wTorus = 0, wRibbon = 0;
       if (shapeMode === 'sphere') {
         wSphere = 1;
@@ -1554,7 +1578,6 @@
       const tubeR = baseRadius * 0.38;
       const fovShape = 460;
 
-      // 1. Batched Latitudinal Slices using Precomputed Trig Tables
       for (let s = -halfSlices; s <= halfSlices; s++) {
         const u = s / halfSlices;
         if (Math.abs(u) > 0.96) continue;
@@ -1592,7 +1615,6 @@
           const py = yS * wSphere + yT * wTorus + yR * wRibbon;
           const pz = zS * wSphere + zT * wTorus + zR * wRibbon;
 
-          // 3D Matrix Transform
           const x1 = px * cosZ - py * sinZ;
           const y1 = px * sinZ + py * cosZ;
 
@@ -1611,7 +1633,6 @@
         }
       }
 
-      // 2. Batched Longitudinal Meridian Rings
       for (let m = 0; m < NUM_MERIDIANS; m++) {
         const cPhi = merCosPhi[m];
         const sPhi = merSinPhi[m];
@@ -1640,7 +1661,6 @@
         }
       }
 
-      // Execute 4 batched strokes total for the entire 3D sculpture
       ctx.lineWidth = 0.9;
       ctx.strokeStyle = 'rgba(16, 185, 129, 0.25)';
       ctx.stroke(pathMeridian);
@@ -1707,11 +1727,10 @@
         }
       });
 
-      // Recalculate document scroll height after filtering
       updateCanvasAndLayoutMetrics();
     }
 
-    // ================= 3. RELIABLE CLIPBOARD WITH IFRAME FALLBACK =================
+    // ================= 3. RELIABLE CLIPBOARD =================
     let toastTimeout = null;
     function showToast(message) {
       const toast = document.getElementById('toast');
