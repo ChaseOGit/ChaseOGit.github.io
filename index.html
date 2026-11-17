@@ -540,12 +540,15 @@
           <!-- Action Footer -->
           <div class="px-6 py-3.5 border-t border-slate-800/90 bg-[#06090e]/90 flex items-center justify-between font-mono text-xs">
             <div class="flex items-center gap-4">
-              <a href="https://github.com/ChaseOGit" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
-                <span>GitHub Profile</span>
+              <a href="https://github.com/ChaseOGit/OrinConductor/tree/main" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
+                <span>View Source</span>
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M7 17L17 7M7 7h10v10"/>
                 </svg>
               </a>
+              <button type="button" onclick="copyToClipboard('git clone https://github.com/ChaseOGit/OrinConductor.git', 'Copied git clone command')" class="text-slate-400 hover:text-emerald-300 transition-colors">
+                [git clone]
+              </button>
             </div>
             <span class="text-emerald-400 font-semibold">60 FPS (&lt;5 ms GPU) • AGX Orin</span>
           </div>
